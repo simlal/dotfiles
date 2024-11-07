@@ -1,0 +1,57 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+    {
+        "context": "Terminal",
+        "bindings": {
+            "ctrl-n": "workspace::NewTerminal",
+            "ctrl-shift-w": "pane::CloseActiveItem"
+        }
+    },
+    {
+        "context": "Editor",
+        "bindings": {
+            "ctrl-,": "workspace::ToggleVimMode",
+            "alt-f12": "editor::GoToDefinitionSplit",
+            "f11": "editor::GoToDeclaration",
+            "alt-f11": "editor::GoToDeclarationSplit",
+            "f10": "editor::GoToTypeDefinition",
+            "alt-f10": "editor::GoToTypeDefinitionSplit",
+            "f9": "editor::FindAllReferences"
+            // "shift-alt-enter": "editor::ExpandExcerptsUp"
+
+            // "ctrl-down": ["workspace::SendKeyStrokes", "ctrl-down ctrl-down ctrl-down"]
+        }
+    },
+    {
+        "context": "ProjectSearchBar",
+        "bindings": {
+            "f3": "search::SelectNextMatch",
+            "ctrl-f3": "search::SelectPrevMatch"
+        }
+    },
+
+    {
+        "context": "Editor && mode == full",
+        "bindings": {
+            // Hunk navigation
+            "ctrl-f8": null,
+            "f7": "editor::GoToHunk",
+            "shift-f7": "editor::GoToPrevHunk",
+            // Diagnostics for project
+            "ctrl-shift-f8": "diagnostics::Deploy"
+        }
+    },
+    {
+        "context": "Workspace",
+        "bindings": {
+            // "ctrl-shift-m": null,
+            "ctrl-shift-f8": "diagnostics::Deploy"
+        }
+    }
+]

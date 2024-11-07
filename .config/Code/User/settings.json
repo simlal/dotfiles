@@ -1,0 +1,181 @@
+{
+    "gitlens.hovers.currentLine.over": "line",
+    "workbench.startupEditor": "none",
+    "workbench.iconTheme": "catppuccin-mocha",
+    "notebook.lineNumbers": "on",
+    "editor.cursorWidth": 4,
+    "editor.fontFamily": "'Fira Code', 'FiraCode Nerd Font', 'FiraCode Nerd Font Mono'",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 15,
+    "terminal.integrated.fontSize": 15,
+    "jupyter.askForKernelRestart": false,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono'",
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "python.terminal.activateEnvironment": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false,
+        "python": true
+    },
+    // Gen UI
+    "workbench.layoutControl.enabled": false,
+    "workbench.editor.empty.hint": "hidden",
+    "window.menuBarVisibility": "compact",
+    "window.commandCenter": false,
+    "window.titleBarStyle": "custom",
+    "window.customMenuBarAltFocus": false,
+    "window.enableMenuBarMnemonics": false,
+    "gitlens.graph.minimap.enabled": false,
+    "window.density.editorTabHeight": "compact",
+    "window.title": "${rootName} @ ${activeRepositoryBranchName} >>> ${activeEditorMedium} ${dirty}",
+    "window.titleSeparator": " | ",
+    "breadcrumbs.symbolPath": "last",
+    "breadcrumbs.filePath": "last",
+    // Vertical rulers
+    "editor.rulers": [
+        {
+            "column": 80,
+            "color": "#8881573a"
+        },
+        {
+            "column": 120,
+            "color": "#9158584e"
+        }
+    ],
+    // Indent rainbow config
+    "indentRainbow.indicatorStyle": "light",
+    "indentRainbow.lightIndicatorStyleLineWidth": 2,
+    "cmake.showOptionsMovedNotification": false,
+    "editor.minimap.enabled": false,
+    "redhat.telemetry.enabled": false,
+    // line numbering
+    "workbench.colorCustomizations": {
+        "editorLineNumber.foreground": "#d79921"
+    },
+    "editor.cursorSurroundingLines": 8,
+    "editor.lineNumbers": "relative",
+    // vim extension settings
+    "vim.useSystemClipboard": true,
+    "vim.disableExtension": false,
+    // Zen mode prefs
+    "zenMode.centerLayout": false,
+    "zenMode.hideActivityBar": true,
+    "zenMode.hideStatusBar": true,
+    "zenMode.hideLineNumbers": false,
+    // General Language settings
+    // FORMATTER SETTINGS
+    "editor.detectIndentation": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    // prettier settings
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": false,
+    "prettier.printWidth": 120,
+    "prettier.trailingComma": "all",
+    // Ruff settings
+    "ruff.nativeServer": "on",
+    "ruff.lineLength": 120,
+    "ruff.lint.enable": false,
+    "ruff.configurationPreference": "filesystemFirst",
+    // Per Language settings
+    // Python settings
+    "python.analysis.typeCheckingMode": "standard",
+    "python.analysis.autoImportCompletions": false,
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+        }
+    },
+    // "eslint.format.enable": true,
+    "[javascript]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit"
+        }
+    },
+    "[javascriptreact]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit"
+        }
+    },
+    "[json]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[jsonc]": {
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit"
+            // Fix trailing commas
+        }
+    },
+    "shellcheck.enable": true,
+    "[shellscript]": {
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "files.eol": "\n"
+    },
+    "[ignore]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[dotenv]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[env]": {
+        "editor.defaultFormatter": "IronGeek.vscode-env"
+    },
+    "[markdown]": {
+        "editor.formatOnSave": true,
+        "editor.unicodeHighlight.ambiguousCharacters": false,
+        "editor.unicodeHighlight.invisibleCharacters": false,
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        }
+    },
+    // Nix settings
+    "[nix]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "jnoortheen.nix-ide"
+    },
+    "files.associations": {
+        ".env": "env",
+        "*.py": "python"
+    },
+    // Wordwrap
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 120,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "window.customTitleBarVisibility": "auto",
+    "markdown-preview-enhanced.enablePreviewZenMode": false,
+    "markdown-preview-enhanced.previewTheme": "github-dark.css",
+    "markdown-preview-enhanced.codeBlockTheme": "github-dark.css",
+    "dev.containers.dockerPath": "podman",
+    "dev.containers.dockerSocketPath": "$DOCKER_HOST",
+    "dev.containers.optimisticallyLaunchDocker": false
+}

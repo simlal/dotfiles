@@ -40,7 +40,7 @@ alias l='eza -bl --header --git --color=always --group-directories-first --icons
 alias la='eza -bla --header --git --color=always --group-directories-first --icons'
 
 # VERBOSE DEFAULT EDITOR
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # Docker rootless daemon socket
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock

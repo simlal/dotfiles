@@ -228,6 +228,10 @@ return {
 			-- log_level = vim.log.levels.DEBUG, -- Enable debugging logs
 			notify_on_error = true,
 			format_on_save = function(bufnr)
+				-- Disable with a global or buffer-local variable
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
 				-- Disable "format_on_save lsp_fallback" for languages that don'tconf
 				-- have a well standardized coding style. You can add additional
 				-- languages here or re-enable it for the disabled ones.

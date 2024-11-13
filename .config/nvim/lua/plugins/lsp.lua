@@ -169,7 +169,11 @@ return {
 			local servers = {
 				bashls = {},
 				dockerls = {},
-				pyright = {},
+				pyright = {
+					analysis = {
+						typeCheckingMode = "standard",
+					},
+				},
 				eslint = {},
 				ts_ls = {},
 				nixd = {},

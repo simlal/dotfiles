@@ -17,11 +17,11 @@
     "explorer.confirmDragAndDrop": false,
     "workbench.colorTheme": "Catppuccin Mocha",
     "github.copilot.enable": {
-        "*": true,
+        "*": false,
         "plaintext": false,
         "markdown": true,
         "scminput": false,
-        "python": true
+        "python": false
     },
     // Gen UI
     "workbench.layoutControl.enabled": false,
@@ -177,5 +177,6 @@
     "markdown-preview-enhanced.codeBlockTheme": "github-dark.css",
     "dev.containers.dockerPath": "podman",
     "dev.containers.dockerSocketPath": "$DOCKER_HOST",
-    "dev.containers.optimisticallyLaunchDocker": false
+    "dev.containers.optimisticallyLaunchDocker": false,
+    "database-client.autoSync": true
 }

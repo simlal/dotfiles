@@ -30,7 +30,7 @@ fi
 alias python="python3"
 alias cat="bat"
 alias ipython="$HOME/.pyvenv/ipython-venv/bin/ipython3"
-alias icat="kitten icat"
+# alias icat="kitten icat"
 alias dotfiles="cd $HOME/dotfiles"
 
 # eza-aliases
@@ -38,6 +38,9 @@ alias ls='eza --color=always --group-directories-first --icons'
 alias ll='eza -blT --header --icons --octal-permissions --group-directories-first --color=always'
 alias l='eza -bl --header --git --color=always --group-directories-first --icons'
 alias la='eza -bla --header --git --color=always --group-directories-first --icons'
+
+# git-aliases
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
 
 # VERBOSE DEFAULT EDITOR
 export EDITOR="nvim"

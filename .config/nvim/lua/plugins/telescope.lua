@@ -1,3 +1,5 @@
+-- TODO: TEST
+-- NOTE
 -- NOTE: Plugins can specify dependencies.
 --
 -- The dependencies are proper plugin specifications as well - anything
@@ -54,11 +56,14 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			-- You can put your default mappings / updates / etc. in here
 			--  All the info you're looking for is in `:help telescope.setup()`
 			--
-			-- defaults = {
-			-- 	layout_config = {
-			-- 		vertical = { width = 0.8 },
-			-- 	},
-			-- },
+			defaults = {
+				layout_config = {
+					horizontal = {
+						preview_cutoff = 10,
+						preview_width = 0.5,
+					},
+				},
+			},
 			-- pickers = {}
 			extensions = {
 				["ui-select"] = {

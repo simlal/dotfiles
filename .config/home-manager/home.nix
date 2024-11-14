@@ -61,6 +61,8 @@
       nodejs_22
       yarn
       tslib
+      mysql84
+      luajitPackages.tiktoken_core
 
       # Language servers
       lua-language-server
@@ -84,7 +86,7 @@
 
       # Extra tools
       vimPlugins.markdown-preview-nvim
-      mysql84
+      
 
     ];
   };

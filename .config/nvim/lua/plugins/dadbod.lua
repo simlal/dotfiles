@@ -19,5 +19,6 @@ return {
 				vim.opt.foldenable = false
 			end,
 		})
+		vim.keymap.set("n", "<leader>td", "<cmd>DBUIToggle<CR>", { desc = "[D]adbod UI" })
 	end,
 }

@@ -70,6 +70,7 @@
       nixd
       nodePackages_latest.typescript-language-server
       marksman
+      sqls
 
       # linters
       nodePackages_latest.eslint
@@ -83,6 +84,7 @@
 
       # Extra tools
       vimPlugins.markdown-preview-nvim
+      mysql84
 
     ];
   };

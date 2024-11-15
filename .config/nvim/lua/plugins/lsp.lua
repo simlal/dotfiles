@@ -197,6 +197,8 @@ return {
 				markdown = { "prettier" },
 				bash = { "shellcheck" },
 				sh = { "shfmt" },
+				sql = { "sql_formatter" },
+				mysql = { "sql_formatter" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },

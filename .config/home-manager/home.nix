@@ -86,8 +86,7 @@
 
       # Extra tools
       vimPlugins.markdown-preview-nvim
-      
-
+      nodePackages_latest.sql-formatter
     ];
   };
 

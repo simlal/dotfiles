@@ -11,7 +11,7 @@ return {
 				},
 				suggestion = {
 					keymap = {
-						accept_word = "<M-;>",
+						accept_word = "<M-,>",
 					},
 				},
 			})
@@ -26,7 +26,7 @@ return {
 		},
 		build = "make tiktoken", -- Only on MacOS or Linux
 		opts = {
-			vim.keymap.set("n", "<leader>tc", "<cmd>CopilotChatToggle<CR>", { desc = "[C]opilotChat" }),
+			vim.keymap.set("n", "<leader>tc", "<cmd>CopilotChatToggle<CR>", { desc = "[C]opilot Chat" }),
 		},
 	},
 }

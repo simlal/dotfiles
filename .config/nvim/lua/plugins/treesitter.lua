@@ -7,6 +7,7 @@ return { -- Highlight, edit, and navigate code
 		ensure_installed = {
 			"bash",
 			"c",
+			"cpp",
 			"diff",
 			"html",
 			"lua",
@@ -18,6 +19,7 @@ return { -- Highlight, edit, and navigate code
 			"vimdoc",
 			"sql",
 			"python",
+			"javascript",
 		},
 		-- Autoinstall languages that are not installed
 		auto_install = true,

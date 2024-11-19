@@ -42,6 +42,8 @@
     pandoc
     texliveTeTeX
     lazygit
+    platformio-core
+    clang
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -54,15 +56,10 @@
   programs.neovim = {
     enable = true;
     extraPackages = with pkgs; [
-      # Runtime deps
+      # Base nvim runtime deps
       gcc
       gnumake
       luajit
-      nodejs_22
-      yarn
-      tslib
-      mysql84
-      luajitPackages.tiktoken_core
 
       # Language servers
       lua-language-server
@@ -73,6 +70,7 @@
       nodePackages_latest.typescript-language-server
       marksman
       sqls
+      clang-tools
 
       # linters
       nodePackages_latest.eslint
@@ -83,10 +81,16 @@
       nixpkgs-fmt
       nodePackages_latest.prettier
       shfmt
-
-      # Extra tools
-      vimPlugins.markdown-preview-nvim
       nodePackages_latest.sql-formatter
+
+      # Extra tools / dependencies
+      vimPlugins.markdown-preview-nvim
+      nodejs_22
+      yarn
+      tslib
+      mysql84
+      luajitPackages.tiktoken_core
+      platformio-core
     ];
   };
 

@@ -121,6 +121,7 @@ return {
 				nixd = {},
 				marksman = {},
 				sqls = {},
+				clangd = {},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},
@@ -201,6 +202,7 @@ return {
 				mysql = { "sql_formatter" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
+				json = { "prettier" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },

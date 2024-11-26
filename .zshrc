@@ -27,16 +27,16 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
 fi
 
 # Aliases
-alias python="python3"
+# alias python="python3"
 alias cat="bat"
-alias ipython="$HOME/.pyvenv/ipython-venv/bin/ipython3"
+# alias ipython="$HOME/.pyvenv/ipython-venv/bin/ipython3"
 # alias icat="kitten icat"
 alias dotfiles="cd $HOME/dotfiles"
 
 # eza-aliases
 alias ls='eza --color=always --group-directories-first --icons'
-alias ll='eza -blT --header --icons --octal-permissions --group-directories-first --color=always'
-alias l='eza -bl --header --git --color=always --group-directories-first --icons'
+alias ll='eza -blT --header --icons --octal-permissions --group-directories-first --color=always --group'
+alias l='eza -bl --header --git --color=always --group-directories-first --icons' 
 alias la='eza -bla --header --git --color=always --group-directories-first --icons'
 
 # git-aliases

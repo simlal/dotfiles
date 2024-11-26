@@ -20,6 +20,12 @@ return {
 				sections = {
 					lualine_b = {
 						{
+							function()
+								return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+							end,
+							icon = "",
+						},
+						{
 							"branch",
 							fmt = function(branch)
 								local win_width = vim.api.nvim_win_get_width(0)
@@ -31,12 +37,14 @@ return {
 							end,
 						},
 						"diff",
+						"diagnostics",
 					},
 					lualine_c = {
-						{
-							symbols.get,
-							cond = symbols.has,
-						},
+						{ "filename", path = 1 },
+						-- {
+						-- 	symbols.get,
+						-- 	cond = symbols.has,
+						-- },
 					},
 				},
 			}

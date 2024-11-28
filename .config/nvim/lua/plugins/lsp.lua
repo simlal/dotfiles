@@ -181,6 +181,11 @@ return {
 					lsp_format = lsp_format_opt,
 				}
 			end,
+			formatters = {
+				prettier = {
+					timeout_ms = 3000,
+				},
+			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				-- Conform can also run multiple formatters sequentially

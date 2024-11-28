@@ -27,7 +27,16 @@ return {
 		},
 		build = "make tiktoken", -- Only on MacOS or Linux
 		opts = {
+			-- custom keymaps
 			vim.keymap.set("n", "<leader>tc", "<cmd>CopilotChatToggle<CR>", { desc = "[C]opilot Chat" }),
+
+			-- markdown render config
+			highlight_headers = false,
+			separator = "---",
+			error_header = "> [!ERROR] Error",
+
+			-- models
+			-- model = "o1-mini",
 		},
 	},
 }

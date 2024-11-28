@@ -16,6 +16,7 @@ return {
 			return true
 		end,
 		hint_prefix = " ",
+
 		-- max_height = set_max_height_floating_win(0.2),
 	},
 	config = function(_, opts)

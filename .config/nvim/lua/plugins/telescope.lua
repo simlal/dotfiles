@@ -78,9 +78,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
 		-- See `:help telescope.builtin`
 		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>s?", builtin.help_tags, { desc = "[S]earch [?] Help" })
-		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+		vim.keymap.set("n", "<leader>s?", builtin.help_tags, { desc = "[?] Help" })
+		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[K]eymaps" })
+		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[F]iles" })
 		vim.keymap.set("n", "<leader>sa", function()
 			builtin.find_files({
 				find_command = {
@@ -94,22 +94,20 @@ return { -- Fuzzy Finder (files, lsp, etc)
 					".git/*",
 				},
 			})
-		end, { desc = "[S]earch [A]ll files (incl. hidden)" })
-		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-		-- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+		end, { desc = "[A]ll files (incl. hidden)" })
+		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "[.] Recent Files" })
+		vim.keymap.set("n", "<leader>ss", builtin.grep_string, { desc = "Grep current Word [S]election" })
+		vim.keymap.set("n", "<leader>sw", builtin.live_grep, { desc = "Grep in [W]orkspace" })
+		vim.keymap.set("n", "<leader>ds", builtin.diagnostics, { desc = "[D]iagnostics" })
+		-- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[R]esume" })
+		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find Existing Buffers" })
 		-- git specific search remaps
-		vim.keymap.set("n", "<leader>sh", builtin.git_files, { desc = "[S]earch Git [H] Files" })
-		vim.keymap.set("n", "<leader>ss", builtin.git_status, { desc = "[S]earch Git [S]tatus" })
-		vim.keymap.set("n", "<leader>sc", builtin.git_bcommits, { desc = "[S]earch Git [c]ommits Current Buffer" })
-		vim.keymap.set("n", "<leader>sC", builtin.git_commits, { desc = "[S]earch Git [C]ommits CWD" })
-
-		-- Slightly advanced example of overriding default behavior and theme
+		vim.keymap.set("n", "<leader>sg", builtin.git_files, { desc = "[G]it Files" })
+		vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Search [S]tatus" })
+		vim.keymap.set("n", "<leader>gc", builtin.git_bcommits, { desc = "Search [c]ommits Buffer" })
+		vim.keymap.set("n", "<leader>gC", builtin.git_commits, { desc = "Search [C]ommits Workspace" })
+		-- current files search
 		vim.keymap.set("n", "<leader>/", function()
-			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 				winblend = 5,
 				previewer = true,
@@ -119,16 +117,13 @@ return { -- Fuzzy Finder (files, lsp, etc)
 					preview_cutoff = 0, -- Ensure the previewer is always displayed
 				},
 			}))
-		end, { desc = "[/] Fuzzily search in current buffer" })
-
-		-- It's also possible to pass additional configuration options.
-		--  See `:help telescope.builtin.live_grep()` for information about particular keys
+		end, { desc = "[/] Fuzzy Search Buffer" })
 		vim.keymap.set("n", "<leader>s/", function()
 			builtin.live_grep({
 				grep_open_files = true,
 				prompt_title = "Live Grep in Open Files",
 			})
-		end, { desc = "[S]earch [/] in Open Files" })
+		end, { desc = "[/] Grep in Open Files" })
 
 		-- Shortcut for searching your Neovim configuration files
 		vim.keymap.set("n", "<leader>sn", function()

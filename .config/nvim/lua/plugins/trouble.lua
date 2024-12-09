@@ -4,34 +4,34 @@ return {
 	cmd = "Trouble",
 	keys = {
 		{
-			"<leader>xx",
+			"<leader>dD",
 			"<cmd>Trouble diagnostics toggle<cr>",
-			desc = "Diagnosti[x] ",
+			desc = "Workspace [D]iagnostics",
 		},
 		{
-			"<leader>xX",
+			"<leader>dd",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-			desc = "Buffer Diagnosti[X] ",
+			desc = "Current Buffer [d]iagnostics",
 		},
 		{
-			"<leader>cs",
+			"<leader>ts",
 			"<cmd>Trouble symbols toggle focus=true win.position=right win.size=0.4<cr>",
-			desc = "LSP: [S]ymbols (Trouble)",
+			desc = "Code [S]ymbols",
 		},
 		{
-			"<leader>cl",
+			"<leader>tl",
 			"<cmd>Trouble lsp toggle focus=false win.position=right win.size=0.4<cr>",
-			desc = "LSP: Definitions / references / ... (Trouble)",
+			desc = "[L]ist Code Def/Ref/Impl/...",
 		},
-		{
-			"<leader>xl",
-			"<cmd>Trouble loclist toggle<cr>",
-			desc = "[L]ocation List ",
-		},
-		{
-			"<leader>xq",
-			"<cmd>Trouble qflist toggle<cr>",
-			desc = "[Q]uickfix List ",
-		},
+		-- {
+		-- 	"<leader>xl",
+		-- 	"<cmd>Trouble loclist toggle<cr>",
+		-- 	desc = "[L]ocation List ",
+		-- },
+		-- {
+		-- 	"<leader>xq",
+		-- 	"<cmd>Trouble qflist toggle<cr>",
+		-- 	desc = "[Q]uickfix List ",
+		-- },
 	},
 }

@@ -28,25 +28,25 @@ return {
 				callback = function(event)
 					local map = function(keys, func, desc, mode)
 						mode = mode or "n"
-						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "" .. desc })
 					end
 
-					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+					map("gd", require("telescope.builtin").lsp_definitions, "lsp: [G]oto [D]efinition")
+					map("gr", require("telescope.builtin").lsp_references, "lsp: [G]oto [R]eferences")
+					map("gI", require("telescope.builtin").lsp_implementations, "lsp: [G]oto [I]mplementation")
+					map("gT", require("telescope.builtin").lsp_type_definitions, "lsp: Type [D]efinition")
+					map("gD", vim.lsp.buf.declaration, "lsp: [G]oto [D]eclaration")
+					map("<leader>c/", require("telescope.builtin").lsp_document_symbols, "[/] Search Buffer Symbols")
 					map(
-						"<leader>ws",
+						"<leader>cw",
 						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"[W]orkspace [S]ymbols"
+						"Search [W]orkspace Symbols"
 					)
-					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+					map("<leader>cr", vim.lsp.buf.rename, "[R]ename")
+					map("<leader>ca", vim.lsp.buf.code_action, "[A]ction", { "n", "x" })
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header.
-					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
@@ -83,31 +83,18 @@ return {
 					--
 					-- This may be unwanted, since they displace some of your code
 					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-						map("<leader>th", function()
+						map("<leader>ch", function()
 							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-						end, "Inlay [H]ints")
+						end, "Toggle Inlay [H]ints")
 					end
 				end,
 			})
 
-			-- LSP servers and clients are able to communicate to each other what features they support.
-			--  By default, Neovim doesn't support everything that is in the LSP specification.
-			--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 			-- Setup Neovim LSP configuration
 			local lspconfig = require("lspconfig")
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-			-- Enable the following language servers
-			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-			--
-			--  Add any additional override configuration in the following tables. Available keys are:
-			--  - cmd (table): Override the default command used to start the server
-			--  - filetypes (table): Override the default list of associated filetypes for the server
-			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-			--  - settings (table): Override the default settings passed when initializing the server.
-			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				bashls = {},
 				dockerls = {},
@@ -122,6 +109,7 @@ return {
 				marksman = {},
 				sqls = {},
 				clangd = {},
+				yamlls = {},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},
@@ -150,7 +138,7 @@ return {
 		cmd = { "ConformInfo" },
 		keys = {
 			{
-				"<leader>f",
+				"<leader>cf",
 				function()
 					require("conform").format({ async = true, lsp_format = "fallback" })
 				end,
@@ -199,7 +187,7 @@ return {
 				},
 				javascript = { "prettier" },
 				typescript = { "prettier" },
-				nix = { "nixpkgs-fmt" },
+				nix = { "alejandra" },
 				markdown = { "prettier" },
 				bash = { "shellcheck" },
 				sh = { "shfmt" },
@@ -208,6 +196,7 @@ return {
 				c = { "clang-format" },
 				cpp = { "clang-format" },
 				json = { "prettier" },
+				yaml = { "yamlfmt" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },

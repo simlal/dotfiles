@@ -4,14 +4,14 @@ return {
 	cmd = "Trouble",
 	keys = {
 		{
-			"<leader>dD",
+			"<leader>dw",
 			"<cmd>Trouble diagnostics toggle<cr>",
-			desc = "Workspace [D]iagnostics",
+			desc = "[W]orkspace Diagnostics",
 		},
 		{
 			"<leader>dd",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-			desc = "Current Buffer [d]iagnostics",
+			desc = "[/] Current Buffer Diagnostics",
 		},
 		{
 			"<leader>ts",

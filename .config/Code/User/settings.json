@@ -17,11 +17,11 @@
     "explorer.confirmDragAndDrop": false,
     "workbench.colorTheme": "Catppuccin Mocha",
     "github.copilot.enable": {
-        "*": false,
+        "*": true,
         "plaintext": false,
         "markdown": true,
         "scminput": false,
-        "python": false
+        "python": true
     },
     // Gen UI
     "workbench.layoutControl.enabled": false,
@@ -178,5 +178,10 @@
     "dev.containers.dockerPath": "podman",
     "dev.containers.dockerSocketPath": "$DOCKER_HOST",
     "dev.containers.optimisticallyLaunchDocker": false,
-    "database-client.autoSync": true
+    "database-client.autoSync": true,
+    "python.defaultInterpreterPath": "/home/deck/programming/masters-udes/ift-712/tps/projet-final/.venv",
+    "markdown-pdf.executablePath": "$(which com.microsoft.Edge)",
+    "markdown-preview-enhanced.chromePath": "chromium",
+    "cmake.pinnedCommands": ["workbench.action.tasks.configureTaskRunner", "workbench.action.tasks.runTask"],
+    "cmake.showConfigureWithDebuggerNotification": false
 }

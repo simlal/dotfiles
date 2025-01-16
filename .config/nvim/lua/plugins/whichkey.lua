@@ -42,7 +42,7 @@ return { -- Useful plugin to show you pending keybinds.
 		-- Document existing key chains
 		spec = {
 			{ "<leader>c", group = "[C]ode", mode = { "n", "x" } },
-			{ "<leader>d", group = "[D]iagnostics" },
+			{ "<leader>e", group = "[E]rrors + diagnostics" },
 			{ "<leader>g", group = "[G]it" },
 			{ "<leader>s", group = "[S]earch" },
 			{ "<leader>t", group = "[T]oggle Quick Access" },

@@ -8,7 +8,7 @@
 -- Use the `dependencies` key to specify the dependencies of a particular plugin
 return { -- Fuzzy Finder (files, lsp, etc)
 	"nvim-telescope/telescope.nvim",
-	event = "VimEnter",
+	revent = "VimEnter",
 	branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -53,8 +53,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		-- [[ Configure Telescope ]]
 		-- See `:help telescope` and `:help telescope.setup()`
 		require("telescope").setup({
-			-- You can put your default mappings / updates / etc. in here
-			--  All the info you're looking for is in `:help telescope.setup()`
 			--
 			defaults = {
 				layout_config = {
@@ -62,6 +60,14 @@ return { -- Fuzzy Finder (files, lsp, etc)
 						preview_cutoff = 10,
 						preview_width = 0.5,
 					},
+				},
+				mappings = {
+					n = {
+						["<M-d>"] = require("telescope.actions").delete_buffer,
+					}, -- n
+					i = {
+						["<M-d>"] = require("telescope.actions").delete_buffer,
+					}, -- i
 				},
 			},
 			-- pickers = {}
@@ -98,7 +104,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "[.] Recent Files" })
 		vim.keymap.set("n", "<leader>ss", builtin.grep_string, { desc = "Grep current Word [S]election" })
 		vim.keymap.set("n", "<leader>sw", builtin.live_grep, { desc = "Grep in [W]orkspace" })
-		vim.keymap.set("n", "<leader>ds", builtin.diagnostics, { desc = "[D]iagnostics" })
 		-- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[R]esume" })
 		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find Existing Buffers" })
 		-- git specific search remaps
@@ -124,6 +129,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				prompt_title = "Live Grep in Open Files",
 			})
 		end, { desc = "[/] Grep in Open Files" })
+
+		-- diagnostics search
+		vim.keymap.set("n", "<leader>es", builtin.diagnostics, { desc = "[S]earch Workspace diagnostics" })
 
 		-- Shortcut for searching your Neovim configuration files
 		vim.keymap.set("n", "<leader>sn", function()

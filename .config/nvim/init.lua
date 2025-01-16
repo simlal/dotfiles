@@ -3,11 +3,10 @@ vim.g.maplocalleader = " "
 
 vim.g.have_nerd_font = true
 
-require("options")
-
-require("keymaps")
-
-require("misc")
+-- load configs
+require("config.options")
+require("config.keymaps")
+require("config.misc")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

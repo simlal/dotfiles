@@ -109,7 +109,9 @@ return {
 				nixd = {},
 				marksman = {},
 				sqls = {},
+				cmake = {},
 				clangd = {},
+				rust_analyzer = {},
 				yamlls = {},
 				lua_ls = {
 					-- cmd = {...},

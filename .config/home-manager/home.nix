@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "deck";
@@ -36,14 +38,19 @@
     eza
     man
     man-pages
-    vim 
     ripgrep
     fzf
     pandoc
     texliveTeTeX
     lazygit
     platformio-core
-    clang
+    gdb
+    gcc
+    rustc
+    cargo
+
+    # python config for global use
+    (pkgs.python312.withPackages (python-pkgs: with python-pkgs; [ipykernel]))
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -52,6 +59,22 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  # zsh + ohmyzsh and plugins
+  programs.zsh = {
+    enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "sudo"
+        "zsh-autosuggestions"
+        "zsh-syntax-highlighting"
+        "nix-shell"
+        "vi-mode"
+      ];
+    };
+  };
 
   programs.neovim = {
     enable = true;
@@ -71,17 +94,23 @@
       marksman
       sqls
       clang-tools
+      yaml-language-server
+      cmake-language-server
+      rust-analyzer
 
       # linters
       nodePackages_latest.eslint
+      nodePackages.vscode-langservers-extracted
 
       # Formatters
       stylua
       ruff
-      nixpkgs-fmt
+      alejandra
       nodePackages_latest.prettier
       shfmt
       nodePackages_latest.sql-formatter
+      yamlfmt
+      rustfmt
 
       # Extra tools / dependencies
       vimPlugins.markdown-preview-nvim
@@ -89,8 +118,11 @@
       yarn
       tslib
       mysql84
+      postgresql
       luajitPackages.tiktoken_core
       platformio-core
+      nodePackages_latest.katex
+      rustc
     ];
   };
 
@@ -109,7 +141,6 @@
 
     # ".config/Code/User/keybindings.json".source = "${config.home.homeDirectory}/dotfiles/.config/Code/User/keybindings.json";
     # ".config/Code/User/settings.json".source = "${config.home.homeDirectory}/dotfiles/.config/Code/User/settings.json";
-
   };
 
   # Home Manager can also manage your environment variables through
@@ -120,11 +151,10 @@
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-      # EDITOR = vim
+    # EDITOR = vim
   };
 
   # Oh my zsh TODO migration
-
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

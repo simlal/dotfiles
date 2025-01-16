@@ -70,6 +70,10 @@ if [ -z "$MANPATH" ]; then
     export MANPATH=$(manpath)
 fi
 
+# Pico SDK path
+PICO_SDK_PATH="$HOME/programming/pico-sdk/"
+export PICO_SDK_PATH
+
 ######## terminal and shell tools  ########
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'" # Use bat for manpage color

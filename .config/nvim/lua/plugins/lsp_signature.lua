@@ -1,9 +1,3 @@
--- helper func for max height
-local function set_max_height_floating_win(fraction)
-	local current_win_height = vim.api.nvim_win_get_height(0)
-	local max_height = math.ceil(current_win_height * fraction)
-	return max_height
-end
 return {
 	"ray-x/lsp_signature.nvim",
 	event = "InsertEnter",

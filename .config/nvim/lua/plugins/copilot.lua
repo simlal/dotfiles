@@ -37,6 +37,17 @@ return {
 
 			-- models
 			-- model = "o1-mini",
+			mappings = {
+				close = {
+					normal = "q",
+					insert = "<C-q>", -- remove default binding for Ctrl+C
+				},
+				reset = {
+					normal = "<M-d>", -- replace Ctrl+L with Meta+D
+					insert = "<M-d>",
+				},
+				-- other mappings...
+			},
 		},
 	},
 }

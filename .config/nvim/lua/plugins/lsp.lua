@@ -112,7 +112,28 @@ return {
 				cmake = {},
 				clangd = {},
 				rust_analyzer = {},
-				yamlls = {},
+				yamlls = require("yaml-companion").setup({
+					lspconfig = {
+						flags = {
+							debounce_text_changes = 150,
+						},
+						settings = {
+							redhat = { telemetry = { enabled = false } },
+							yaml = {
+								validate = true,
+								format = { enable = true },
+								hover = true,
+								schemaStore = {
+									enable = true,
+									url = "https://www.schemastore.org/api/json/catalog.json", -- Ensure this URL is active
+								},
+								schemaDownload = { enable = true },
+								schemas = {}, -- Can add specific schemas here if needed
+								trace = { server = "debug" },
+							},
+						},
+					},
+				}),
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},

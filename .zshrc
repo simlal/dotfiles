@@ -34,10 +34,10 @@ alias cat="bat"
 alias dotfiles="cd $HOME/dotfiles"
 
 # eza-aliases
-alias ls='eza --color=always --group-directories-first --icons'
-alias ll='eza -blT --header --icons --octal-permissions --group-directories-first --color=always --group'
-alias l='eza -bl --header --git --color=always --group-directories-first --icons' 
-alias la='eza -bla --header --git --color=always --group-directories-first --icons'
+alias ls='eza --color=always --group-directories-first --icons=always'
+alias ll='eza -blT --header --icons=always --octal-permissions --group-directories-first --color=always --group'
+alias l='eza -bl --header --git --color=always --group-directories-first --icons=always' 
+alias la='eza -bla --header --git --color=always --group-directories-first --icons=always'
 
 # git-aliases
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"

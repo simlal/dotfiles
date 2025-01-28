@@ -183,5 +183,11 @@
     "markdown-pdf.executablePath": "$(which com.microsoft.Edge)",
     "markdown-preview-enhanced.chromePath": "chromium",
     "cmake.pinnedCommands": ["workbench.action.tasks.configureTaskRunner", "workbench.action.tasks.runTask"],
-    "cmake.showConfigureWithDebuggerNotification": false
+    "cmake.showConfigureWithDebuggerNotification": false,
+    "[c]": {
+        "editor.wordBasedSuggestions": "off",
+        "editor.semanticHighlighting.enabled": true,
+        "editor.stickyScroll.defaultModel": "foldingProviderModel",
+        "editor.suggest.insertMode": "replace"
+    }
 }

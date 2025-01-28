@@ -23,31 +23,41 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    # CLI tools
     atuin
     awscli2
     bat
     carapace
-    glibcLocales
-    fira-code-nerdfont
-    podman
     starship
-    vscode
     xsel
-    zellij
-    docker
     eza
-    man
-    man-pages
     ripgrep
     fzf
+
+    # fonts
+    glibcLocales
+    nerd-fonts.fira-code
+
+    # libs
+    man
+    man-pages
+
+    # docs
     pandoc
     texliveTeTeX
+
+    # apps/gui/tui
+    podman
+    vscode
+    zellij
+    docker
     lazygit
-    platformio-core
+
+    # cpp/rust toolchain
     gdb
+    rustup
     gcc
-    rustc
-    cargo
+    probe-rs
 
     # python config for global use
     (pkgs.python312.withPackages (python-pkgs: with python-pkgs; [ipykernel]))
@@ -96,7 +106,7 @@
       clang-tools
       yaml-language-server
       cmake-language-server
-      rust-analyzer
+      # rust-analyzer
 
       # linters
       nodePackages_latest.eslint
@@ -110,7 +120,7 @@
       shfmt
       nodePackages_latest.sql-formatter
       yamlfmt
-      rustfmt
+      # rustfmt
 
       # Extra tools / dependencies
       vimPlugins.markdown-preview-nvim
@@ -122,7 +132,7 @@
       luajitPackages.tiktoken_core
       platformio-core
       nodePackages_latest.katex
-      rustc
+      # rustc
     ];
   };
 

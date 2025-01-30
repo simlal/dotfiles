@@ -4,12 +4,12 @@ return {
 	keys = {
 		{
 			"<leader>ew",
-			"<cmd>Trouble diagnostics toggle win.size=0.4<cr>",
+			"<cmd>Trouble diagnostics toggle focus=true win.size=0.4<cr>",
 			desc = "[W]orkspace Diagnostics",
 		},
 		{
 			"<leader>e/",
-			"<cmd>Trouble diagnostics toggle filter.buf=0 win.size=0.4<cr>",
+			"<cmd>Trouble diagnostics toggle focus=true filter.buf=0 win.size=0.4<cr>",
 			desc = "[/] Current Buffer Diagnostics",
 		},
 		{

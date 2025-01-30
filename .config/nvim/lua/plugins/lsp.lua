@@ -155,6 +155,7 @@ return {
 						},
 					},
 				}),
+				omnisharp = {},
 				lua_ls = {
 					-- cmd = {...},
 					-- filetypes = { ...},

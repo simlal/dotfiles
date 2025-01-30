@@ -106,6 +106,7 @@
       clang-tools
       yaml-language-server
       cmake-language-server
+      # omnisharp-roslyn
       # rust-analyzer
 
       # linters
@@ -132,6 +133,7 @@
       luajitPackages.tiktoken_core
       platformio-core
       nodePackages_latest.katex
+      # dotnet-sdk
       # rustc
     ];
   };

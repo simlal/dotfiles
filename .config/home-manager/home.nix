@@ -37,6 +37,7 @@
     # fonts
     glibcLocales
     nerd-fonts.fira-code
+    jetbrains-mono
 
     # libs
     man
@@ -58,6 +59,8 @@
     rustup
     gcc
     probe-rs
+
+    ghostty
 
     # python config for global use
     (pkgs.python312.withPackages (python-pkgs: with python-pkgs; [ipykernel]))
@@ -85,6 +88,16 @@
       ];
     };
   };
+
+  # ghostty
+  # programs.ghostty = {
+  #   enable = true;
+  #   extraPackages = with pkgs; [
+  #     gtk4
+  #     libadwaita
+  #     pkg-config
+  #   ];
+  # };
 
   programs.neovim = {
     enable = true;
@@ -150,6 +163,8 @@
     ".config/atuin/config.toml".source = "${config.home.homeDirectory}/dotfiles/.config/atuin/config.toml";
     ".config/zellij/config.kdl".source = "${config.home.homeDirectory}/dotfiles/.config/zellij/config.kdl";
     ".config/nvim".source = "${config.home.homeDirectory}/dotfiles/.config/nvim";
+    # ".config/wezterm/wezterm.lua".source = "${config.home.homeDirectory}/dotfiles/.config/wezterm/wezterm.lua";
+    # ".config/ghostty".source = "${config.home.homeDirectory}/dotfiles/.config/ghostty";
 
     # ".config/Code/User/keybindings.json".source = "${config.home.homeDirectory}/dotfiles/.config/Code/User/keybindings.json";
     # ".config/Code/User/settings.json".source = "${config.home.homeDirectory}/dotfiles/.config/Code/User/settings.json";

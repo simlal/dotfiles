@@ -16,6 +16,10 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 ################ User configuration ################
+### GHOSTTY ###
+if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+    builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+fi
 
 # GPG key for git
 export GPG_TTY=$(tty)
@@ -41,6 +45,9 @@ alias la='eza -bla --header --git --color=always --group-directories-first --ico
 
 # git-aliases
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+
+# nix home-manager shortcut
+alias hms="home-manager switch"
 
 # VERBOSE DEFAULT EDITOR
 export EDITOR="nvim"

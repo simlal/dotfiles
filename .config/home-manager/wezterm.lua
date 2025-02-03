@@ -14,7 +14,7 @@ config.default_cwd = home
 ---- theme and fonts ---
 config.color_scheme = "Catppuccin Frappe"
 config.font = wezterm.font("JetBrains Mono")
-config.font_size = 15
+config.font_size = 14
 
 ------------------------
 ------- cursor ---------
@@ -28,7 +28,7 @@ config.window_padding = {
 	left = 0,
 	right = 0,
 	top = 0,
-	bottom = 0,
+	bottom = 1,
 }
 config.window_decorations = "NONE"
 config.enable_scroll_bar = false
@@ -40,8 +40,57 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.tab_and_split_indices_are_zero_based = false
 
+-- Change Left tab bar using the docs example!
+local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
+local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
+
+function tab_title(tab_info)
+	local title = tab_info.tab_title
+	-- if the tab title is explicitly set, take that
+	if title and #title > 0 then
+		return title
+	end
+	-- Otherwise, use the title from the active pane
+	-- in that tab
+	return tab_info.active_pane.title
+end
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+	local edge_background = "#0b0022"
+	local background = "#1b1032"
+	local foreground = "#808080"
+
+	if tab.is_active then
+		background = "#5a3b8a"
+		foreground = "#c0c0c0"
+	elseif hover then
+		background = "#3b3052"
+		foreground = "#909090"
+	end
+
+	local edge_foreground = background
+
+	local title = tab_title(tab)
+
+	-- ensure that the titles fit in the available space,
+	-- and that we have room for the edges.
+	title = wezterm.truncate_right(title, max_width - 2)
+
+	return {
+		{ Background = { Color = edge_background } },
+		{ Foreground = { Color = edge_foreground } },
+		{ Text = SOLID_LEFT_ARROW },
+		{ Background = { Color = background } },
+		{ Foreground = { Color = foreground } },
+		{ Text = title },
+		{ Background = { Color = edge_background } },
+		{ Foreground = { Color = edge_foreground } },
+		{ Text = SOLID_RIGHT_ARROW },
+	}
+end)
+
 wezterm.on("update-right-status", function(window, pane)
-	local date = wezterm.strftime("%b %-d %H:%M ")
+	local date = wezterm.strftime("%b-%-d %H:%M ")
 
 	-- Battery indicator
 	local bat = ""
@@ -87,11 +136,31 @@ wezterm.on("update-right-status", function(window, pane)
 		})
 	end
 
-	-- Set the right status with the mode, LEADER, battery, and date
+	-- Get current keyboard layout
+	-- local function get_current_layout()
+	-- 	local layout_process = wezterm.run_child_process({ "setxkbmap", "-query" })
+	-- 	local layout_output = layout_process:read()
+	--
+	-- 	-- Extract the first layout (the active layout is always first in the list)
+	-- 	local layout = layout_output:match("layout:s*(%S+)") -- Get the first layout
+	-- 	return layout
+	-- end
+	-- local current_layout = get_current_layout()
+	-- "⌨️ "
+	--
+	-- Set the right status with the mode, LEADER, battery, date, and keyboard layout
 	window:set_right_status(wezterm.format({
-		{ Text = mode_indicator .. "   " .. ldr_key .. "   " .. bat .. "   " .. date },
+		{
+			Text = mode_indicator .. "   " .. ldr_key .. "   " .. bat .. "   " .. date,
+		},
 	}))
 end)
+
+-- -- Set the right status with the mode, LEADER, battery, and date
+-- window:set_right_status(wezterm.format({
+-- 	{ Text = mode_indicator .. "   " .. ldr_key .. "   " .. bat .. "   " .. date },
+-- }))
+-- end)
 
 ------------------------
 -------- KEYMAPS -------
@@ -187,12 +256,12 @@ config.keys = {
 	{
 		mods = "LEADER",
 		key = "DownArrow",
-		action = wezterm.action.AdjustPaneSize({ "Down", 10 }),
+		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
 	},
 	{
 		mods = "LEADER",
 		key = "UpArrow",
-		action = wezterm.action.AdjustPaneSize({ "Up", 10 }),
+		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
 	},
 
 	-- command palette override

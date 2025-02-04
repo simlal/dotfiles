@@ -1,6 +1,7 @@
 return {
 	"ray-x/lsp_signature.nvim",
 	event = "InsertEnter",
+	enabled = false,
 	opts = {
 		bind = true,
 		handler_opts = {
@@ -11,6 +12,7 @@ return {
 		end,
 		hint_prefix = " ",
 		toggle_key = "<C-k>", -- Set the toggle key
+		floating_window = false,
 		-- max_height = set_max_height_floating_win(0.2),
 	},
 	config = function(_, opts)

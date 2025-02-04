@@ -53,6 +53,7 @@
     zellij
     docker
     lazygit
+    glow
 
     # cpp/rust toolchain
     gdb

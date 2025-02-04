@@ -21,7 +21,7 @@ if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
     builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
 fi
 
-# GPG key for git
+# GPG key for git and pinentry
 export GPG_TTY=$(tty)
 
 # Start new ssh agent if needed
@@ -48,6 +48,10 @@ alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bol
 
 # nix home-manager shortcut
 alias hms="home-manager switch"
+
+# Wezterm cli from flatpak
+alias wezterm="org.wezfurlong.wezterm"
+alias imgcat="wezterm imgcat"
 
 # VERBOSE DEFAULT EDITOR
 export EDITOR="nvim"

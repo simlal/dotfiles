@@ -35,6 +35,10 @@ config.enable_scroll_bar = false
 config.window_close_confirmation = "NeverPrompt"
 
 ------------------------
+------ workspace -------
+local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
+
+------------------------
 ---- status/tab bar ----
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
@@ -98,21 +102,6 @@ wezterm.on("update-right-status", function(window, pane)
 		bat = "🔋" .. string.format("%.0f%%", b.state_of_charge * 100)
 	end
 
-	-- LEADER key indicator
-	local ldr_key = wezterm.format({
-		{ Foreground = { Color = "#d3d3d3" } },
-		{ Text = "󰒲  LEADER" },
-	})
-
-	-- If LEADER key is active, change the color and make it bold
-	if window:leader_is_active() then
-		ldr_key = wezterm.format({
-			{ Attribute = { Intensity = "Bold" } },
-			{ Foreground = { Color = "#ff4500" } },
-			{ Text = "🔥 LEADER" },
-		})
-	end
-
 	-- Mode indicator
 	local mode = window:active_key_table() or "default"
 	local mode_indicator = ""
@@ -128,11 +117,38 @@ wezterm.on("update-right-status", function(window, pane)
 			{ Foreground = { Color = "#00ffff" } },
 			{ Text = "🔍 Search Mode" },
 		})
+	elseif mode == "resize_pane" then
+		mode_indicator = wezterm.format({
+			{ Foreground = { Color = "#ff00ff" } },
+			{ Text = "📐 Resize Pane" },
+		})
+	elseif mode == "workspaces" then
+		mode_indicator = wezterm.format({
+			{ Foreground = { Color = "#00ff00" } },
+			{ Text = "🛠️ Workspaces" },
+		})
 	else
 		-- Default mode (if no active mode)
 		mode_indicator = wezterm.format({
 			-- { Foreground = { Color = "#00ff00" } },
 			{ Text = "⚡ Default" },
+		})
+	end
+
+	local active_workspace = "🖥️ " .. window:active_workspace()
+
+	-- LEADER key indicator
+	local ldr_key = wezterm.format({
+		{ Foreground = { Color = "#d3d3d3" } },
+		{ Text = "󰒲  LEADER" },
+	})
+
+	-- If LEADER key is active, change the color and make it bold
+	if window:leader_is_active() then
+		ldr_key = wezterm.format({
+			{ Attribute = { Intensity = "Bold" } },
+			{ Foreground = { Color = "#ff4500" } },
+			{ Text = "🔥 LEADER" },
 		})
 	end
 
@@ -149,9 +165,18 @@ wezterm.on("update-right-status", function(window, pane)
 	-- "⌨️ "
 	--
 	-- Set the right status with the mode, LEADER, battery, date, and keyboard layout
+	local padding = "   "
 	window:set_right_status(wezterm.format({
 		{
-			Text = mode_indicator .. "   " .. ldr_key .. "   " .. bat .. "   " .. date,
+			Text = mode_indicator
+				.. padding
+				.. ldr_key
+				.. padding
+				.. active_workspace
+				.. padding
+				.. bat
+				.. padding
+				.. date,
 		},
 	}))
 end)
@@ -196,7 +221,7 @@ config.keys = {
 	},
 	-- rename tab
 	{
-		key = "r",
+		key = "e",
 		mods = "LEADER",
 		action = wezterm.action.PromptInputLine({
 			description = "Enter new name for tab",
@@ -242,29 +267,7 @@ config.keys = {
 		key = "l",
 		action = wezterm.action.ActivatePaneDirection("Right"),
 	},
-	-- pane sizing
-	{
-		mods = "LEADER",
-		key = "LeftArrow",
-		action = wezterm.action.AdjustPaneSize({ "Left", 10 }),
-	},
-	{
-		mods = "LEADER",
-		key = "RightArrow",
-		action = wezterm.action.AdjustPaneSize({ "Right", 10 }),
-	},
-	{
-		mods = "LEADER",
-		key = "DownArrow",
-		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
-	},
-	{
-		mods = "LEADER",
-		key = "UpArrow",
-		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
-	},
 
-	-- command palette override
 	{
 		key = "p",
 		mods = "LEADER",
@@ -287,6 +290,23 @@ config.keys = {
 		mods = "LEADER",
 		action = wezterm.action.ActivateCopyMode,
 	},
+	-- key tables: resizing panes, workspace management
+	{
+		key = "r",
+		mods = "LEADER",
+		action = wezterm.action.ActivateKeyTable({
+			name = "resize_pane",
+			one_shot = false,
+		}),
+	},
+	{
+		key = "o",
+		mods = "LEADER",
+		action = wezterm.action.ActivateKeyTable({
+			name = "workspaces",
+			timeout_milliseconds = 1500,
+		}),
+	},
 }
 
 -- tab navigation
@@ -300,17 +320,98 @@ for i = 0, 9 do
 end
 
 -- key tables
--- config.key_tables = {
--- 	resize_pane = {
--- 		{ key = "LeftArrow", action = wezterm.action.AdjustPaneSize({ "Left", 5 }) },
--- 		{ key = "RightArrow", action = wezterm.action.AdjustPaneSize({ "Right", 5 }) },
--- 		{ key = "UpArrow", action = wezterm.action.AdjustPaneSize({ "Up", 5 }) },
--- 		{ key = "DownArrow", action = wezterm.action.AdjustPaneSize({ "Down", 5 }) },
---
--- 		-- Cancel the mode by pressing escape
--- 		{ key = "Escape", action = "PopKeyTable" },
--- 	},
--- }
+config.key_tables = {
+	resize_pane = {
+		{ key = "LeftArrow", action = wezterm.action.AdjustPaneSize({ "Left", 8 }) },
+		{ key = "RightArrow", action = wezterm.action.AdjustPaneSize({ "Right", 8 }) },
+		{ key = "UpArrow", action = wezterm.action.AdjustPaneSize({ "Up", 4 }) },
+		{ key = "DownArrow", action = wezterm.action.AdjustPaneSize({ "Down", 4 }) },
+
+		-- Cancel the mode by pressing escape
+		{ key = "Escape", action = "PopKeyTable" },
+	},
+	workspaces = {
+		{
+			key = "n",
+			action = wezterm.action.PromptInputLine({
+				description = wezterm.format({
+					{ Attribute = { Intensity = "Bold" } },
+					{ Foreground = { AnsiColor = "Fuchsia" } },
+					{ Text = "Enter name for new workspace" },
+				}),
+				action = wezterm.action_callback(function(window, pane, line)
+					if line then
+						window:perform_action(
+							wezterm.action.SwitchToWorkspace({
+								name = line,
+							}),
+							pane
+						)
+					end
+				end),
+			}),
+		},
+		{
+			key = "s",
+			action = wezterm.action_callback(function(win, pane)
+				resurrect.save_state(resurrect.workspace_state.get_workspace_state())
+				-- resurrect.window_state.save_window_action()
+			end),
+		},
+		{
+			key = "l",
+			action = wezterm.action_callback(function(win, pane)
+				resurrect.fuzzy_load(win, pane, function(id, label)
+					local type = string.match(id, "^([^/]+)") -- match before '/'
+					id = string.match(id, "([^/]+)$") -- match after '/'
+					id = string.match(id, "(.+)%..+$") -- remove file extention
+					local opts = {
+						relative = true,
+						restore_text = true,
+						on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+					}
+					if type == "workspace" then
+						local state = resurrect.load_state(id, "workspace")
+						resurrect.workspace_state.restore_workspace(state, opts)
+						wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), id)
+					elseif type == "window" then
+						local state = resurrect.load_state(id, "window")
+						resurrect.window_state.restore_window(pane:window(), state, opts)
+					elseif type == "tab" then
+						local state = resurrect.load_state(id, "tab")
+						resurrect.tab_state.restore_tab(pane:tab(), state, opts)
+					end
+				end)
+			end),
+		},
+		{
+			key = "r",
+			action = wezterm.action.PromptInputLine({
+				description = "Enter new name for workspace",
+				action = wezterm.action_callback(function(window, pane, line)
+					if line then
+						wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+						resurrect.save_state(resurrect.workspace_state.get_workspace_state())
+					end
+				end),
+			}),
+		},
+		{
+			key = "d",
+			action = wezterm.action_callback(function(win, pane)
+				resurrect.fuzzy_load(win, pane, function(id)
+					resurrect.delete_state(id)
+				end, {
+					title = "Delete State",
+					description = "Select State to Delete and press Enter = accept, Esc = cancel, / = filter",
+					fuzzy_description = "Search State to Delete: ",
+					is_fuzzy = true,
+				})
+			end),
+		},
+		{ key = "Escape", action = "PopKeyTable" },
+	},
+}
 
 ------------------------
 ---------- END ---------

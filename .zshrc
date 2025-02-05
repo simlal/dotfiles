@@ -50,7 +50,7 @@ alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bol
 alias hms="home-manager switch"
 
 # Wezterm cli from flatpak
-alias wezterm="org.wezfurlong.wezterm"
+alias wezterm="$(flatpak info --show-location org.wezfurlong.wezterm)/export/bin/org.wezfurlong.wezterm"
 alias imgcat="wezterm imgcat"
 
 # VERBOSE DEFAULT EDITOR

@@ -2,15 +2,19 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 ------------------------
-------- constants ------
+----- paths and env ----
+-- home
 local home = os.getenv("HOME")
-wezterm.log_info(home)
-local zsh_path = "/.nix-profile/bin/zsh"
+config.default_cwd = home
+
+-- shell
+local zsh_path = home .. "/" .. ".nix-profile/bin/zsh"
+config.set_environment_variables = {
+	PATH = home .. "/.nix-profile/bin:" .. os.getenv("PATH"),
+}
+config.default_prog = { zsh_path, "-l" }
 ------------------------
 ---- default shell -----
-
-config.default_prog = { home .. zsh_path, "-l" }
-config.default_cwd = home
 
 ------------------------
 ---- theme and fonts ---
@@ -154,24 +158,19 @@ wezterm.on("update-right-status", function(window, pane)
 		})
 	end
 
-	-- Get current keyboard layout
+	-- Get current keyboard layout (WE NEED FLATPAK TO HAVE ACCESS TO /nix/store!)
 	local layout = "⌨️ "
-	-- local xkb_path = home .. "/.nix-profile/bin/xkb-switch"
-	-- wezterm.log_info(home .. zsh_path)
-	-- wezterm.log_info(xkb_path)
-	-- wezterm.log_info(os.getenv("PATH"))
-	--
-	-- wezterm.log_info(wezterm.glob("/home/deck/.nix-profile/bin/xkb-switch"))
-	-- local success, stdout, stderr = wezterm.run_child_process({ home .. zsh_path, "-c", xkb_path, "-p" })
-	-- wezterm.log_info(stdout)
+	local xkb_path = home .. "/" .. ".nix-profile/bin/xkb-switch"
+	-- wezterm.log_info(wezterm.glob(xkb_path))
+	local success, stdout, stderr = wezterm.run_child_process({ zsh_path, "-c", xkb_path, "-p" })
+	wezterm.log_info(stdout)
+	if success then
+		local current_layout = stdout:gsub("\n", "")
+		layout = layout .. current_layout
+	else
+		layout = layout .. "?"
+	end
 
-	-- if success then
-	-- 	layout = layout .. "SUCCESS"
-	-- else
-	-- 	layout = layout .. "Error"
-	-- end
-	--
-	--
 	-- Set the right status with the mode, LEADER, battery, date, and keyboard layout
 	local padding = "   "
 	window:set_right_status(wezterm.format({

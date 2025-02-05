@@ -55,15 +55,12 @@
     docker
     lazygit
     glow
-    wezterm
 
     # cpp/rust toolchain
     gdb
     rustup
     gcc
     probe-rs
-
-    ghostty
 
     # python config for global use
     (pkgs.python312.withPackages (python-pkgs: with python-pkgs; [ipykernel]))
@@ -91,9 +88,6 @@
       ];
     };
   };
-  # programs.wezterm = {
-  #   enable = true;
-  # };
 
   # ghostty
   # programs.ghostty = {

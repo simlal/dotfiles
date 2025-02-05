@@ -4,10 +4,12 @@ local config = wezterm.config_builder()
 ------------------------
 ------- constants ------
 local home = os.getenv("HOME")
-
+wezterm.log_info(home)
+local zsh_path = "/.nix-profile/bin/zsh"
 ------------------------
 ---- default shell -----
-config.default_prog = { home .. "/.nix-profile/bin/zsh", "-l" }
+
+config.default_prog = { home .. zsh_path, "-l" }
 config.default_cwd = home
 
 ------------------------
@@ -153,16 +155,22 @@ wezterm.on("update-right-status", function(window, pane)
 	end
 
 	-- Get current keyboard layout
-	-- local function get_current_layout()
-	-- 	local layout_process = wezterm.run_child_process({ "setxkbmap", "-query" })
-	-- 	local layout_output = layout_process:read()
+	local layout = "⌨️ "
+	-- local xkb_path = home .. "/.nix-profile/bin/xkb-switch"
+	-- wezterm.log_info(home .. zsh_path)
+	-- wezterm.log_info(xkb_path)
+	-- wezterm.log_info(os.getenv("PATH"))
 	--
-	-- 	-- Extract the first layout (the active layout is always first in the list)
-	-- 	local layout = layout_output:match("layout:s*(%S+)") -- Get the first layout
-	-- 	return layout
+	-- wezterm.log_info(wezterm.glob("/home/deck/.nix-profile/bin/xkb-switch"))
+	-- local success, stdout, stderr = wezterm.run_child_process({ home .. zsh_path, "-c", xkb_path, "-p" })
+	-- wezterm.log_info(stdout)
+
+	-- if success then
+	-- 	layout = layout .. "SUCCESS"
+	-- else
+	-- 	layout = layout .. "Error"
 	-- end
-	-- local current_layout = get_current_layout()
-	-- "⌨️ "
+	--
 	--
 	-- Set the right status with the mode, LEADER, battery, date, and keyboard layout
 	local padding = "   "
@@ -173,6 +181,8 @@ wezterm.on("update-right-status", function(window, pane)
 				.. ldr_key
 				.. padding
 				.. active_workspace
+				.. padding
+				.. layout
 				.. padding
 				.. bat
 				.. padding

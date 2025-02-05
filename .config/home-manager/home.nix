@@ -33,6 +33,7 @@
     eza
     ripgrep
     fzf
+    xkb-switch
 
     # fonts
     glibcLocales

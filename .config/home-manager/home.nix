@@ -55,6 +55,7 @@
     docker
     lazygit
     glow
+    wezterm
 
     # cpp/rust toolchain
     gdb
@@ -90,6 +91,9 @@
       ];
     };
   };
+  # programs.wezterm = {
+  #   enable = true;
+  # };
 
   # ghostty
   # programs.ghostty = {

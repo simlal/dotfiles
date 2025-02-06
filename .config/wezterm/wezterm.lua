@@ -54,7 +54,7 @@ config.tab_and_split_indices_are_zero_based = false
 local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
-function tab_title(tab_info)
+local function tab_title(tab_info)
 	local title = tab_info.tab_title
 	-- if the tab title is explicitly set, take that
 	if title and #title > 0 then
@@ -99,6 +99,28 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	}
 end)
 
+local function format_status_items(win_width_pixels, icon, text_item, truncate)
+	local pix_threshold = 1280
+	if win_width_pixels <= pix_threshold then
+		if truncate and #text_item > 9 then
+			wezterm.log_info(text_item)
+			text_item = text_item:sub(1, #text_item - 3) .. "..."
+			return icon .. text_item
+		end
+		if truncate and #text_item <= 9 then
+			return icon .. text_item
+		end
+		return icon
+	end
+	if truncate and #text_item > 9 then
+		text_item = text_item:sub(1, #text_item - 3) .. "..."
+		return icon .. text_item
+	else
+		return icon .. text_item
+	end
+end
+
+-- Fix status items on small screens (like steam deck!)
 wezterm.on("update-right-status", function(window, pane)
 	local date = wezterm.strftime("%b-%-d %H:%M ")
 
@@ -108,6 +130,8 @@ wezterm.on("update-right-status", function(window, pane)
 		bat = "🔋" .. string.format("%.0f%%", b.state_of_charge * 100)
 	end
 
+	-- HACK: Use window resolution to format items
+	local window_width = window:get_dimensions().pixel_width
 	-- Mode indicator
 	local mode = window:active_key_table() or "default"
 	local mode_indicator = ""
@@ -116,37 +140,46 @@ wezterm.on("update-right-status", function(window, pane)
 	if mode == "copy_mode" then
 		mode_indicator = wezterm.format({
 			{ Foreground = { Color = "#ffcc00" } },
-			{ Text = "✂️ Copy Mode" },
+			{ Text = format_status_items(window_width, "✂️", " Copy Mode", false) },
 		})
 	elseif mode == "search_mode" then
 		mode_indicator = wezterm.format({
 			{ Foreground = { Color = "#00ffff" } },
-			{ Text = "🔍 Search Mode" },
+			{ Text = format_status_items(window_width, "🔍", " Search Mode", false) },
 		})
 	elseif mode == "resize_pane" then
 		mode_indicator = wezterm.format({
 			{ Foreground = { Color = "#ff00ff" } },
-			{ Text = "📐 Resize Pane" },
+			{ Text = format_status_items(window_width, "📐", " Resize Pane", false) },
 		})
 	elseif mode == "workspaces" then
 		mode_indicator = wezterm.format({
 			{ Foreground = { Color = "#00ff00" } },
-			{ Text = "🛠️ Workspaces" },
+			{ Text = format_status_items(window_width, "🛠️", " Workspaces", false) },
 		})
 	else
 		-- Default mode (if no active mode)
 		mode_indicator = wezterm.format({
 			-- { Foreground = { Color = "#00ff00" } },
-			{ Text = "⚡ Default" },
+			{ Text = format_status_items(window_width, "⚡", " Default", false) },
 		})
 	end
 
-	local active_workspace = "🖥️ " .. window:active_workspace()
+	-- if tab then
+	-- 	local total_width_chars = 0
+	-- 	wezterm.log_info(tab:panes())
+	-- end
+	-- wezterm.log_info(current_win_dims)
+
+	local active_workspace = " " .. window:active_workspace()
+
+	-- wezterm.log_info(active_workspace)
+	active_workspace = format_status_items(window_width, "🖥️", active_workspace, true)
 
 	-- LEADER key indicator
 	local ldr_key = wezterm.format({
 		{ Foreground = { Color = "#d3d3d3" } },
-		{ Text = "󰒲  LEADER" },
+		{ Text = format_status_items(window_width, "󰒲 ", " LEADER", false) },
 	})
 
 	-- If LEADER key is active, change the color and make it bold
@@ -154,7 +187,7 @@ wezterm.on("update-right-status", function(window, pane)
 		ldr_key = wezterm.format({
 			{ Attribute = { Intensity = "Bold" } },
 			{ Foreground = { Color = "#ff4500" } },
-			{ Text = "🔥 LEADER" },
+			{ Text = format_status_items(window_width, "🔥", " LEADER", false) },
 		})
 	end
 
@@ -163,7 +196,6 @@ wezterm.on("update-right-status", function(window, pane)
 	local xkb_path = home .. "/" .. ".nix-profile/bin/xkb-switch"
 	-- wezterm.log_info(wezterm.glob(xkb_path))
 	local success, stdout, stderr = wezterm.run_child_process({ zsh_path, "-c", xkb_path, "-p" })
-	wezterm.log_info(stdout)
 	if success then
 		local current_layout = stdout:gsub("\n", "")
 		layout = layout .. current_layout

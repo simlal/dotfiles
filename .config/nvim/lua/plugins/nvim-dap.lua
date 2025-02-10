@@ -13,29 +13,41 @@ return {
 
 			require("dapui").setup()
 			require("dap-go").setup()
+			vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+			vim.fn.sign_define(
+				"DapBreakpointCondition",
+				{ text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" }
+			)
+			vim.fn.sign_define("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
+			vim.fn.sign_define(
+				"DapStopped",
+				{ text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
+			)
 
-			require("nvim-dap-virtual-text").setup({
-				-- This just tries to mitigate the chance that I leak tokens here. Probably won't stop it from happening...
-				display_callback = function(variable)
-					local name = string.lower(variable.name)
-					local value = string.lower(variable.value)
-					if name:match("secret") or name:match("api") or value:match("secret") or value:match("api") then
-						return "*****"
-					end
-
-					if #variable.value > 15 then
-						return " " .. string.sub(variable.value, 1, 15) .. "... "
-					end
-
-					return " " .. variable.value
-				end,
-			})
+			-- require("nvim-dap-virtual-text").setup({
+			-- 	-- This just tries to mitigate the chance that I leak tokens here. Probably won't stop it from happening...
+			-- 	display_callback = function(variable)
+			-- 		local name = string.lower(variable.name)
+			-- 		local value = string.lower(variable.value)
+			-- 		if name:match("secret") or name:match("api") or value:match("secret") or value:match("api") then
+			-- 			return "*****"
+			-- 		end
+			--
+			-- 		if #variable.value > 15 then
+			-- 			return " " .. string.sub(variable.value, 1, 15) .. "... "
+			-- 		end
+			--
+			-- 		return " " .. variable.value
+			-- 	end,
+			-- 	nvim_dap_virtual = ebaled,
+			-- })
 
 			-- init adapters
 			if not dap.adapters then
 				dap.adapters = {}
 			end
 
+			-- PROBE-RS RUST EMBEDDED
 			dap.adapters["probe-rs-debug"] = {
 				type = "server",
 				port = "${port}",
@@ -113,6 +125,41 @@ return {
 					file:close()
 				end
 			end
+
+			-- lldb for C/CPP/RUST
+			dap.adapters.lldb = {
+				type = "executable",
+				command = "lldb-dap", -- adjust as needed, must be absolute path
+				name = "lldb",
+			}
+			dap.configurations.cpp = {
+				{
+					name = "Launch",
+					type = "lldb",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					end,
+					cwd = "${workspaceFolder}",
+					stopOnEntry = false,
+					args = {},
+
+					-- 💀
+					-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+					--
+					--    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+					--
+					-- Otherwise you might get the following error:
+					--
+					--    Error on launch: Failed to attach to the target process
+					--
+					-- But you should be aware of the implications:
+					-- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+					-- runInTerminal = false,
+				},
+			}
+			dap.configurations.c = dap.configurations.cpp
+			dap.configurations.rust = dap.configurations.cpp
 
 			-- keymaps
 			vim.keymap.set("n", "<leader>tb", ui.toggle, { noremap = true, desc = "DAP de[B]ugger" })

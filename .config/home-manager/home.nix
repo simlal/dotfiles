@@ -61,6 +61,7 @@
     rustup
     gcc
     probe-rs
+    lldb
 
     # python config for global use
     (pkgs.python312.withPackages (python-pkgs: with python-pkgs; [ipykernel]))

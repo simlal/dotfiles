@@ -6,15 +6,13 @@ local config = wezterm.config_builder()
 -- home
 local home = os.getenv("HOME")
 config.default_cwd = home
-
--- shell
 local zsh_path = home .. "/" .. ".nix-profile/bin/zsh"
 config.set_environment_variables = {
 	PATH = home .. "/.nix-profile/bin:" .. os.getenv("PATH"),
 }
+
+-- shell
 config.default_prog = { zsh_path, "-l" }
-------------------------
----- default shell -----
 
 ------------------------
 ---- theme and fonts ---
@@ -39,6 +37,7 @@ config.window_padding = {
 config.window_decorations = "NONE"
 config.enable_scroll_bar = false
 config.window_close_confirmation = "NeverPrompt"
+config.max_fps = 75
 
 ------------------------
 ------ workspace -------
@@ -103,7 +102,6 @@ local function format_status_items(win_width_pixels, icon, text_item, truncate)
 	local pix_threshold = 1280
 	if win_width_pixels <= pix_threshold then
 		if truncate and #text_item > 9 then
-			wezterm.log_info(text_item)
 			text_item = text_item:sub(1, #text_item - 3) .. "..."
 			return icon .. text_item
 		end

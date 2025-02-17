@@ -34,5 +34,32 @@ return {
 				},
 			},
 		})
+
+		-- lsp keymaps
+		vim.keymap.set({ "n", "i", "s" }, "<c-f>", function()
+			if not require("noice.lsp").scroll(4) then
+				return "<c-f>"
+			end
+		end, { silent = true, expr = true })
+
+		vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
+			if not require("noice.lsp").scroll(-4) then
+				return "<c-b>"
+			end
+		end, { silent = true, expr = true })
+
+		-- noice group keymaps
+		vim.keymap.set("n", "<leader>nl", function()
+			require("noice").cmd("last")
+		end, { desc = "[L]ast message" })
+		vim.keymap.set("n", "<leader>nh", function()
+			require("noice").cmd("history")
+		end, { desc = "Show [H]istory" })
+		vim.keymap.set("n", "<leader>nd", function()
+			require("noice").cmd("dismiss")
+		end, { desc = "[D]ismiss messages" })
+		vim.keymap.set("n", "<leader>ns", function()
+			require("noice").cmd("telescope")
+		end, { desc = "[S]earch messages" })
 	end,
 }

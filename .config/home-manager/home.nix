@@ -62,16 +62,12 @@
     gcc
     probe-rs
     lldb
+    gnumake
+    espflash
 
-    # python config for global use
-    (pkgs.python312.withPackages (python-pkgs: with python-pkgs; [ipykernel]))
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    # python reqs with uv
+    uv
+    libffi
   ];
 
   # zsh + ohmyzsh and plugins
@@ -89,16 +85,6 @@
       ];
     };
   };
-
-  # ghostty
-  # programs.ghostty = {
-  #   enable = true;
-  #   extraPackages = with pkgs; [
-  #     gtk4
-  #     libadwaita
-  #     pkg-config
-  #   ];
-  # };
 
   programs.neovim = {
     enable = true;
@@ -164,7 +150,7 @@
     ".config/atuin/config.toml".source = "${config.home.homeDirectory}/dotfiles/.config/atuin/config.toml";
     ".config/zellij/config.kdl".source = "${config.home.homeDirectory}/dotfiles/.config/zellij/config.kdl";
     ".config/nvim".source = "${config.home.homeDirectory}/dotfiles/.config/nvim";
-    # ".config/wezterm/wezterm.lua".source = "${config.home.homeDirectory}/dotfiles/.config/wezterm/wezterm.lua";
+    ".config/wezterm/wezterm.lua".source = "${config.home.homeDirectory}/dotfiles/.config/wezterm/wezterm.lua";
     # ".config/ghostty".source = "${config.home.homeDirectory}/dotfiles/.config/ghostty";
 
     # ".config/Code/User/keybindings.json".source = "${config.home.homeDirectory}/dotfiles/.config/Code/User/keybindings.json";

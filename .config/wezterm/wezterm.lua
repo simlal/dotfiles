@@ -19,6 +19,7 @@ config.default_prog = { zsh_path, "-l" }
 config.color_scheme = "Catppuccin Frappe"
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 14
+config.warn_about_missing_glyphs = false
 
 ------------------------
 ------- cursor ---------

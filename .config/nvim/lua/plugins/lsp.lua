@@ -97,7 +97,15 @@ return {
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 			local servers = {
-				bashls = {},
+				bashls = {
+					on_init = function(client)
+						-- Prevent LSP from working on `.env` files
+						if vim.bo.filetype == "sh" and vim.fn.expand("%:t"):match("%.env") then
+							client.stop() -- Completely stop LSP client for this buffer
+						end
+					end,
+					filetypes = { "sh", "bash" }, -- Keep normal shell files
+				},
 				dockerls = {},
 				pyright = {
 					analysis = {
@@ -203,7 +211,7 @@ return {
 				-- Disable "format_on_save lsp_fallback" for languages that don'tconf
 				-- have a well standardized coding style. You can add additional
 				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
+				local disable_filetypes = { c = true, cpp = false }
 				local lsp_format_opt
 				if disable_filetypes[vim.bo[bufnr].filetype] then
 					lsp_format_opt = "never"
@@ -211,7 +219,7 @@ return {
 					lsp_format_opt = "fallback"
 				end
 				return {
-					timeout_ms = 500,
+					timeout_ms = 1000,
 					lsp_format = lsp_format_opt,
 				}
 			end,

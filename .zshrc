@@ -16,11 +16,6 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 ################ User configuration ################
-### GHOSTTY ###
-if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
-    builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
-fi
-
 # GPG key for git and pinentry
 export GPG_TTY=$(tty)
 
@@ -30,7 +25,12 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     ssh-add $HOME/.ssh/id_25519 2>/dev/null
 fi
 
-# Aliases
+# Language environment
+export LANG=en_US.utf8
+export LC_CTYPE=en_US.utf8
+export LC_ALL=en_US.utf8
+
+######## Aliases ########
 # alias python="python3"
 alias cat="bat"
 # alias ipython="$HOME/.pyvenv/ipython-venv/bin/ipython3"
@@ -62,13 +62,11 @@ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 ######## PATH EXPORTS and bin ########
 export PATH="/bin:$PATH"
 
-# Language environment
-export LANG=en_US.utf8
-export LC_CTYPE=en_US.utf8
-export LC_ALL=en_US.utf8
-
 # local bin export to PATH
 export PATH="$HOME/.local/bin:$PATH"
+
+# Cargo/rust path/bin
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Go-related path/bin
 #export PATH="/usr/local/go/bin:$PATH"
@@ -102,6 +100,8 @@ zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
 
 # export ZELLIJ_AUTO_ATTACH=true
+
+######### python management ########
 
 ######### Nix-related ########
 if [ -e /home/deck/.nix-profile/etc/profile.d/nix.sh ]; then . /home/deck/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

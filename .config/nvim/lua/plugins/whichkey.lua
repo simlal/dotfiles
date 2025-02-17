@@ -48,6 +48,7 @@ return { -- Useful plugin to show you pending keybinds.
 			{ "<leader>t", group = "[T]oggle Quick Access" },
 			{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
 			{ "<leader>d", group = "[D]ebugger Adapter Protocol" },
+			{ "<leader>n", group = "[N]oice" },
 		},
 	},
 }

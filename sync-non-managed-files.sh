@@ -29,15 +29,15 @@ echo "Copying $HOME_MANAGER_SOURCE_DIR/home.nix -> $HOME_MANAGER_DEST_DIR/home.n
 cp "$HOME_MANAGER_SOURCE_DIR/home.nix" "$HOME_MANAGER_DEST_DIR/home.nix"
 check_copy_OK
 
-# wezterm config bug with hms
-WEZTERM_SOURCE_DIR="$HOME/.config/wezterm"
-WEZTERM_DEST_DIR="$DOTFILES_DIR/.config/wezterm"
-
-create_dest_dir_if_not_exists "$WEZTERM_DEST_DIR"
-
-echo "Copying $WEZTERM_SOURCE_DIR/wezterm.lua -> $WEZTERM_DEST_DIR/wezterm.lua"
-cp "$WEZTERM_SOURCE_DIR/wezterm.lua" "$WEZTERM_DEST_DIR/wezterm.lua"
-check_copy_OK
+# # wezterm config bug with hms
+# WEZTERM_SOURCE_DIR="$HOME/.config/wezterm"
+# WEZTERM_DEST_DIR="$DOTFILES_DIR/.config/wezterm"
+#
+# create_dest_dir_if_not_exists "$WEZTERM_DEST_DIR"
+#
+# echo "Copying $WEZTERM_SOURCE_DIR/wezterm.lua -> $WEZTERM_DEST_DIR/wezterm.lua"
+# cp "$WEZTERM_SOURCE_DIR/wezterm.lua" "$WEZTERM_DEST_DIR/wezterm.lua"
+# check_copy_OK
 
 # VSCODE
 VSCODE_SOURCE_DIR="$HOME/.config/Code/User"

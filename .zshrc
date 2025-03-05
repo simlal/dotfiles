@@ -1,0 +1,108 @@
+################ OH MY ZSH CONFIG ################
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+plugins=(
+    git
+    sudo
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    vi-mode
+)
+source $ZSH/oh-my-zsh.sh
+
+################ User configuration ################
+
+# Ghostty shell integration for Bash. This should be at the top of your bashrc!
+if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+  builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+fi
+
+# GPG key for git and pinentry
+export GPG_TTY=$(tty)
+
+# Start new ssh agent if needed
+#if [ -z "$SSH_AUTH_SOCK" ]; then
+#    eval "$(ssh-agent -s)"
+#    ssh-add $HOME/.ssh/id_25519 2>/dev/null
+#fi
+
+######## Aliases ########
+# alias python="python3"
+alias cat="bat"
+
+# dotfiles management
+alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# eza-aliases
+alias ls='eza --color=always --group-directories-first --icons=always'
+alias ll='eza -blT --header --icons=always --octal-permissions --group-directories-first --color=always --group --git-ignore'
+alias l='eza -bl --header --git --color=always --group-directories-first --icons=always' 
+alias la='eza -bla --header --git --color=always --group-directories-first --icons=always'
+
+# git-aliases
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+
+# Wezterm cli from flatpak
+#alias wezterm="$(flatpak info --show-location org.wezfurlong.wezterm)/export/bin/org.wezfurlong.wezterm"
+#alias imgcat="wezterm imgcat"
+
+# VERBOSE DEFAULT EDITOR
+export EDITOR="nvim"
+
+# Docker rootless daemon socket
+#export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+
+######## PATH EXPORTS and bin ########
+#
+# Ensure $PATH and environment variables are set up
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+  export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+
+# Export linuxbrew path for zsh
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+
+# Cargo/rust path/bin
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Go-related path/bin
+#export PATH="/usr/local/go/bin:$PATH"
+
+# export GOPATH=$(go env GOPATH)
+#export PATH="$(go env GOBIN):$PATH"
+
+# MANPAGES
+#if [ -z "$MANPATH" ]; then
+#    export MANPATH=$(manpath)
+#fi
+
+# NodeVersionManager
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+######## terminal and shell tools  ########
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'" # Use bat for manpage color
+export MANROFFOPT="-c"
+
+# starship prompt
+eval "$(starship init zsh)"
+
+# atuin search history
+eval "$(atuin init zsh --disable-up-arrow)"
+
+# carapace autocomplete
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
+
+# zoxide smart cd
+eval "$(zoxide init zsh)"
+
+# export ZELLIJ_AUTO_ATTACH=true
+
+. "$HOME/.atuin/bin/env"

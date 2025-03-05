@@ -33,6 +33,10 @@ keybind = ctrl+space>[=previous_tab
 keybind = ctrl+space>]=next_tab
 
 keybind = ctrl+space>w=close_tab
+keybind = ctrl+page_up=unbind
+
+keybind = ctrl+page_up=move_tab:1
+keybind = ctrl+page_down=move_tab:-1
 
 # splits
 # create/close
@@ -48,15 +52,15 @@ keybind = ctrl+space>k=goto_split:top
 keybind = ctrl+space>l=goto_split:right
 
 # resize
-keybind = ctrl+space>left=resize_split:left,50
-keybind = ctrl+space>right=resize_split:right,50
-keybind = ctrl+space>up=resize_split:up,50
-keybind = ctrl+space>down=resize_split:down,50
-keybind = ctrl+space>equal=equalize_splits 
+keybind = ctrl+alt+left=resize_split:left,50
+keybind = ctrl+alt+right=resize_split:right,50
+keybind = ctrl+alt+up=resize_split:up,50
+keybind = ctrl+alt+down=resize_split:down,50
+keybind = ctrl+alt+equal=equalize_splits 
 
 # lines navigation
-keybind = ctrl+up=scroll_page_lines:-1 
-keybind = ctrl+down=scroll_page_lines:1 
+keybind = shift+up=scroll_page_lines:-1 
+keybind = shift+down=scroll_page_lines:1 
 
 ######### INIT COMMAND #########
 # default shell and integration

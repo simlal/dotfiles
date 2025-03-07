@@ -62,7 +62,7 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
 fi
 
 # Export linuxbrew path for zsh
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 
 # Cargo/rust path/bin
 export PATH="$HOME/.cargo/bin:$PATH"

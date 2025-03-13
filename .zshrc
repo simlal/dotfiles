@@ -65,7 +65,7 @@ fi
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 
 # Cargo/rust path/bin
-export PATH="$HOME/.cargo/bin:$PATH"
+. "$HOME/.cargo/env"
 
 # Go-related path/bin
 #export PATH="/usr/local/go/bin:$PATH"
@@ -105,4 +105,3 @@ eval "$(zoxide init zsh)"
 
 # export ZELLIJ_AUTO_ATTACH=true
 
-. "$HOME/.atuin/bin/env"

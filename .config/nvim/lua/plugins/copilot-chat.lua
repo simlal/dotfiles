@@ -13,5 +13,7 @@ return {
       },
       -- other mappings...
     },
+
+    model = "claude-3.7-sonnet",
   },
 }

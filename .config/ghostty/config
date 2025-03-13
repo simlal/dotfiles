@@ -1,7 +1,10 @@
 
 ######### UI #########
+# theme - font - cursor
 theme = catppuccin-frappe
 font-family = "JetBrains mono"
+font-size = 14
+
 mouse-hide-while-typing = true
 cursor-invert-fg-bg = true
 
@@ -13,6 +16,10 @@ split-divider-color = #ef9f76
 window-padding-x = 2
 gtk-titlebar = false
 gtk-wide-tabs = true
+window-height = 30
+window-width = 120
+
+
 # adw-toolbar-style = flat
 
 ######### keybindings #########

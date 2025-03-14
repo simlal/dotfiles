@@ -1,8 +1,19 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
+-- Function to get the current YAML schema
+-- local function get_schema()
+--   local schema = require("yaml-companion").get_buf_schema(0)
+--   if schema.result[1].name == "none" then
+--     return "No schema applied"
+--   end
+--   return schema.result[1].name
+-- end
 --
--- Add any additional autocmds here
--- with `vim.api.nvim_create_autocmd`
+-- -- Create a custom command to show the current schema
+-- vim.api.nvim_create_user_command("YamlSchemaCurrent", function()
+--   local schema_name = get_schema()
+--   print("Current YAML schema: " .. schema_name)
+-- end, {})
 --
--- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
--- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+-- -- Custom command to trigger telescope with yaml_schema (yaml-companion)
+-- vim.api.nvim_create_user_command("YamlSchemaPick", function()
+--   vim.cmd("Telescope yaml_schema")
+-- end, {})

@@ -73,16 +73,6 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PAT
 # export GOPATH=$(go env GOPATH)
 #export PATH="$(go env GOBIN):$PATH"
 
-# MANPAGES
-#if [ -z "$MANPATH" ]; then
-#    export MANPATH=$(manpath)
-#fi
-
-# NodeVersionManager
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 ######## terminal and shell tools  ########
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'" # Use bat for manpage color

@@ -25,6 +25,7 @@ window-width = 120
 ######### keybindings #########
 keybind = ctrl+space>t=new_tab 
 keybind = ctrl+space>n=new_window
+keybind = ctrl+,=ignore
 
 # tab navigation
 keybind = ctrl+space>1=goto_tab:1

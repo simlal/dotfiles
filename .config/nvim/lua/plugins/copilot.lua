@@ -7,7 +7,9 @@ return {
         ["*"] = false,
       },
       keymap = {
-        accept_word = "<M-,>",
+        accept_word = "<C-,>",
+        next = "<C-]>",
+        prev = "<C-[",
       },
     },
   },

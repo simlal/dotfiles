@@ -4,6 +4,8 @@ return {
     opts = {
       filetypes = {
         markdown = true,
+        python = true,
+        rust = true,
         ["*"] = false,
       },
       keymap = {

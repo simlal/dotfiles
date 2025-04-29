@@ -5,7 +5,7 @@ return {
       filetypes = {
         markdown = true,
         python = true,
-        rust = true,
+        -- rust = true,
         ["*"] = false,
       },
       keymap = {

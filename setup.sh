@@ -21,7 +21,42 @@ ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 ### Install utilities using brew ###
 if ! command -v brew &>/dev/null; then
   echo "Homebrew not found, installing..."
+  # Install build-essential for Homebrew
+  sudo apt-get update && sudo apt-get install -y build-essential
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # Add Homebrew to PATH for the current session and permanently
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>"$HOME/.bashrc"
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>"$HOME/.zshrc"
+  echo "Homebrew installed! Proceeding to utilities"
 else
-  echo "Homebrew already installed, skipping."
+  echo "Homebrew already installed, skipping install."
 fi
+
+# Installing dev packages and tooling
+packages=(
+  gcc
+  atuin
+  awscli
+  bat
+  carapace
+  eza
+  fd
+  fzf
+  lazygit
+  mysql-client
+  neovim
+  node
+  pnpm
+  ripgrep
+  starship
+  zoxide
+)
+
+for package in "${packages[@]}"; do
+  echo "Installing $package via brew..."
+  brew install $package
+done
+
+echo "Done setting up devcontainer on $(cat /etc/os-release) container!"

@@ -6,7 +6,7 @@ echo Setting up config files and utilities for devcontainer...
 XDG_CONFIG_DIR="$HOME/.config"
 mkdir -p "$XDG_CONFIG_DIR"
 
-DOTFILES_DIR="$PWD/dotfiles" # Cloned dotfiles
+DOTFILES_DIR="$PWD" # Cloned dotfiles
 
 ln -sf "$DOTFILES_DIR/.config/starship.toml" "$HOME/.config/starship.toml"
 ln -sf "$DOTFILES_DIR/.config/nvim" "$HOME/.config/nvim"
@@ -19,4 +19,9 @@ ln -sf "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
 ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
 ### Install utilities using brew ###
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v brew &>/dev/null; then
+  echo "Homebrew not found, installing..."
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+  echo "Homebrew already installed, skipping."
+fi

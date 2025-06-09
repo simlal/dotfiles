@@ -50,7 +50,7 @@ packages=(
   node
   pnpm
   ripgrep
-  starship
+  # starship
   zoxide
 )
 

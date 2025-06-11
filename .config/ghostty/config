@@ -9,6 +9,7 @@ mouse-hide-while-typing = true
 cursor-invert-fg-bg = true
 
 # splits
+unfocused-split-opacity = 0.5
 unfocused-split-fill = black
 split-divider-color = #ef9f76
 
@@ -24,11 +25,18 @@ window-width = 120
 # adw-toolbar-style = flat
 
 ######### keybindings #########
+
+# New tab/windows
 keybind = ctrl+space>t=new_tab 
 keybind = ctrl+space>n=new_window
-keybind = ctrl+,=ignore
+
+# config
+keybind = ctrl+,=open_config
+keybind = ctrl+space>,=reload_config
 
 # tab navigation
+keybind = ctrl+space>o=toggle_tab_overview
+
 keybind = ctrl+space>1=goto_tab:1
 keybind = ctrl+space>2=goto_tab:2
 keybind = ctrl+space>3=goto_tab:3
@@ -42,8 +50,8 @@ keybind = ctrl+space>[=previous_tab
 keybind = ctrl+space>]=next_tab
 
 keybind = ctrl+space>w=close_tab
-keybind = ctrl+page_up=unbind
 
+keybind = ctrl+page_up=unbind
 keybind = ctrl+page_up=move_tab:1
 keybind = ctrl+page_down=move_tab:-1
 

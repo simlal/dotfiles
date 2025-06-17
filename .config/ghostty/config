@@ -20,6 +20,10 @@ gtk-wide-tabs = true
 window-height = 30
 window-width = 120
 
+######### Globals #########
+app-notifications = true
+# copy-on-select = clipboard
+
 # scrollback-limit in bytes
 
 # adw-toolbar-style = flat

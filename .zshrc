@@ -44,6 +44,10 @@ alias la='eza -bla --header --git --color=always --group-directories-first --ico
 # git-aliases
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
 
+# Atuin scripts
+alias asr="atuin scripts run"
+alias asl="atuin scripts list"
+
 # Wezterm cli from flatpak
 #alias wezterm="$(flatpak info --show-location org.wezfurlong.wezterm)/export/bin/org.wezfurlong.wezterm"
 #alias imgcat="wezterm imgcat"
@@ -94,4 +98,3 @@ zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'exter
 eval "$(zoxide init zsh)"
 
 # export ZELLIJ_AUTO_ATTACH=true
-

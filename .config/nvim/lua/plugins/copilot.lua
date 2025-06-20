@@ -5,6 +5,8 @@ return {
       filetypes = {
         markdown = true,
         python = false,
+        javascript = false,
+        yaml = false,
         ["*"] = false,
       },
       keymap = {

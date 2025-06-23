@@ -24,3 +24,6 @@ gui:
     "*": "#babbf1"
 
   nerdFontsVersion: "3"
+
+git:
+  overrideGpg: true

@@ -83,6 +83,9 @@ keybind = ctrl+alt+equal=equalize_splits
 keybind = shift+up=scroll_page_lines:-1 
 keybind = shift+down=scroll_page_lines:1 
 
+# Open scrollback in text editor
+keybind = ctrl+space>s=write_screen_file:open
+
 ######### INIT COMMAND #########
 # default shell and integration
-command = /home/linuxbrew/.linuxbrew/bin/zsh --login --interactive
+command = $(which zsh) --login --interactive

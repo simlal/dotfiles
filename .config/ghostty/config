@@ -73,10 +73,12 @@ keybind = ctrl+space>k=goto_split:top
 keybind = ctrl+space>l=goto_split:right
 
 # resize
-keybind = ctrl+alt+left=resize_split:left,50
-keybind = ctrl+alt+right=resize_split:right,50
-keybind = ctrl+alt+up=resize_split:up,50
-keybind = ctrl+alt+down=resize_split:down,50
+keybind = ctrl+alt+right=unbind
+keybind = ctrl+alt+left=unbind
+keybind = ctrl+alt+h=resize_split:left,50
+keybind = ctrl+alt+l=resize_split:right,50
+keybind = ctrl+alt+k=resize_split:up,50
+keybind = ctrl+alt+j=resize_split:down,50
 keybind = ctrl+alt+equal=equalize_splits 
 
 # lines navigation

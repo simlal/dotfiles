@@ -17,3 +17,12 @@
 -- vim.api.nvim_create_user_command("YamlSchemaPick", function()
 --   vim.cmd("Telescope yaml_schema")
 -- end, {})
+--
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*",
+	callback = function()
+		vim.opt_local.formatoptions:remove({ "o", "r" }) -- removes auto-comment on o/O and Enter
+	end,
+	group = vim.api.nvim_create_augroup("mygroup", { clear = true }),
+	desc = "Disable auto-commenting on new lines",
+})

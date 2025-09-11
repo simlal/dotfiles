@@ -28,65 +28,66 @@ app-notifications = true
 
 # adw-toolbar-style = flat
 
+#NOTE: TOGGLE BACK ON IF NOT USING TMUX
 ######### keybindings #########
 
 # New tab/windows
-keybind = ctrl+space>t=new_tab 
-keybind = ctrl+space>n=new_window
-
-# config
-keybind = ctrl+,=open_config
-keybind = ctrl+space>,=reload_config
-
-# tab navigation
-keybind = ctrl+space>o=toggle_tab_overview
-
-keybind = ctrl+space>1=goto_tab:1
-keybind = ctrl+space>2=goto_tab:2
-keybind = ctrl+space>3=goto_tab:3
-keybind = ctrl+space>4=goto_tab:4
-keybind = ctrl+space>5=goto_tab:5
-keybind = ctrl+space>6=goto_tab:6
-keybind = ctrl+space>7=goto_tab:7
-keybind = ctrl+space>8=goto_tab:8
-keybind = ctrl+space>9=goto_tab:9
-keybind = ctrl+space>[=previous_tab
-keybind = ctrl+space>]=next_tab
-
-keybind = ctrl+space>w=close_tab
-
-keybind = ctrl+page_up=unbind
-keybind = ctrl+page_up=move_tab:1
-keybind = ctrl+page_down=move_tab:-1
-
-# splits
-# create/close
-keybind = ctrl+space>x=close_surface
-keybind = ctrl+space>\=new_split:right
-keybind = ctrl+space>-=new_split:down
-keybind = ctrl+space>z=toggle_split_zoom
-
-# nav
-keybind = ctrl+space>h=goto_split:left
-keybind = ctrl+space>j=goto_split:bottom
-keybind = ctrl+space>k=goto_split:top
-keybind = ctrl+space>l=goto_split:right
-
-# resize
-keybind = ctrl+alt+right=unbind
-keybind = ctrl+alt+left=unbind
-keybind = ctrl+alt+h=resize_split:left,50
-keybind = ctrl+alt+l=resize_split:right,50
-keybind = ctrl+alt+k=resize_split:up,50
-keybind = ctrl+alt+j=resize_split:down,50
-keybind = ctrl+alt+equal=equalize_splits 
-
-# lines navigation
-keybind = shift+up=scroll_page_lines:-1 
-keybind = shift+down=scroll_page_lines:1 
-
-# Open scrollback in text editor
-keybind = ctrl+space>s=write_screen_file:open
+# keybind = ctrl+space>t=new_tab 
+# keybind = ctrl+space>n=new_window
+#
+# # config
+# keybind = ctrl+,=open_config
+# keybind = ctrl+space>,=reload_config
+#
+# # tab navigation
+# keybind = ctrl+space>o=toggle_tab_overview
+#
+# keybind = ctrl+space>1=goto_tab:1
+# keybind = ctrl+space>2=goto_tab:2
+# keybind = ctrl+space>3=goto_tab:3
+# keybind = ctrl+space>4=goto_tab:4
+# keybind = ctrl+space>5=goto_tab:5
+# keybind = ctrl+space>6=goto_tab:6
+# keybind = ctrl+space>7=goto_tab:7
+# keybind = ctrl+space>8=goto_tab:8
+# keybind = ctrl+space>9=goto_tab:9
+# keybind = ctrl+space>[=previous_tab
+# keybind = ctrl+space>]=next_tab
+#
+# keybind = ctrl+space>w=close_tab
+#
+# keybind = ctrl+page_up=unbind
+# keybind = ctrl+page_up=move_tab:1
+# keybind = ctrl+page_down=move_tab:-1
+#
+# # splits
+# # create/close
+# keybind = ctrl+space>x=close_surface
+# keybind = ctrl+space>\=new_split:right
+# keybind = ctrl+space>-=new_split:down
+# keybind = ctrl+space>z=toggle_split_zoom
+#
+# # nav
+# keybind = ctrl+space>h=goto_split:left
+# keybind = ctrl+space>j=goto_split:bottom
+# keybind = ctrl+space>k=goto_split:top
+# keybind = ctrl+space>l=goto_split:right
+#
+# # resize
+# keybind = ctrl+alt+right=unbind
+# keybind = ctrl+alt+left=unbind
+# keybind = ctrl+alt+h=resize_split:left,50
+# keybind = ctrl+alt+l=resize_split:right,50
+# keybind = ctrl+alt+k=resize_split:up,50
+# keybind = ctrl+alt+j=resize_split:down,50
+# keybind = ctrl+alt+equal=equalize_splits 
+#
+# # lines navigation
+# keybind = shift+up=scroll_page_lines:-1 
+# keybind = shift+down=scroll_page_lines:1 
+#
+# # Open scrollback in text editor
+# keybind = ctrl+space>s=write_screen_file:open
 
 ######### INIT COMMAND #########
 # default shell and integration

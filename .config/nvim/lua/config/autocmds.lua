@@ -26,3 +26,49 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("mygroup", { clear = true }),
 	desc = "Disable auto-commenting on new lines",
 })
+
+-- FastCmpModeToggle for blink.cmp
+local blink = require("blink.cmp")
+local fast_mode_enabled = false
+
+-- Save your normal sources so you can restore them
+local normal_sources = { "lsp", "path", "snippets", "buffer" }
+
+local function enable_fast_mode()
+	blink.setup({
+		completion = { keyword_length = 2, autocomplete = false },
+		sources = { default = { "lsp", "path" } },
+	})
+	fast_mode_enabled = true
+	vim.notify("Blink Fast Mode: ON", vim.log.levels.INFO)
+end
+
+local function disable_fast_mode()
+	blink.setup({
+		completion = { keyword_length = 1, autocomplete = true },
+		sources = { default = normal_sources },
+	})
+	fast_mode_enabled = false
+	vim.notify("Blink Fast Mode: OFF", vim.log.levels.INFO)
+end
+
+-- Manual toggle command
+vim.api.nvim_create_user_command("FastCmpModeToggle", function()
+	if fast_mode_enabled then
+		disable_fast_mode()
+	else
+		enable_fast_mode()
+	end
+end, {})
+
+-- Auto‑enable fast mode for large files (>1MB)
+vim.api.nvim_create_autocmd("BufReadPre", {
+	group = vim.api.nvim_create_augroup("fast_cmp_mode", { clear = true }),
+	callback = function(args)
+		local size = vim.fn.getfsize(args.file)
+		if size > 1024 * 1024 then
+			enable_fast_mode()
+		end
+	end,
+	desc = "Enable Blink Fast Mode for large files",
+})

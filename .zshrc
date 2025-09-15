@@ -52,6 +52,21 @@ alias asl="atuin scripts list"
 #alias wezterm="$(flatpak info --show-location org.wezfurlong.wezterm)/export/bin/org.wezfurlong.wezterm"
 #alias imgcat="wezterm imgcat"
 
+# tmux session manager
+# alias ssession=$(sesh l -t -T -d -H | walker -d -f -k -p "Sesh sessions"); sesh cn --switch $ssession
+alias psesh='sesh connect "$(sesh list --icons | fzf-tmux -p 80%,70% \
+  --no-sort --ansi --border-label " sesh " --prompt "⚡  " \
+  --header "  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find" \
+  --bind "tab:down,btab:up" \
+  --bind "ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)" \
+  --bind "ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)" \
+  --bind "ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)" \
+  --bind "ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)" \
+  --bind "ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)" \
+  --bind "ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)" \
+  --preview-window "right:55%" \
+  --preview "sesh preview {}")"'
+
 # VERBOSE DEFAULT EDITOR
 export EDITOR="nvim"
 
@@ -79,8 +94,12 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PAT
 
 ######## terminal and shell tools  ########
 
+# batcat
 export MANPAGER="sh -c 'col -bx | bat -l man -p'" # Use bat for manpage color
 export MANROFFOPT="-c"
+
+# FZF coloring
+export FZF_DEFAULT_OPTS="--ansi $FZF_DEFAULT_OPTS"
 
 # starship prompt
 eval "$(starship init zsh)"
@@ -98,3 +117,4 @@ zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'exter
 eval "$(zoxide init zsh)"
 
 # export ZELLIJ_AUTO_ATTACH=true
+

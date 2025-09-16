@@ -20,9 +20,14 @@ gtk-wide-tabs = true
 window-height = 30
 window-width = 120
 
+# Clipboard
+clipboard-write = allow
+clipboard-read = allow
+
 ######### Globals #########
 app-notifications = true
 # copy-on-select = clipboard
+
 
 # scrollback-limit in bytes
 

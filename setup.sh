@@ -36,7 +36,7 @@ setup_dotfiles() {
 
 # Installing dev packages and tooling with brew + setting up oh-my-zsh/plugins
 setup_dev_env() {
-  # NOTE: Update as needed
+  # NOTE: Update as needed (i.e. tmux, zsh may be missing from base OS)
   brew_packages=(
     "atuin"
     "awscli"

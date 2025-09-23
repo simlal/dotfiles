@@ -4,9 +4,11 @@ return {
 		opts = {
 			filetypes = {
 				markdown = true,
-				python = false,
+				python = true,
 				javascript = false,
+				typescript = false,
 				yaml = false,
+				toml = false,
 				["*"] = false,
 			},
 			keymap = {

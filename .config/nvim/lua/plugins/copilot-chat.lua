@@ -15,10 +15,10 @@ return {
 		},
 
 		model = "claude-sonnet-4",
-		-- providers = {
-		-- 	github_models = {
-		-- 		disabled = true,
-		-- 	},
-		-- },
+		providers = {
+			github_models = {
+				disabled = true,
+			},
+		},
 	},
 }

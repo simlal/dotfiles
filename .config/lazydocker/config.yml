@@ -1,0 +1,6 @@
+customCommands:
+  images:
+    - name: run sh (ephemeral)
+      attach: true
+      shell: true
+      command: "docker run --rm -it {{ .Image.ID }} /bin/sh"

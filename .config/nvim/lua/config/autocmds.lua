@@ -27,6 +27,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "Disable auto-commenting on new lines",
 })
 
+-- commentstring for sql files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "sql", "mysql", "plsql" },
+	callback = function()
+		vim.bo.commentstring = "-- %s"
+	end,
+})
+
 -- FastCmpModeToggle for blink.cmp
 local blink = require("blink.cmp")
 local fast_mode_enabled = false

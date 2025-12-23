@@ -35,6 +35,10 @@ symbol = " "
 [fossil_branch]
 symbol = " "
 
+[git_status]
+ignore_submodules = true
+untracked = ""
+
 [git_branch]
 symbol = " "
 

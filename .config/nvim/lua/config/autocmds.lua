@@ -35,6 +35,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "groovy",
+	callback = function()
+		vim.bo.expandtab = false
+		vim.bo.tabstop = 2
+		vim.bo.softtabstop = 2
+		vim.bo.shiftwidth = 2
+	end,
+})
+
 -- FastCmpModeToggle for blink.cmp
 local blink = require("blink.cmp")
 local fast_mode_enabled = false

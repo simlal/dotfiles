@@ -6,13 +6,8 @@ local config = wezterm.config_builder()
 -- home
 local home = os.getenv("HOME")
 config.default_cwd = home
---local zsh_path = home .. "/" .. ".nix-profile/bin/zsh"
---config.set_environment_variables = {
---	PATH = home .. "/.nix-profile/bin:" .. os.getenv("PATH"),
---}
---
 ---- shell
---config.default_prog = { zsh_path, "-l" }
+config.default_prog = { "/usr/bin/zsh", "-l" }
 
 ------------------------
 ---- theme and fonts ---
@@ -33,7 +28,7 @@ config.window_padding = {
 	left = 0,
 	right = 0,
 	top = 0,
-	bottom = 1,
+	bottom = 0,
 }
 config.window_decorations = "NONE"
 config.enable_scroll_bar = false
@@ -47,7 +42,7 @@ local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.
 ------------------------
 ---- status/tab bar ----
 config.use_fancy_tab_bar = false
-config.tab_bar_at_bottom = true
+-- config.tab_bar_at_bottom = true
 config.tab_and_split_indices_are_zero_based = false
 
 -- Change Left tab bar using the docs example!
@@ -151,6 +146,11 @@ wezterm.on("update-right-status", function(window, pane)
 			{ Foreground = { Color = "#ff00ff" } },
 			{ Text = format_status_items(window_width, "📐", " Resize Pane", false) },
 		})
+	elseif mode == "zoom_mode" then
+		mode_indicator = wezterm.format({
+			{ Foreground = { Color = "#ff8800" } },
+			{ Text = format_status_items(window_width, "🔎", " Zoom Mode", false) },
+		})
 	elseif mode == "workspaces" then
 		mode_indicator = wezterm.format({
 			{ Foreground = { Color = "#00ff00" } },
@@ -178,7 +178,7 @@ wezterm.on("update-right-status", function(window, pane)
 	-- LEADER key indicator
 	local ldr_key = wezterm.format({
 		{ Foreground = { Color = "#d3d3d3" } },
-		{ Text = format_status_items(window_width, "󰒲 ", " LEADER", false) },
+		{ Text = format_status_items(window_width, "󰒲 ", " LDR", false) },
 	})
 
 	-- If LEADER key is active, change the color and make it bold
@@ -186,21 +186,9 @@ wezterm.on("update-right-status", function(window, pane)
 		ldr_key = wezterm.format({
 			{ Attribute = { Intensity = "Bold" } },
 			{ Foreground = { Color = "#ff4500" } },
-			{ Text = format_status_items(window_width, "🔥", " LEADER", false) },
+			{ Text = format_status_items(window_width, "🔥", " LDR", false) },
 		})
 	end
-
-	-- Get current keyboard layout (WE NEED FLATPAK TO HAVE ACCESS TO /nix/store!)
-	local layout = "⌨️ "
-	-- local xkb_path = home .. "/" .. ".nix-profile/bin/xkb-switch"
-	-- wezterm.log_info(wezterm.glob(xkb_path))
-	--local success, stdout, stderr = wezterm.run_child_process({ zsh_path, "-c", xkb_path, "-p" })
---	if success then
---		local current_layout = stdout:gsub("\n", "")
---		layout = layout .. current_layout
---	else
---		layout = layout .. "?"
---	end
 
 	-- Set the right status with the mode, LEADER, battery, date, and keyboard layout
 	local padding = "   "
@@ -211,8 +199,8 @@ wezterm.on("update-right-status", function(window, pane)
 				.. ldr_key
 				.. padding
 				.. active_workspace
-				.. padding
-				.. layout
+				-- .. padding
+				-- .. layout
 				.. padding
 				.. bat
 				.. padding
@@ -308,6 +296,13 @@ config.keys = {
 		action = wezterm.action.ActivatePaneDirection("Right"),
 	},
 
+	-- Zoom pane
+	{
+		mods = "LEADER",
+		key = "z",
+		action = wezterm.action.TogglePaneZoomState,
+	},
+	-- cmd palette / launcher
 	{
 		key = "p",
 		mods = "LEADER",

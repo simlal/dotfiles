@@ -22,13 +22,7 @@ fi
 # GPG key for git and pinentry
 export GPG_TTY=$(tty)
 
-# Start new ssh agent if needed
-#if [ -z "$SSH_AUTH_SOCK" ]; then
-#    eval "$(ssh-agent -s)"
-#    ssh-add $HOME/.ssh/id_25519 2>/dev/null
-#fi
-
-######## Aliases ########
+######## Personal aliases ########
 # alias python="python3"
 alias cat="bat"
 
@@ -51,12 +45,7 @@ alias ghac="gh run watch -i 1 \$(gh run list --limit 1 --json databaseId --jq '.
 alias asr="atuin scripts run"
 alias asl="atuin scripts list"
 
-# Wezterm cli from flatpak
-#alias wezterm="$(flatpak info --show-location org.wezfurlong.wezterm)/export/bin/org.wezfurlong.wezterm"
-#alias imgcat="wezterm imgcat"
-
-# tmux session manager
-# alias ssession=$(sesh l -t -T -d -H | walker -d -f -k -p "Sesh sessions"); sesh cn --switch $ssession
+# Tmux session manager
 alias psesh='sesh connect "$(sesh list --icons | fzf-tmux -p 80%,70% \
   --no-sort --ansi --border-label " sesh " --prompt "⚡  " \
   --header "  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find" \
@@ -73,7 +62,7 @@ alias psesh='sesh connect "$(sesh list --icons | fzf-tmux -p 80%,70% \
 # nvim
 alias n='nvim'
 
-# mysql client use mariadb
+# mysql client use mariadb (for brew)
 alias mysql="mariadb"
 
 # VERBOSE DEFAULT EDITOR
@@ -81,6 +70,9 @@ export EDITOR="nvim"
 
 # Docker rootless daemon socket
 #export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+
+
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 ######## PATH EXPORTS and bin ########
 #
@@ -101,7 +93,7 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PAT
 # export GOPATH=$(go env GOPATH)
 #export PATH="$(go env GOBIN):$PATH"
 
-######## terminal and shell tools  ########
+######## Terminal and shell tools customizations  ########
 
 # batcat
 export MANPAGER="sh -c 'col -bx | bat -l man -p'" # Use bat for manpage color
@@ -122,8 +114,17 @@ zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
 zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 
+
 # zoxide smart cd
 eval "$(zoxide init zsh)"
 
-# export ZELLIJ_AUTO_ATTACH=true
+#### Omnimed overrides ####
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+. "$HOME/.local/bin/env"
+. $HOME/.omnimedrc 2> /dev/null
+PATH=$PATH:~/Applications/Scripts
+export HISTTIMEFORMAT="%Y-%m-%d %T "
+eval "$(direnv hook zsh)"
 
+[ -f "$HOME/.bash_aliases_omnimed" ] && . "$HOME/.bash_aliases_omnimed"

@@ -4,7 +4,8 @@ return {
 		opts = {
 			filetypes = {
 				markdown = true,
-				python = true,
+				asciidoc = true,
+				python = false,
 				javascript = false,
 				typescript = false,
 				yaml = false,

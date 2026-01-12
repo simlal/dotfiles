@@ -1,9 +1,176 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
---
+-- better up/down
+vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+
+-- Move to window using the <ctrl> hjkl keys
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+
 -- Resize window using <ctrl> arrow keys
-LazyVim.safe_keymap_set("n", "<C-Up>", "<cmd>resize +5<cr>", { desc = "Increase Window Height" })
-LazyVim.safe_keymap_set("n", "<C-Down>", "<cmd>resize -5<cr>", { desc = "Decrease Window Height" })
-LazyVim.safe_keymap_set("n", "<C-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decrease Window Width" })
-LazyVim.safe_keymap_set("n", "<C-Right>", "<cmd>vertical resize +3<cr>", { desc = "Increase Window Width" })
+vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
+-- Move Lines
+vim.keymap.set("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+vim.keymap.set("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
+vim.keymap.set("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+vim.keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+vim.keymap.set("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
+vim.keymap.set("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+
+-- buffers
+vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+-- vim.keymap.set("n", "<leader>bd", function()
+--   Snacks.bufdelete()
+-- end, { desc = "Delete Buffer" })
+-- vim.keymap.set("n", "<leader>bo", function()
+--   Snacks.bufdelete.other()
+-- end, { desc = "Delete Other Buffers" })
+vim.keymap.set("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+
+-- Clear search and stop snippet on escape
+vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
+	vim.cmd("noh")
+	return "<esc>"
+end, { expr = true, desc = "Escape and Clear hlsearch" })
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
+vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+vim.keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
+vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+
+-- Add undo break-points
+vim.keymap.set("i", ",", ",<c-g>u")
+vim.keymap.set("i", ".", ".<c-g>u")
+vim.keymap.set("i", ";", ";<c-g>u")
+
+-- save file
+vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+
+--keywordprg
+vim.keymap.set("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+
+-- better indenting
+vim.keymap.set("x", "<", "<gv")
+vim.keymap.set("x", ">", ">gv")
+
+-- commenting
+vim.keymap.set("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+vim.keymap.set("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
+
+-- new file
+vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+
+-- location list
+vim.keymap.set("n", "<leader>xl", function()
+	local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
+	if not success and err then
+		vim.notify(err, vim.log.levels.ERROR)
+	end
+end, { desc = "Location List" })
+
+-- quickfix list
+vim.keymap.set("n", "<leader>xq", function()
+	local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
+	if not success and err then
+		vim.notify(err, vim.log.levels.ERROR)
+	end
+end, { desc = "Quickfix List" })
+
+vim.keymap.set("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+vim.keymap.set("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+	return function()
+		vim.diagnostic.jump({
+			count = (next and 1 or -1) * vim.v.count1,
+			severity = severity and vim.diagnostic.severity[severity] or nil,
+			float = true,
+		})
+	end
+end
+vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+local diag_active = true
+vim.keymap.set("n", "<leader>ud", function()
+	diag_active = not diag_active
+	vim.diagnostic.config({
+		virtual_text = diag_active,
+		signs = diag_active,
+		underline = diag_active,
+	})
+end, { desc = "Toggle diagnostics" })
+
+-- stylua: ignore start
+
+-- toggle options
+-- LazyVim.format.snacks_toggle():map("<leader>uf")
+-- LazyVim.format.snacks_toggle(true):map("<leader>uF")
+-- Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+-- Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+-- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+-- Snacks.toggle.diagnostics():map("<leader>ud")
+-- Snacks.toggle.line_number():map("<leader>ul")
+-- Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
+-- Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
+-- Snacks.toggle.treesitter():map("<leader>uT")
+-- Snacks.toggle.option("background", { off = "light", on = "dark" , name = "Dark Background" }):map("<leader>ub")
+-- Snacks.toggle.dim():map("<leader>uD")
+-- Snacks.toggle.animate():map("<leader>ua")
+-- Snacks.toggle.indent():map("<leader>ug")
+-- Snacks.toggle.scroll():map("<leader>uS")
+-- Snacks.toggle.profiler():map("<leader>dpp")
+-- Snacks.toggle.profiler_highlights():map("<leader>dph")
+
+-- lazygit
+-- if vim.fn.executable("lazygit") == 1 then
+--   map("n", "<leader>gg", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
+--   map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
+-- end
+
+-- vim.keymap.set("n", "<leader>gL", function() Snacks.picker.git_log() end, { desc = "Git Log (cwd)" })
+-- vim.keymap.set("n", "<leader>gb", function() Snacks.picker.git_log_line() end, { desc = "Git Blame Line" })
+-- vim.keymap.set("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Current File History" })
+-- vim.keymap.set("n", "<leader>gl", function() Snacks.picker.git_log({ cwd = LazyVim.root.git() }) end, { desc = "Git Log" })
+-- vim.keymap.set({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
+-- vim.keymap.set({"n", "x" }, "<leader>gY", function()
+--   Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
+-- end, { desc = "Git Browse (copy)" })
+
+-- quit
+vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+
+-- highlights under cursor
+vim.keymap.set("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+vim.keymap.set("n", "<leader>uI", function() vim.treesitter.inspect_tree() vim.api.nvim_input("I") end, { desc = "Inspect Tree" })
+
+-- windows
+vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below", remap = true })
+vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right", remap = true })
+vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
+-- Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ")
+
+-- tabs
+vim.keymap.set("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+vim.keymap.set("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+vim.keymap.set("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })

@@ -60,7 +60,8 @@ alias psesh='sesh connect "$(sesh list --icons | fzf-tmux -p 80%,70% \
   --preview "sesh preview {}")"'
 
 # nvim
-alias n='nvim'
+alias nvim-lazy='NVIM_APPNAME=nvim-lazyvim nvim'
+alias nvim-minimax='NVIM_APPNAME=nvim-minimax nvim'
 
 # mysql client use mariadb (for brew)
 alias mysql="mariadb"

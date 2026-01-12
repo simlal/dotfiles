@@ -1,13 +1,13 @@
 
 ######### UI #########
 # theme - font - cursor
-theme = catppuccin-frappe
+theme = "Catppuccin Macchiato"
 font-family = "JetBrains mono"
-font-size = 14
+font-size = 13
 
 # Mouse
 mouse-hide-while-typing = true
-focus-follows-mouse = true
+focus-follows-mouse = false
 
 # Cursor
 cursor-invert-fg-bg = true
@@ -21,8 +21,10 @@ split-divider-color = #ef9f76
 window-padding-x = 2
 gtk-titlebar = false
 gtk-wide-tabs = true
-window-height = 30
-window-width = 120
+window-height = 200
+window-width = 400
+window-padding-x = 0
+window-padding-y = 0
 
 # Clipboard
 clipboard-write = allow

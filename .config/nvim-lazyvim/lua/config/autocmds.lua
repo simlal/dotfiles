@@ -17,19 +17,11 @@
 -- vim.api.nvim_create_user_command("YamlSchemaPick", function()
 --   vim.cmd("Telescope yaml_schema")
 -- end, {})
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
-	callback = function()
-		(vim.hl or vim.highlight).on_yank()
-	end,
-})
-
--- removes auto-comment on o/O and Enter
+--
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	callback = function()
-		vim.opt_local.formatoptions:remove({ "o", "r" })
+		vim.opt_local.formatoptions:remove({ "o", "r" }) -- removes auto-comment on o/O and Enter
 	end,
 	group = vim.api.nvim_create_augroup("mygroup", { clear = true }),
 	desc = "Disable auto-commenting on new lines",
@@ -43,20 +35,15 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Tree sitter auto install
--- vim.api.nvim_create_autocmd("FileType", {
--- 	callback = function()
--- 		local lang = vim.bo.filetype
--- 		local ok = pcall(require("nvim-treesitter.parsers").get_parser, lang)
--- 		if not ok then
--- 			vim.cmd("TSInstall " .. lang)
--- 		end
--- 	end,
--- })
-
------------------
---- BLINK CMP ---
------------------
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "groovy",
+	callback = function()
+		vim.bo.expandtab = false
+		vim.bo.tabstop = 2
+		vim.bo.softtabstop = 2
+		vim.bo.shiftwidth = 2
+	end,
+})
 
 -- FastCmpModeToggle for blink.cmp
 local blink = require("blink.cmp")

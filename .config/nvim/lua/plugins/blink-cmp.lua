@@ -28,7 +28,7 @@ return {
 				opts = {},
 			},
 			"folke/lazydev.nvim",
-			-- { "fang2hou/blink-copilot" },
+			{ "fang2hou/blink-copilot" },
 		},
 		--- @module 'blink.cmp'
 		--- @type blink.cmp.Config
@@ -50,9 +50,13 @@ return {
 
 			sources = {
 				default = { "lsp", "path", "snippets", "lazydev" },
-				-- default = { "lsp", "path", "snippets", "lazydev", "copilot" },
+				per_filetype = {
+					markdown = { inherit_defaults = true, "copilot" },
+					asciidoc = { inherit_defaults = true, "copilot" },
+					-- python = { inherit_defaults = true, "copilot" },
+				},
 				providers = {
-					-- copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
+					copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true },
 					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
 					path = {
 						enabled = function()

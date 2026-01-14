@@ -43,16 +43,11 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Tree sitter auto install
--- vim.api.nvim_create_autocmd("FileType", {
--- 	callback = function()
--- 		local lang = vim.bo.filetype
--- 		local ok = pcall(require("nvim-treesitter.parsers").get_parser, lang)
--- 		if not ok then
--- 			vim.cmd("TSInstall " .. lang)
--- 		end
--- 	end,
--- })
+-- enable/disable auto format on save
+vim.api.nvim_create_user_command("ToggleAutoformat", function()
+	vim.g.autoformat = not vim.g.autoformat
+	print("Format on save = " .. tostring(vim.g.autoformat))
+end, {})
 
 -----------------
 --- BLINK CMP ---

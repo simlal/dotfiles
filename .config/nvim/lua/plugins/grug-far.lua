@@ -16,7 +16,7 @@ return {
 				})
 			end,
 			mode = { "n", "x" },
-			desc = "Search and Replace",
+			desc = "Search & Replace",
 		},
 		{
 			"<leader>sR",
@@ -28,7 +28,7 @@ return {
 					},
 				})
 			end,
-			desc = "Search and Replace in current buffer",
+			desc = "Search & Replace (current buffer)",
 		},
 	},
 }

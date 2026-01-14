@@ -37,9 +37,21 @@ return {
 				which_key = true,
 			},
 		},
-		config = function(_, opts)
-			require("catppuccin").setup(opts)
-			vim.cmd.colorscheme("catppuccin")
+		-- config = function(_, opts)
+		-- 	require("catppuccin").setup(opts)
+		-- 	vim.cmd.colorscheme("catppuccin")
+		-- end,
+	},
+	{
+		"bluz71/vim-moonfly-colors",
+		name = "moonfly",
+		lazy = false,
+		priority = 1000,
+
+		config = function()
+			vim.g.moonflyUnderlineMatchParen = true
+			vim.g.moonflyWinSeparator = 2
+			vim.cmd.colorscheme("moonfly")
 		end,
 	},
 }

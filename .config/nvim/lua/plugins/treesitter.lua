@@ -11,6 +11,7 @@ return {
 				"diff",
 				"groovy",
 				"html",
+				"json5",
 				"lua",
 				"luadoc",
 				"markdown",

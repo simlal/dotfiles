@@ -1,5 +1,6 @@
 return {
 	"folke/todo-comments.nvim",
+	lazy = false, -- Ensure TODO/FIX/NOTE coloring
 	cmd = { "TodoTrouble", "TodoTelescope" },
 	opts = {},
     -- stylua: ignore

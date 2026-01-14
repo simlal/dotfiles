@@ -1,7 +1,7 @@
 
 ######### UI #########
 # theme - font - cursor
-theme = "Catppuccin Macchiato"
+theme = "Moonfly"
 font-family = "JetBrains mono"
 font-size = 13
 

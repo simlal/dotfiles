@@ -5,6 +5,19 @@ return {
 		cmd = { "ConformInfo" },
 		keys = {
 			{
+				"<leader>cf",
+				function()
+					require("conform").format({
+						async = false,
+						lsp_fallback = true,
+						quiet = false,
+						timeout_ms = 3000,
+					})
+				end,
+				mode = { "n", "x" },
+				desc = "Format",
+			},
+			{
 				"<leader>cF",
 				function()
 					require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
@@ -16,9 +29,10 @@ return {
 		opts = {
 			-- notify_on_error = false,
 			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
+				-- Respect autoformat toggle from usercommand
+				if not (vim.g.autoformat or vim.b[bufnr].autoformat) then
+					return false
+				end
 				local disable_filetypes = { c = true, cpp = true, groovy = true }
 				if disable_filetypes[vim.bo[bufnr].filetype] then
 					return nil
@@ -29,6 +43,7 @@ return {
 					}
 				end
 			end,
+
 			formatters_by_ft = {
 				lua = { "stylua" },
 				sh = { "shfmt" },

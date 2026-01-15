@@ -48,7 +48,7 @@ return {
 				lua = { "stylua" },
 				sh = { "shfmt" },
 				markdown = { "prettier", "markdownlint-cli2", stop_after_first = true },
-				-- You can use 'stop_after_first' to run the first available formatter from the list
+				-- Use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
 			},
 		},

@@ -1,10 +1,3 @@
--- NOTE: Plugins can specify dependencies.
---
--- The dependencies are proper plugin specifications as well - anything
--- you do for a plugin at the top level, you can do for a dependency.
---
--- Use the `dependencies` key to specify the dependencies of a particular plugin
-
 return {
 	{ -- Fuzzy Finder (files, lsp, etc)
 		"nvim-telescope/telescope.nvim",
@@ -45,8 +38,7 @@ return {
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
 
-			-- Helper: get visual selection (LazyVim-style)
-			-- BUG: FIX ME
+			-- BUG: FIX ME not working!
 			local function get_visual_selection()
 				local _, ls, cs = unpack(vim.fn.getpos("'<"))
 				local _, le, ce = unpack(vim.fn.getpos("'>"))
@@ -125,5 +117,7 @@ return {
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "Find config file" })
 		end,
+
+		-- TODO: Add git integrations keymaps
 	},
 }

@@ -37,7 +37,7 @@ return {
 						padding = { left = 1, right = 0 },
 					},
 
-					-- Separator (subtle breadcrumb)
+					-- Separator
 					{
 						function()
 							return ""
@@ -55,21 +55,52 @@ return {
 							unnamed = "[No Name]",
 						},
 					},
-
-					-- Filetype icon only (cleaner than text)
-					{
-						function()
-							local icon = require("nvim-web-devicons").get_icon(vim.fn.expand("%:t"))
-							return icon or ""
-						end,
-						padding = { left = 1 },
-					},
 				},
 
 				-- RIGHT
 				lualine_x = {
+
+					-- Diagnostics
+					{
+						"diagnostics",
+						symbols = {
+							error = " ",
+							warn = " ",
+							info = " ",
+							hint = " ",
+						},
+						padding = { left = 1, right = 0 },
+					},
+
+					-- separator
+					{
+						function()
+							return "|"
+						end,
+						padding = { left = 1, right = 1 },
+						cond = function()
+							local d = vim.diagnostic.count(0)
+							return (d[1] or 0) > 0 or (d[2] or 0) > 0 or (d[3] or 0) > 0 or (d[4] or 0) > 0
+						end,
+					},
+
+					-- TODO: add copilot icon from blink-cmp
+
+					-- Separator
+					-- {
+					-- 	function()
+					-- 		return "|"
+					-- 	end,
+					-- 	padding = { left = 1, right = 1 },
+					-- },
+
 					-- Minimal LSP indicator
-					-- TODO: add copilot icon
+					{
+						"filetype",
+						colored = true,
+						icon_only = true,
+						padding = { left = 0, right = 0 },
+					},
 					{
 						function()
 							local buf = vim.api.nvim_get_current_buf()
@@ -85,23 +116,12 @@ return {
 							if #clients == 0 then
 								return ""
 							end
-							return "  " .. table.concat(names, ",")
+							return table.concat(names, ",")
 						end,
 						cond = function()
 							return #vim.lsp.get_clients({ bufnr = 0 }) > 0
 						end,
 						padding = { right = 1 },
-					},
-
-					-- Diagnostics
-					{
-						"diagnostics",
-						symbols = {
-							error = " ",
-							warn = " ",
-							info = " ",
-							hint = " ",
-						},
 					},
 				},
 

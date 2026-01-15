@@ -28,12 +28,19 @@ vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 vim.opt.cursorline = true -- Enable highlighting of the current line
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
+	foldopen = "",
+	foldclose = "",
+	fold = " ",
+	foldsep = " ",
+	diff = "╱",
+	eob = " ",
+	horiz = "━",
+	horizup = "┻",
+	horizdown = "┳",
+	vert = "┃",
+	vertleft = "┫",
+	vertright = "┣",
+	verthoriz = "╋",
 }
 vim.opt.foldlevel = 99
 vim.opt.foldmethod = "indent"
@@ -42,7 +49,7 @@ vim.opt.ignorecase = true -- Ignore case
 vim.opt.inccommand = "nosplit" -- preview incremental substitute
 vim.opt.laststatus = 3 -- global statusline
 vim.opt.linebreak = true -- Wrap lines at convenient points
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.list = true -- Show some invisible characters (tabs...
 vim.opt.mouse = "a" -- Enable mouse mode
 vim.opt.number = true -- Print line number
@@ -75,4 +82,3 @@ vim.opt.wrap = false -- Disable line wrap
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
-

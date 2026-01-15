@@ -18,13 +18,12 @@ unfocused-split-fill = black
 split-divider-color = #ef9f76
 
 # window
-window-padding-x = 2
 gtk-titlebar = false
 gtk-wide-tabs = true
 window-height = 200
 window-width = 400
-window-padding-x = 0
-window-padding-y = 0
+window-padding-x = 2
+window-padding-y = 2
 
 # Clipboard
 clipboard-write = allow

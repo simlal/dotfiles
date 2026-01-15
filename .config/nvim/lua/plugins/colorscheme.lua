@@ -1,4 +1,5 @@
 return {
+	-- Keep as fallback
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -51,6 +52,7 @@ return {
 		config = function()
 			vim.g.moonflyUnderlineMatchParen = true
 			vim.g.moonflyWinSeparator = 2
+			vim.g.moonflyVirtualTextColor = true
 			vim.cmd.colorscheme("moonfly")
 		end,
 	},

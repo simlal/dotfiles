@@ -1,3 +1,4 @@
+-- NOTE: NOT USED
 return {}
 -- return {
 -- 	"zbirenbaum/copilot.lua",

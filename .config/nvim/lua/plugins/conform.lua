@@ -33,7 +33,7 @@ return {
 				if not (vim.g.autoformat or vim.b[bufnr].autoformat) then
 					return false
 				end
-				local disable_filetypes = { c = true, cpp = true, groovy = true }
+				local disable_filetypes = { c = true, cpp = true, groovy = true, java = true }
 				if disable_filetypes[vim.bo[bufnr].filetype] then
 					return nil
 				else
@@ -46,8 +46,9 @@ return {
 
 			formatters_by_ft = {
 				lua = { "stylua" },
-				sh = { "shfmt" },
 				markdown = { "prettier", "markdownlint-cli2", stop_after_first = true },
+				sh = { "shfmt", lsp_format = "fallback" },
+				java = { "google-java-format", lsp_format = "fallback" },
 				-- Use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
 			},

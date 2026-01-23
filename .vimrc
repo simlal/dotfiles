@@ -22,7 +22,7 @@ set showmatch
 " Colors
 set background=dark
 set termguicolors
-colorscheme catppuccin_frappe
+colorscheme retrobox
 
 " Basic remaps
 let mapleader = " "

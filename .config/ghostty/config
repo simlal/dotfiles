@@ -20,8 +20,8 @@ split-divider-color = #ef9f76
 # window
 gtk-titlebar = false
 gtk-wide-tabs = true
-window-height = 200
-window-width = 400
+window-height = 40
+window-width = 120
 window-padding-x = 2
 window-padding-y = 2
 

@@ -46,8 +46,8 @@ return {
 					map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
 					map("<leader>cr", vim.lsp.buf.rename, "Rename")
 					map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
-					map("<leader>cs", tb.lsp_document_symbols, "Document Symbols")
-					map("<leader>cS", tb.lsp_dynamic_workspace_symbols, "Workspace Symbols")
+					map("<leader>ss", tb.lsp_document_symbols, "Document Symbols")
+					map("<leader>sS", tb.lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
 					---------------------------------------------------------------------------
 					-- highlight references
@@ -151,6 +151,8 @@ return {
 			-- Only add lua ls here see lang/ for per language config
 			local servers = {
 
+				--bash
+				bashls = {},
 				-- python
 				basedpyright = {},
 
@@ -164,11 +166,14 @@ return {
 					},
 				},
 
-				-- java + groovy
+				-- java (handled by nvim-jdtls) + groovy
 				groovyls = {},
 
 				-- markdown
 				marksman = {},
+
+				-- xml
+				lemminx = {},
 
 				-- yaml
 				yamlls = {
@@ -249,27 +254,33 @@ return {
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format Lua code
-				-- python
-				"basedpyright",
-				"ruff",
-				-- java + groovy
-				"groovy-language-server",
+
 				-- markdown
 				"markdownlint-cli2",
 				"markdown-toc",
+
+				-- prettier
+				"prettier",
+
+				-- bash checker
+				"shellcheck",
+				"shfmt",
+
+				-- java (managed by nvim-jdtls)
+				"jdtls",
+				"google-java-format",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
-				ensure_installed = {
-					-- python
-					"basedpyright",
-					"ruff",
-				},
+				ensure_installed = {},
 				automatic_installation = false,
 				handlers = {
 					function(server_name)
 						local server = servers[server_name] or {}
+						if server_name == "jdtls" then
+							return true -- Skip setup; let nvim-jdtls handle it
+						end
 						-- This handles overriding only values explicitly passed
 						-- by the server configuration above. Useful when disabling
 						-- certain features of an LSP (for example, turning off formatting for ts_ls)

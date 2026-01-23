@@ -67,7 +67,6 @@ return {
 			end, { desc = "Files (buffer dir)" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Search Select Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search current Word" })
-			-- TODO: Modify prompt title
 			vim.keymap.set("n", "<leader>sW", function()
 				builtin.grep_string({
 					cwd = require("telescope.utils").buffer_dir(),
@@ -116,8 +115,11 @@ return {
 			vim.keymap.set("n", "<leader>fc", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "Find config file" })
-		end,
 
-		-- TODO: Add git integrations keymaps
+			-- Git integrations keymaps
+			vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Git Files" })
+			vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Git branches" })
+			vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git status" })
+		end,
 	},
 }

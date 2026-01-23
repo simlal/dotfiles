@@ -58,6 +58,12 @@ vim.api.nvim_create_user_command("ToggleAutoformat", function()
 	print("Format on save = " .. tostring(vim.g.autoformat))
 end, {})
 
+-- Toggle wrap
+vim.api.nvim_create_user_command("ToggleLineWrap", function()
+	vim.o.wrap = not vim.o.wrap
+	print("Line wrap = " .. tostring(vim.o.wrap))
+end, {})
+
 -----------------
 --- BLINK CMP ---
 -----------------

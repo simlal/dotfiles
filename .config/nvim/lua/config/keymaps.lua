@@ -153,3 +153,6 @@ vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" 
 
 -- global format_on_save
 vim.keymap.set("n", "<leader>uf", "<cmd>ToggleAutoformat<cr>", { desc = "Toggle autoformat" })
+
+-- Toggle line wrap
+vim.keymap.set("n", "<leader>uw", "<cmd>ToggleLineWrap<cr>", { desc = "Toggle line wrap" })

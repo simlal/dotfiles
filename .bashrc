@@ -40,3 +40,4 @@ eval "$(zoxide init bash)"
 
 # Omnimed bashrc
 [ -f "$HOME/.bashrc_omnimed" ] && . "$HOME/.bashrc_omnimed"
+. ~/.bash_aliases_omnimed

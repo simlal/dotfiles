@@ -54,18 +54,12 @@ return {
 				return table.concat(lines, "\n")
 			end
 
-			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
+
+			-- Search
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Help Pages" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "Keymaps" })
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Files (cwd)" })
-			vim.keymap.set("n", "<leader>fF", function()
-				builtin.find_files({
-					cwd = require("telescope.utils").buffer_dir(),
-					prompt_title = "Find files (buffer dir)",
-				})
-			end, { desc = "Files (buffer dir)" })
-			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Search Select Telescope" })
+			vim.keymap.set("n", "<leader>sm", builtin.marks, { desc = "Marks" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search current Word" })
 			vim.keymap.set("n", "<leader>sW", function()
 				builtin.grep_string({
@@ -90,36 +84,59 @@ return {
 					prompt_title = "Grep (buffer dir)",
 				})
 			end, { desc = "Grep (buffer dir)" })
-			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Search Diagnostics" })
-			-- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Search Resume" })
-			vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Search Recent Files " })
-			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "  Find existing buffers" })
 
-			vim.keymap.set("n", "<leader>/", function()
-				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-					winblend = 10,
-					previewer = false,
-				}))
-			end, { desc = "Fuzzy search (current buf)" })
+			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Diagnostics" })
+			vim.keymap.set("n", "<leader>sD", function()
+				builtin.diagnostics({
+					bufnr = 0,
+					prompt_title = "Diagnostics (current buffer)",
+				})
+			end, { desc = "Diagnostics (current buffer)" })
 
-			-- It's also possible to pass additional configuration options.
-			--  See `:help telescope.builtin.live_grep()` for information about particular keys
 			vim.keymap.set("n", "<leader>s/", function()
 				builtin.live_grep({
 					grep_open_files = true,
 					prompt_title = "Grep in Open Buffers",
 				})
 			end, { desc = "Grep Open Buffers" })
+			vim.keymap.set("n", "<leader>sa", builtin.autocommands, { desc = "Autocommands" })
 
-			-- Shortcut for searching your Neovim configuration files
+			-- Find files
+			vim.keymap.set("n", "<leader>fa", function()
+				builtin.find_files({
+					prompt_title = "All files (hidden/ignored cwd)",
+					hidden = true,
+					no_ignore = true,
+				})
+			end, { desc = "All files (hidden/ignored cwd)" })
+			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files (cwd)" })
+			vim.keymap.set("n", "<leader>fF", function()
+				builtin.find_files({
+					cwd = require("telescope.utils").buffer_dir(),
+					prompt_title = "Find files (buffer dir)",
+				})
+			end, { desc = "Files (buffer dir)" })
+			vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "Git Files" })
+			vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = "Find Recent Files " })
+			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "  Find existing buffers" })
+
 			vim.keymap.set("n", "<leader>fc", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end, { desc = "Find config file" })
 
 			-- Git integrations keymaps
-			vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Git Files" })
+			vim.keymap.set("n", "<leader>gf", builtin.git_bcommits, { desc = "Git current file history" })
 			vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Git branches" })
 			vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git status" })
+
+			-- Misc
+			vim.keymap.set("n", "<leader>:", builtin.command_history, { desc = "Command History" })
+			vim.keymap.set("n", "<leader>/", function()
+				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+					winblend = 10,
+					previewer = false,
+				}))
+			end, { desc = "Fuzzy search (current buf)" })
 		end,
 	},
 }

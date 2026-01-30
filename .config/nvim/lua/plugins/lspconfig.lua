@@ -269,6 +269,9 @@ return {
 				-- java (managed by nvim-jdtls)
 				"jdtls",
 				"google-java-format",
+
+				-- kulala-fmt (lsp managed by kulala-nvim)
+				"kulala-fmt",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

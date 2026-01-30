@@ -113,3 +113,11 @@ vim.api.nvim_create_autocmd("BufReadPre", {
 	end,
 	desc = "Enable Blink Fast Mode for large files",
 })
+
+-- map http to kulala_http for tree-sitter
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "http",
+	callback = function()
+		vim.treesitter.start(0, "kulala_http")
+	end,
+})

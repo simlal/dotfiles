@@ -15,7 +15,7 @@ return {
 			enabled = false,
 		},
 
-		file_types = { "markdown", "norg", "rmd", "org", "codecompanion", "asciidoc" },
+		file_types = { "markdown", "norg", "rmd", "org", "codecompanion", "asciidoc", "copilot-chat" },
 	},
 	config = function(_, opts)
 		require("render-markdown").setup(opts)

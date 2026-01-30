@@ -49,6 +49,7 @@ return {
 				markdown = { "prettier", "markdownlint-cli2", stop_after_first = true },
 				sh = { "shfmt", lsp_format = "fallback" },
 				java = { "google-java-format", lsp_format = "fallback" },
+				http = { "kulala-fmt", lsp_format = "fallback" },
 				-- Use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
 			},

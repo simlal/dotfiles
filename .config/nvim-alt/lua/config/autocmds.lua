@@ -17,11 +17,28 @@
 -- vim.api.nvim_create_user_command("YamlSchemaPick", function()
 --   vim.cmd("Telescope yaml_schema")
 -- end, {})
---
+
+-- Yazi on startup
+-- vim.api.nvim_create_autocmd("VimEnter", {
+-- 	callback = function()
+-- 		if vim.fn.argc() == 0 then
+-- 			vim.cmd("Yazi")
+-- 		end
+-- 	end,
+-- })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+	callback = function()
+		(vim.hl or vim.highlight).on_yank()
+	end,
+})
+
+-- removes auto-comment on o/O and Enter
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	callback = function()
-		vim.opt_local.formatoptions:remove({ "o", "r" }) -- removes auto-comment on o/O and Enter
+		vim.opt_local.formatoptions:remove({ "o", "r" })
 	end,
 	group = vim.api.nvim_create_augroup("mygroup", { clear = true }),
 	desc = "Disable auto-commenting on new lines",
@@ -35,15 +52,21 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "groovy",
-	callback = function()
-		vim.bo.expandtab = false
-		vim.bo.tabstop = 2
-		vim.bo.softtabstop = 2
-		vim.bo.shiftwidth = 2
-	end,
-})
+-- enable/disable auto format on save
+vim.api.nvim_create_user_command("ToggleAutoformat", function()
+	vim.g.autoformat = not vim.g.autoformat
+	print("Format on save = " .. tostring(vim.g.autoformat))
+end, {})
+
+-- Toggle wrap
+vim.api.nvim_create_user_command("ToggleLineWrap", function()
+	vim.o.wrap = not vim.o.wrap
+	print("Line wrap = " .. tostring(vim.o.wrap))
+end, {})
+
+-----------------
+--- BLINK CMP ---
+-----------------
 
 -- FastCmpModeToggle for blink.cmp
 local blink = require("blink.cmp")
@@ -89,4 +112,12 @@ vim.api.nvim_create_autocmd("BufReadPre", {
 		end
 	end,
 	desc = "Enable Blink Fast Mode for large files",
+})
+
+-- map http to kulala_http for tree-sitter
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "http",
+	callback = function()
+		vim.treesitter.start(0, "kulala_http")
+	end,
 })

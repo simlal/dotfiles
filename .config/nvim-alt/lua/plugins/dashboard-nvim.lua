@@ -27,20 +27,20 @@ return {
 				header = vim.split(logo, "\n"),
 				center = {
 					{
-						action = "lua LazyVim.pick('files', { root = false })()",
-						desc = " > Find File (cwd)",
+						action = "Telescope find_files",
+						desc = " > Find File",
 						icon = " ",
 						key = "f",
 					},
 					{
-						action = "lua LazyVim.pick('oldfiles')()",
+						action = "Telescope oldfiles",
 						desc = " > Recent Files",
 						icon = " ",
 						key = ".",
 					},
 					{
-						action = "lua LazyVim.pick('live_grep', { root = false })()",
-						desc = " > Grep (cwd)",
+						action = "Telescope live_grep",
+						desc = " > Grep",
 						icon = " ",
 						key = "g",
 					},
@@ -57,7 +57,7 @@ return {
 						key = "e",
 					},
 					{
-						action = "lua LazyVim.pick.config_files()()",
+						action = 'lua require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })',
 						desc = " > Config",
 						icon = " ",
 						key = "c",
@@ -74,13 +74,6 @@ return {
 						icon = "󰒲 ",
 						key = "l",
 					},
-					{
-						action = "LazyExtras",
-						desc = " > LazyExtras",
-						icon = " ",
-						key = "x",
-					},
-
 					{
 						action = function()
 							vim.api.nvim_input("<cmd>qa<cr>")

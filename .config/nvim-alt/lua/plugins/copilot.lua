@@ -1,0 +1,56 @@
+-- NOTE: NOT USED
+return {}
+-- return {
+-- 	"zbirenbaum/copilot.lua",
+-- 	cmd = "Copilot",
+-- 	build = ":Copilot auth",
+-- 	event = "BufReadPost",
+--
+-- 	opts = function()
+-- 		local ai_cmp = vim.g.ai_cmp
+--
+-- 		return {
+-- 			suggestion = {
+-- 				enabled = not ai_cmp,
+-- 				auto_trigger = true,
+-- 				hide_during_completion = ai_cmp,
+-- 				keymap = {
+-- 					accept = "<M-l>",
+-- 					accept_word = "<M-,>",
+-- 					accept_line = "<M-;>",
+-- 					next = "<M-]>",
+-- 					prev = "<M-[>",
+-- 					dismiss = "<M-d>",
+-- 				},
+-- 			},
+--
+-- 			panel = { enabled = false },
+--
+-- 			filetypes = {
+-- 				markdown = true,
+-- 				asciidoc = true,
+-- 				python = false,
+-- 				javascript = false,
+-- 				typescript = false,
+-- 				lua = false,
+-- 				yaml = false,
+-- 				toml = false,
+-- 				["*"] = false,
+-- 			},
+-- 		}
+-- 	end,
+--
+-- 	config = function(_, opts)
+-- 		require("copilot").setup(opts)
+--
+-- 		-- global AI accept function
+-- 		_G.AI_ACCEPT = function()
+-- 			local suggestion = require("copilot.suggestion")
+-- 			if suggestion.is_visible() then
+-- 				vim.cmd("undojoin")
+-- 				suggestion.accept()
+-- 				return true
+-- 			end
+-- 		end
+-- 	end,
+-- }

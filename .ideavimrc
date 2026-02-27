@@ -122,8 +122,8 @@ let g:WhichKeyDesc_leader_c = "<leader>c +code"
 let g:WhichKeyDesc_structure_popup = "<leader>cs File Structure Popup"
 nmap <leader>cs <Action>(FileStructurePopup)
 
-let g:WhichKeyDesc_structure_tool = "<leader>cS Toggle Structure Tool"
-nmap <leader>cS <Action>(ActivateStructureToolWindow)
+let g:WhichKeyDesc_structure_tool = "<leader>cp Toggle Structure Panel"
+nmap <leader>cp <Action>(ActivateStructureToolWindow)
 
 let g:WhichKeyDesc_format = "<leader>cf Format"
 nmap <leader>cf <Action>(ReformatCode)
@@ -245,8 +245,8 @@ nmap <leader>gb <Action>(Annotate)
 let g:WhichKeyDesc_git_file_history = "<leader>gf Git File History"
 nmap <leader>gf <Action>(Vcs.ShowTabbedFileHistory)
 
-let g:WhichKeyDesc_git_log = "<leader>gl Git Log Panel"
-nmap <leader>gl <Action>(Vcs.Show.Log)
+let g:WhichKeyDesc_git_log = "<leader>gp Git Log Panel"
+nmap <leader>gp <Action>(Vcs.Show.Log)
 
 let g:WhichKeyDesc_git_diff_lines = "<leader>gd Git Diff Lines"
 nmap <leader>gd <Action>(Vcs.ShowDiffChangedLines)
@@ -433,8 +433,8 @@ nmap gm5 <Action>(GotoBookmark5)
 let g:WhichKeyDesc_bookmarks_show = "<leader>ms Show Bookmarks Popup"
 nmap <leader>ms <Action>(ShowBookmarks)
 
-let g:WhichKeyDesc_bookmarks_menu = "<leader>mS Bookmarks Panel"
-nmap <leader>mS <Action>(ActivateBookmarksToolWindow)
+let g:WhichKeyDesc_bookmarks_menu = "<leader>mp Bookmarks Panel"
+nmap <leader>mp <Action>(ActivateBookmarksToolWindow)
 
 " Toggle and manage
 let g:WhichKeyDesc_bookmarks_toggle_bookmark = "<leader>mb Toggle Bookmark"
@@ -452,8 +452,8 @@ let g:WhichKeyDesc_notifications = "<leader>n +notifications"
 let g:WhichKeyDesc_notifications_dismiss = "<leader>nd Dismiss All"
 nmap <leader>nd <Action>(ClearAllNotifications)
 
-let g:WhichKeyDesc_notifications_history = "<leader>nh History"
-nmap <leader>nh <Action>(ActivateNotificationsToolWindow)
+let g:WhichKeyDesc_notifications_history = "<leader>np Notifications Panel"
+nmap <leader>np <Action>(ActivateNotificationsToolWindow)
 
 " ========================================
 " Search (<leader>s)
@@ -508,8 +508,8 @@ let g:WhichKeyDesc_leader_t = "<leader>t +tests"
 let g:WhichKeyDesc_test_last = "<leader>tl Run Last Test"
 nmap <leader>tl <Action>(Run)
 
-let g:WhichKeyDesc_test_panel = "<leader>tt Toggle Test Panel"
-nmap <leader>tt <Action>(ActivateRunToolWindow)
+let g:WhichKeyDesc_test_panel = "<leader>tp Toggle Test Panel"
+nmap <leader>tp <Action>(ActivateRunToolWindow)
 
 let g:WhichKeyDesc_test_nearest = "<leader>tn Run Nearest Class"
 nmap <leader>tn <Action>(RunClass)
@@ -536,7 +536,7 @@ let g:WhichKeyDesc_run_choose_configuration = "<leader>rc Choose Run Config"
 nmap <leader>rc <Action>(ChooseRunConfiguration)
 
 let g:WhichKeyDesc_run_menu = "<leader>rm Run Menu"
-nmap <leader>rm <Action>(ChooseRunConfiguration)
+nmap <leader>rm <Action>(RunMenu)
 
 " ========================================
 " Debug Keymaps (<leader>d)
@@ -568,8 +568,8 @@ nmap <leader>dr <Action>(Resume)
 let g:WhichKeyDesc_debug_evaluate_expression = "<leader>dE Evaluate Expression"
 nmap <leader>dE <Action>(EvaluateExpression)
 
-let g:WhichKeyDesc_debug_activate_tool_window = "<leader>dw Activate Debug Tool Window"
-nmap <leader>dw <Action>(ActivateDebugToolWindow)
+let g:WhichKeyDesc_debug_activate_tool_window = "<leader>dp Activate Debug Tool Window"
+nmap <leader>dp <Action>(ActivateDebugToolWindow)
 
 " ========================================
 " Window Keymaps (<leader>w)

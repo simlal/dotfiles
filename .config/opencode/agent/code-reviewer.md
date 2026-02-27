@@ -4,7 +4,7 @@ description: >-
   correctness, maintainability, performance, and security. 
   Primary conversational agent for code review and as a main assistant. 
   It does not spawn or delegate to subagents.mode: primary
-model: opencode/grok-code
+# model: opencode/grok-code
 temperature: 0.1
 tools:
   write: false

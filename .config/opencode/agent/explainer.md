@@ -6,7 +6,7 @@ description: >-
   best practices, and performance considerations. Designed to give concise,
   structured answers that are easy to act on.
 mode: primary
-model: opencode/grok-code
+# model: opencode/grok-code
 temperature: 0.3
 tools:
   write: false

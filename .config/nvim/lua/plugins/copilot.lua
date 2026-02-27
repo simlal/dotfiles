@@ -6,6 +6,7 @@ return {
 				markdown = true,
 				asciidoc = true,
 				python = false,
+				java = false,
 				javascript = false,
 				typescript = false,
 				yaml = false,

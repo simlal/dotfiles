@@ -41,3 +41,7 @@ eval "$(zoxide init bash)"
 # Omnimed bashrc
 [ -f "$HOME/.bashrc_omnimed" ] && . "$HOME/.bashrc_omnimed"
 . ~/.bash_aliases_omnimed
+omnikools-lag
+. $HOME/.omnimedrc 2> /dev/null
+PATH=$PATH:~/Applications/Scripts
+export HISTTIMEFORMAT="%Y-%m-%d %T "

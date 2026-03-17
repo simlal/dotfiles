@@ -128,3 +128,4 @@ export HISTTIMEFORMAT="%Y-%m-%d %T "
 eval "$(direnv hook zsh)"
 
 [ -f "$HOME/.bash_aliases_omnimed" ] && . "$HOME/.bash_aliases_omnimed"
+omnikools-lag

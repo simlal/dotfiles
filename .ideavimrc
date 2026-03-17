@@ -13,7 +13,6 @@ let maplocalleader="\\"
 " Preserves existing long lines when editing
 " Allows manual formatting with `gq`
 " Recognizes numbered lists in documentation
-set formatoptions=jcroqlnt
 
 " Print current line number
 set number
@@ -25,7 +24,6 @@ set relativenumber
 set scrolloff=8
 
 " Round indent
-set shiftround
 
 " Columns of context
 set sidescrolloff=8
@@ -40,12 +38,6 @@ set nowrap
 
 " Enable copy/paste to/from system keyboard
 set clipboard+=unnamedplus
-
-" Neovim Compatibility Settings
-set backspace=indent,eol,start
-set listchars=tab:>\ ,trail:-,nbsp:+
-set shortmess=filnxtToOF
-
 
 " Cmd history
 set history=1000
@@ -115,6 +107,16 @@ let g:WhichKeyDesc_terminal = "<leader>T Terminal"
 nmap <leader>T <Action>(ActivateTerminalToolWindow)
 
 " ========================================
+" Session <leader>q
+" ========================================
+let g:WhichKeyDesc_leader_q = "<leader>q +session"
+let g:WhichKeyDesc_session_quit = "<leader>qq Quit IDE"
+nmap <leader>qq <Action>(Exit)
+
+let g:WhichKeyDesc_session_restart = "<leader>qr Restart IDE"
+nmap <leader>qr <Action>(RestartIde)
+
+" ========================================
 " Code/Editor <leader>c
 " ========================================
 let g:WhichKeyDesc_leader_c = "<leader>c +code"
@@ -122,8 +124,9 @@ let g:WhichKeyDesc_leader_c = "<leader>c +code"
 let g:WhichKeyDesc_structure_popup = "<leader>cs File Structure Popup"
 nmap <leader>cs <Action>(FileStructurePopup)
 
-let g:WhichKeyDesc_structure_tool = "<leader>cp Toggle Structure Panel"
-nmap <leader>cp <Action>(ActivateStructureToolWindow)
+
+let g:WhichKeyDesc_structure_tool = "<leader>cS Toggle Structure Panel"
+nmap <leader>cS <Action>(ActivateStructureToolWindow)
 
 let g:WhichKeyDesc_format = "<leader>cf Format"
 nmap <leader>cf <Action>(ReformatCode)
@@ -152,6 +155,20 @@ nmap <leader>cri <Action>(ShowIntentionActions)
 let g:WhichKeyDesc_rename = "<leader>crn Rename"
 nmap <leader>crn <Action>(RenameElement)
 
+" HIERARCHY
+let g:WhichKeyDesc_leader_ch = "<leader>ch +hierarchy"
+let g:WhichKeyDesc_hierarchy_call = "<leader>chc Call Hierarchy"
+nmap <leader>chc <Action>(CallHierarchy)
+
+let g:WhichKeyDesc_hierarchy_method = "<leader>chm Method Hierarchy"
+nmap <leader>chm <Action>(MethodHierarchy)
+
+let g:WhichKeyDesc_hierarchy_type = "<leader>cht Type Hierarchy"
+nmap <leader>cht <Action>(TypeHierarchy)
+
+let g:WhichKeyDesc_hierarchy_panel = "<leader>cht Hierarchy Panel"
+nmap <leader>cht <Action>(ActivateHierarchyToolWindow)
+
 " ========================================
 " Buffers <leader>b
 " ========================================
@@ -169,12 +186,17 @@ nmap <leader>bo <Action>(CloseAllEditorsButActive)
 let g:WhichKeyDesc_buffer_pin_delete = "<leader>bO Delete Non-Pinned Buffers"
 nmap <leader>bO <Action>(CloseAllUnpinnedEditors)
 
-let g:WhichKeyDesc_buffer_left = "<leader>bh Delete Buffers to the Left"
+let g:WhichKeyDesc_buffer_left_delete = "<leader>bh Delete Buffers to the Left"
 nmap <leader>bh <Action>(CloseAllToTheLeft)
 
-let g:WhichKeyDesc_buffer_right = "<leader>bl Delete Buffers to the Right"
+let g:WhichKeyDesc_buffer_right_delete = "<leader>bl Delete Buffers to the Right"
 nmap <leader>bl <Action>(CloseAllToTheRight)
 
+" let g:WhichKeyDesc_buffer_move_left = "<leader>b[ Move Buffer Left"
+" nmap <leader>b[ <Action>(MoveTabLeft)
+"
+" let g:WhichKeyDesc_buffer_move_right = "<leader>b] Move Buffer Right"
+" nmap <leader>b] <Action>(MoveTabRight)
 
 " ========================================
 " Debug <leader>d TODO
@@ -245,8 +267,8 @@ nmap <leader>gb <Action>(Annotate)
 let g:WhichKeyDesc_git_file_history = "<leader>gf Git File History"
 nmap <leader>gf <Action>(Vcs.ShowTabbedFileHistory)
 
-let g:WhichKeyDesc_git_log = "<leader>gp Git Log Panel"
-nmap <leader>gp <Action>(Vcs.Show.Log)
+let g:WhichKeyDesc_git_log = "<leader>gl Git Log Panel"
+nmap <leader>gl <Action>(Vcs.Show.Log)
 
 let g:WhichKeyDesc_git_diff_lines = "<leader>gd Git Diff Lines"
 nmap <leader>gd <Action>(Vcs.ShowDiffChangedLines)
@@ -433,8 +455,8 @@ nmap gm5 <Action>(GotoBookmark5)
 let g:WhichKeyDesc_bookmarks_show = "<leader>ms Show Bookmarks Popup"
 nmap <leader>ms <Action>(ShowBookmarks)
 
-let g:WhichKeyDesc_bookmarks_menu = "<leader>mp Bookmarks Panel"
-nmap <leader>mp <Action>(ActivateBookmarksToolWindow)
+let g:WhichKeyDesc_bookmarks_menu = "<leader>mm Bookmarks Panel"
+nmap <leader>mm <Action>(ActivateBookmarksToolWindow)
 
 " Toggle and manage
 let g:WhichKeyDesc_bookmarks_toggle_bookmark = "<leader>mb Toggle Bookmark"
@@ -452,8 +474,8 @@ let g:WhichKeyDesc_notifications = "<leader>n +notifications"
 let g:WhichKeyDesc_notifications_dismiss = "<leader>nd Dismiss All"
 nmap <leader>nd <Action>(ClearAllNotifications)
 
-let g:WhichKeyDesc_notifications_history = "<leader>np Notifications Panel"
-nmap <leader>np <Action>(ActivateNotificationsToolWindow)
+let g:WhichKeyDesc_notifications_history = "<leader>nh Notifications History"
+nmap <leader>nh <Action>(ActivateNotificationsToolWindow)
 
 " ========================================
 " Search (<leader>s)
@@ -483,8 +505,8 @@ nmap <leader>sj <Action>(RecentLocations)
 let g:WhichKeyDesc_search_keymaps = "<leader>sk Keymaps"
 nmap <leader>sk :map<cr>
 
-let g:WhichKeyDesc_search_marks = "<leader>sm Marks"
-nmap <leader>sm :marks<cr>
+let g:WhichKeyDesc_search_marks = "<leader>sm Bookmarks"
+nmap <leader>sm <Action>(ActivateBookmarksToolWindow)
 
 let g:WhichKeyDesc_search_symbol = "<leader>ss Search Symbol"
 nmap <leader>ss <Action>(GotoSymbol)
@@ -508,8 +530,6 @@ let g:WhichKeyDesc_leader_t = "<leader>t +tests"
 let g:WhichKeyDesc_test_last = "<leader>tl Run Last Test"
 nmap <leader>tl <Action>(Run)
 
-let g:WhichKeyDesc_test_panel = "<leader>tp Toggle Test Panel"
-nmap <leader>tp <Action>(ActivateRunToolWindow)
 
 let g:WhichKeyDesc_test_nearest = "<leader>tn Run Nearest Class"
 nmap <leader>tn <Action>(RunClass)
@@ -537,6 +557,16 @@ nmap <leader>rc <Action>(ChooseRunConfiguration)
 
 let g:WhichKeyDesc_run_menu = "<leader>rm Run Menu"
 nmap <leader>rm <Action>(RunMenu)
+
+let g:WhichKeyDesc_run_run = "<leader>rr Run Panel"
+nmap <leader>rr <Action>(ActivateRunToolWindow)
+
+let g:WhichKeyDesc_run_services = "<leader>rs Services Panel"
+nmap <leader>rs <Action>(ActivateServicesToolWindow)
+
+let g:WhichKeyDesc_run_build = "<leader>rb Build Panel"
+nmap <leader>rb <Action>(ActivateBuildToolWindow)
+
 
 " ========================================
 " Debug Keymaps (<leader>d)
@@ -568,22 +598,18 @@ nmap <leader>dr <Action>(Resume)
 let g:WhichKeyDesc_debug_evaluate_expression = "<leader>dE Evaluate Expression"
 nmap <leader>dE <Action>(EvaluateExpression)
 
-let g:WhichKeyDesc_debug_activate_tool_window = "<leader>dp Activate Debug Tool Window"
-nmap <leader>dp <Action>(ActivateDebugToolWindow)
+let g:WhichKeyDesc_debug_activate_tool_window = "<leader>dd Activate Debug Tool Window"
+nmap <leader>dd <Action>(ActivateDebugToolWindow)
 
 " ========================================
 " Window Keymaps (<leader>w)
 " ========================================
 let g:WhichKeyDesc_leader_w = "<leader>w +windows"
-let g:WhichKeyDesc_split_below = "<leader>- Split Window Below"
-nmap <leader>- <c-w>s
-let g:WhichKeyDesc_split_below_alt = "<leader>ws Split Window Below"
-nmap <leader>ws <c-w>s
+let g:WhichKeyDesc_split_below = "<leader>w- Split Window Below"
+nmap <leader>w- <c-w>s
 
-let g:WhichKeyDesc_split_right = "<leader>| Split Window Right"
-nmap <leader><bar> <c-w>v
-let g:WhichKeyDesc_split_right_alt = "<leader>wv Split Window Right"
-nmap <leader>wv <c-w>v
+let g:WhichKeyDesc_split_right = "<leader>w| Split Window Right"
+nmap <leader>w<bar> <c-w>v
 
 let g:WhichKeyDesc_window_delete = "<leader>wd Delete Window"
 nmap <leader>wd <Action>(CloseContent)
@@ -606,11 +632,11 @@ let g:WhichKeyDesc_ai_ask_in_edit = "<leader>ai Prompt AI inline"
 nmap <leader>ai <Action>(AIAssistant.Editor.AskAiAssistantInEditor)
 vmap <leader>ai <Action>(AIAssistant.Editor.AskAiAssistantInEditor)
 
-let g:WhichKeyDesc_ai_toggle_chat = "<leader>aa  Toggle AI Chat"
+let g:WhichKeyDesc_ai_toggle_chat = "<leader>aa Toggle AI Chat"
 nmap <leader>aa <Action>(ActivateAIAssistantToolWindow)
 vmap <leader>aa <Action>(ActivateAIAssistantToolWindow)
 
-let g:WhichKeyDesc_ai_toggle_chat = "<leader>as  AI Settings"
+let g:WhichKeyDesc_ai_settings = "<leader>as AI Settings"
 nmap <leader>as <Action>(AIHub.Settings)
 
 " ========================================
@@ -679,3 +705,4 @@ nmap gsr <Plug>CSurround
 
 " quickscope: Always-on highlight for a unique character in every word on a line to help use f, F
 set quickscope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']

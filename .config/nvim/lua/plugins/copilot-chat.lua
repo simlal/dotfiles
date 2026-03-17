@@ -14,7 +14,7 @@ return {
 			-- other mappings...
 		},
 
-		model = "claude-sonnet-4",
+		model = "gemini-3-flash-preview",
 		providers = {
 			github_models = {
 				disabled = true,

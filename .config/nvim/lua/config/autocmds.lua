@@ -1,3 +1,5 @@
+-- Remove auto spell+wrap in text files
+vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 -- Function to get the current YAML schema
 -- local function get_schema()
 --   local schema = require("yaml-companion").get_buf_schema(0)
@@ -45,6 +47,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-----------------
+-- FASTCMPMODE --
+-----------------
+
 -- FastCmpModeToggle for blink.cmp
 local blink = require("blink.cmp")
 local fast_mode_enabled = false
@@ -80,13 +86,13 @@ vim.api.nvim_create_user_command("FastCmpModeToggle", function()
 end, {})
 
 -- Auto‑enable fast mode for large files (>1MB)
-vim.api.nvim_create_autocmd("BufReadPre", {
-	group = vim.api.nvim_create_augroup("fast_cmp_mode", { clear = true }),
-	callback = function(args)
-		local size = vim.fn.getfsize(args.file)
-		if size > 1024 * 1024 then
-			enable_fast_mode()
-		end
-	end,
-	desc = "Enable Blink Fast Mode for large files",
-})
+-- vim.api.nvim_create_autocmd("BufReadPre", {
+-- 	group = vim.api.nvim_create_augroup("fast_cmp_mode", { clear = true }),
+-- 	callback = function(args)
+-- 		local size = vim.fn.getfsize(args.file)
+-- 		if size > 1024 * 1024 then
+-- 			enable_fast_mode()
+-- 		end
+-- 	end,
+-- 	desc = "Enable Blink Fast Mode for large files",
+-- })

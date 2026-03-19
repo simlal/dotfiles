@@ -38,8 +38,8 @@ alias la='eza -bla --header --git --color=always --group-directories-first --ico
 # git-aliases
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
 # TODO: gh actions latest run watch
-
 alias ghac="gh run watch -i 1 \$(gh run list --limit 1 --json databaseId --jq '.[0].databaseId') && notify-send 'gh actions run is done!'"
+alias ghd="gh dash"
 
 # Atuin scripts
 alias asr="atuin scripts run"

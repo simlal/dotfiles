@@ -53,7 +53,7 @@ layout {
 
                 // ── Wifi ────────────────────────────────────────
                 command_wifi_command     "bash -c \"nmcli -t -f WIFI g\""
-                command_wifi_format      "#[fg=green]󰤨 {stdout}"
+                command_wifi_format      "#[fg=green] {stdout}"
                 command_wifi_interval    "10"
                 command_wifi_rendermode  "static"
 
@@ -65,7 +65,23 @@ layout {
         }
         children
     }
-    tab name="vim" focus=true borderless=false
-    tab name="git" focus=false borderless=false
-    tab name="claude" focus=false borderless=false
+    tab name="vim" focus=true borderless=false {
+        pane split_direction="vertical" {
+            pane size="70%" command="nvim"
+            pane size="30%"
+        }
+    }
+    tab name="claude" focus=false borderless=false {
+      pane command="claude"
+    }
+    tab name="git" focus=false borderless=false {
+        pane split_direction="vertical" {
+            pane size="70%" command="bash" {
+                args "-c" "git rev-parse --git-dir > /dev/null 2>&1 && lazygit || exec $SHELL"
+            }
+            pane size="30%" command="gh" {
+                args "dash"
+            }
+        }
+    }
 }

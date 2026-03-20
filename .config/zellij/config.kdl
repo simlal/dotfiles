@@ -63,9 +63,6 @@ keybinds clear-defaults=true {
             SwitchToMode "Normal"
         }
 
-        // ── Display panes (closest to C-M-p) ─────────────
-        bind "p" { SwitchToMode "Pane"; }
-
         // ── Resize mode ─────────────────────────────────
         bind "R" { SwitchToMode "Resize"; }
     }
@@ -84,29 +81,34 @@ keybinds clear-defaults=true {
         bind "Esc" { SwitchToMode "Normal"; }
     }
 
-    scroll {
-        // vi-style copy mode to match your tmux vi keys
+    scroll clear-defaults=true {
         bind "v" { Copy; }
         bind "y" { Copy; }
-        bind "Ctrl c" "Esc" { ScrollToBottom; SwitchToMode "Normal"; }
+        bind "Esc" { SwitchToMode "Normal"; }           // stay at position
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
         bind "j" "Down" { ScrollDown; }
         bind "k" "Up" { ScrollUp; }
         bind "Ctrl f" "PageDown" { PageScrollDown; }
         bind "Ctrl b" "PageUp" { PageScrollUp; }
         bind "Ctrl d" { HalfPageScrollDown; }
         bind "Ctrl u" { HalfPageScrollUp; }
+        bind "g" { ScrollToTop; }
+        bind "G" { ScrollToBottom; }
         bind "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
     }
 
-    search {
+    search clear-defaults=true {
         bind "n" { Search "down"; }
         bind "N" { Search "up"; }
         bind "c" { SearchToggleOption "CaseSensitivity"; }
         bind "w" { SearchToggleOption "Wrap"; }
         bind "o" { SearchToggleOption "WholeWord"; }
-        bind "Ctrl c" "Esc" { ScrollToBottom; SwitchToMode "Normal"; }
+        bind "Esc" { SwitchToMode "Normal"; }           // stay at position
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
         bind "j" "Down" { ScrollDown; }
         bind "k" "Up" { ScrollUp; }
+        bind "g" { ScrollToTop; }
+        bind "G" { ScrollToBottom; }
     }
 
     entersearch {

@@ -1,87 +1,93 @@
 layout {
-    default_tab_template {
-        pane size=1 borderless=true {
-            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
-                // ── Layout: [MODE | session]  ...tabs...  [bat | wifi | time] ──
-                format_left   "{mode} #[fg=bright_black]│ #[fg=cyan,bold]{session}"
-                format_center "{tabs}"
-                format_right  "{command_battery} #[fg=bright_black]│ {command_wifi} #[fg=bright_black]│ {datetime}"
-                format_space  ""
+  default_tab_template {
+    pane size=1 borderless=true {
+      plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+      // ── Layout ──────────────────────────────────────
+      // TODO: USE PIPE FOR CWD/BRANCH
+      format_left   "{mode}#[fg=bright_black] │ #[fg=cyan,bold]{session}#[fg=bright_black] "
+      format_center "{tabs}"
+      format_right  "{command_battery}#[fg=bright_black] │ {command_wifi}#[fg=bright_black] │ {datetime}"
+      format_space  ""
 
-                border_enabled             "false"
-                hide_frame_for_single_pane "false"
+      border_enabled             "false"
+      hide_frame_for_single_pane "false"
 
-                // ── Modes ───────────────────────────────────────
-                mode_normal        "#[fg=green,bold]NORMAL"
-                mode_tmux          "#[fg=yellow,bold]LEADER"
-                mode_locked        "#[fg=red,bold]LOCKED"
-                mode_resize        "#[fg=magenta,bold]RESIZE"
-                mode_pane          "#[fg=blue,bold]PANE"
-                mode_tab           "#[fg=blue,bold]TAB"
-                mode_scroll        "#[fg=magenta,bold]SCROLL"
-                mode_enter_search  "#[fg=yellow,bold]SEARCH"
-                mode_search        "#[fg=yellow,bold]SEARCH"
-                mode_rename_tab    "#[fg=red,bold]RENAME"
-                mode_rename_pane   "#[fg=red,bold]RENAME"
-                mode_session       "#[fg=cyan,bold]SESSION"
-                mode_move          "#[fg=red,bold]MOVE"
-                mode_prompt        "#[fg=green,bold]PROMPT"
+      // ── Modes (pill style) ───────────────────────────
+      mode_normal        "#[fg=black,bg=green,bold]  NORMAL #[fg=green,bg=default]"
+      mode_tmux          "#[fg=black,bg=yellow,bold]  TMUX #[fg=yellow,bg=default]"
+      mode_locked        "#[fg=black,bg=red,bold]  LOCKED #[fg=red,bg=default]"
+      mode_resize        "#[fg=black,bg=magenta,bold]  RESIZE #[fg=magenta,bg=default]"
+      mode_pane          "#[fg=black,bg=blue,bold]  PANE #[fg=blue,bg=default]"
+      mode_tab           "#[fg=black,bg=blue,bold]  TAB #[fg=blue,bg=default]"
+      mode_scroll        "#[fg=black,bg=magenta,bold]  SCROLL #[fg=magenta,bg=default]"
+      mode_enter_search  "#[fg=black,bg=yellow,bold]  SEARCH #[fg=yellow,bg=default]"
+      mode_search        "#[fg=black,bg=yellow,bold]  SEARCH #[fg=yellow,bg=default]"
+      mode_rename_tab    "#[fg=black,bg=red,bold]  RENAME #[fg=red,bg=default]"
+      mode_rename_pane   "#[fg=black,bg=red,bold]  RENAME #[fg=red,bg=default]"
+      mode_session       "#[fg=black,bg=cyan,bold]  SESSION #[fg=cyan,bg=default]"
+      mode_move          "#[fg=black,bg=red,bold]  MOVE #[fg=red,bg=default]"
+      mode_prompt        "#[fg=black,bg=green,bold]  PROMPT #[fg=green,bg=default]"
 
-                // ── Tabs ────────────────────────────────────────
-                tab_normal              "#[fg=bright_black] {index}:{name}{floating_indicator} "
-                tab_normal_fullscreen   "#[fg=bright_black] {index}:{name}{fullscreen_indicator} "
-                tab_normal_sync         "#[fg=bright_black] {index}:{name}{sync_indicator} "
-                tab_active              "#[fg=cyan,bold] {index}: {name}{floating_indicator} "
-                tab_active_fullscreen   "#[fg=cyan,bold] {index}: {name}{fullscreen_indicator} "
-                tab_active_sync         "#[fg=green,bold] {index}: {name}{sync_indicator} "
-                tab_separator           "#[fg=bright_black]│"
-                tab_rename              "#[fg=red,bold] {index}:{name} "
+      // ── Tabs ────────────────────────────────────────
+      tab_normal              "#[fg=bright_black] {index}: {name} {floating_indicator}"
+      tab_normal_fullscreen   "#[fg=bright_black] {index}: {name} {fullscreen_indicator}"
+      tab_normal_sync         "#[fg=bright_black] {index}: {name} {sync_indicator}"
+      tab_active              "#[fg=cyan,bold] {index} : {name} {floating_indicator}"
+      tab_active_fullscreen   "#[fg=cyan,bold] {index} : {name} {fullscreen_indicator}"
+      tab_active_sync         "#[fg=green,bold] {index} : {name} {sync_indicator}"
+      tab_separator           "#[fg=bright_black] │ "
+      tab_rename              "#[fg=red,bold]  {index} {name} "
 
-                tab_sync_indicator         "  "
-                tab_fullscreen_indicator   "  "
-                tab_floating_indicator     " 󰉧 "
+      tab_sync_indicator       "󰓦 "
+      tab_fullscreen_indicator "󰊓 "
+      tab_floating_indicator   "󰉧 "
 
-                tab_display_count          "6"
-                tab_truncate_start_format  "#[fg=bright_black] +{count} .."
-                tab_truncate_end_format    "#[fg=bright_black] .. +{count} "
+      tab_display_count         "6"
+      tab_truncate_start_format "#[fg=bright_black]  +{count} "
+      tab_truncate_end_format   "#[fg=bright_black] +{count}  "
 
-                // ── Battery ─────────────────────────────────────
-                command_battery_command     "bash -c \"cat /sys/class/power_supply/BAT0/capacity\""
-                command_battery_format      "#[fg=yellow] {stdout}%"
-                command_battery_interval    "30"
-                command_battery_rendermode  "static"
+      // ── Git branch ──────────────────────────────────
+      // command_git_branch_command    "git rev-parse --abbrev-ref HEAD"
+      // command_git_branch_format     "#[fg=blue] {stdout} "
+      // command_git_branch_interval   "10"
+      // command_git_branch_rendermode "static"
 
-                // ── Wifi ────────────────────────────────────────
-                command_wifi_command     "bash -c \"nmcli -t -f WIFI g\""
-                command_wifi_format      "#[fg=green] {stdout}"
-                command_wifi_interval    "10"
-                command_wifi_rendermode  "static"
+      // ── Battery (tiered icons) ───────────────────────
+      command_battery_command    "bash -c 'cap=$(cat /sys/class/power_supply/BAT0/capacity); status=$(cat /sys/class/power_supply/BAT0/status); if [ \"$status\" = \"Charging\" ]; then icon=󱐋; elif [ $cap -ge 90 ]; then icon=󰁹; elif [ $cap -ge 60 ]; then icon=󰂀; elif [ $cap -ge 40 ]; then icon=󰁾; elif [ $cap -ge 20 ]; then icon=󰁼; else icon=󰁺; fi; printf \"%s %s%%\" \"$icon\" \"$cap\"'"
+      command_battery_format     "#[fg=yellow] {stdout} "
+      command_battery_interval   "30"
+      command_battery_rendermode "static"
 
-                // ── Date / time ─────────────────────────────────
-                datetime          "#[fg=bright_black] {format}"
-                datetime_format   "%b %d %H:%M"
-                datetime_timezone "America/Montreal"
-            }
-        }
-        children
+      // ── Wifi ────────────────────────────────────────
+      command_wifi_command    "bash -c \"nmcli -t -f WIFI g\""
+      command_wifi_format     "#[fg=green]󰖩 {stdout} "
+      command_wifi_interval   "10"
+      command_wifi_rendermode "static"
+
+      // ── Date / time ──────────────────────────────────
+      datetime          "#[fg=bright_black]󰃭 {format} "
+      datetime_format   "%b-%d %H:%M"
+      datetime_timezone "America/Montreal"
     }
-    tab name="vim" focus=true borderless=false {
-        pane split_direction="vertical" {
-            pane size="70%" command="nvim"
-            pane size="30%"
-        }
+  }
+  children
+}
+
+tab name="vim" focus=true borderless=false {
+  pane split_direction="vertical" {
+    pane size="70%" command="nvim"
+    pane size="30%"
+  }
+}
+tab name="claude" focus=false borderless=false
+tab name="git" focus=false borderless=false {
+  pane split_direction="vertical" {
+    pane size="70%" command="bash" {
+      args "-c" "git rev-parse --git-dir > /dev/null 2>&1 && lazygit || exec $SHELL"
     }
-    tab name="claude" focus=false borderless=false {
-      pane command="claude"
+    pane size="30%" command="gh" {
+      args "dash"
     }
-    tab name="git" focus=false borderless=false {
-        pane split_direction="vertical" {
-            pane size="70%" command="bash" {
-                args "-c" "git rev-parse --git-dir > /dev/null 2>&1 && lazygit || exec $SHELL"
-            }
-            pane size="30%" command="gh" {
-                args "dash"
-            }
-        }
-    }
+  }
+}
 }

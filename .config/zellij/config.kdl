@@ -9,7 +9,8 @@ keybinds clear-defaults=true {
         bind "Esc" { SwitchToMode "Normal"; }
 
         // ── Windows (tabs) ──────────────────────────────
-        bind "t" "n" { NewTab; SwitchToMode "Normal"; }
+        bind "t" { NewTab; SwitchToMode "Normal"; }
+        bind "a" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
         bind "w" { CloseTab; SwitchToMode "Normal"; }
         bind "[" { GoToPreviousTab; SwitchToMode "Normal"; }
         bind "]" { GoToNextTab; SwitchToMode "Normal"; }
@@ -35,6 +36,7 @@ keybinds clear-defaults=true {
         bind "b" { BreakPane; SwitchToMode "Normal"; }
         bind "}" { BreakPaneRight; SwitchToMode "Normal"; }
         bind "{" { BreakPaneLeft; SwitchToMode "Normal"; }
+        bind "p" { TogglePanePinned; SwitchToMode "Normal"; }
 
         // Pane navigation
         bind "h" { MoveFocus "Left"; SwitchToMode "Normal"; }

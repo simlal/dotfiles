@@ -1,18 +1,15 @@
-" Plugins Needed:
-" - WhichKey
-" - commentary
-" - surround
+" Plugins IntelliJ required (Install via Settings > Plugins > Marketplace) :
+"   - IdeaVim          : https://plugins.jetbrains.com/plugin/164-ideavim
+"   - WhichKey         : https://plugins.jetbrains.com/plugin/15976-which-key
+"
+" Optional plugins for a better UX
+"   - IdeaVim-Quickscope : https://plugins.jetbrains.com/plugin/19417-ideavim-quickscope
 
 " ========================================
 " Global Settings
 " ========================================
 let mapleader=" "
 let maplocalleader="\\"
-
-" Handles comment formatting intelligently (autowrap, next line continue CR/oO, autojoin)
-" Preserves existing long lines when editing
-" Allows manual formatting with `gq`
-" Recognizes numbered lists in documentation
 
 " Print current line number
 set number
@@ -23,13 +20,10 @@ set relativenumber
 " Lines of context
 set scrolloff=8
 
-" Round indent
-
 " Columns of context
 set sidescrolloff=8
 
-" Timeout for key sequences
-set timeoutlen=10000
+" No timeout for key sequences
 set notimeout
 set undolevels=10000
 
@@ -46,11 +40,13 @@ set history=1000
 set showmode
 set showcmd
 
-" Ignore case in search /
+" Ignore case by default + smartcase in search /
+set ignorecase
 set smartcase
 
 " search as you type
 set incsearch
+
 " Highlight search
 set hlsearch
 
@@ -58,7 +54,7 @@ set hlsearch
 set visualbell
 
 " ========================================
-" Defaults and misc <leader> or <C- > or >< etc.
+" Defaults and misc <leader>, <C-*>, <A-*>, etc.
 " ========================================
 nnoremap Y y$
 inoremap <C-U> <C-G>u<C-U>
@@ -124,7 +120,6 @@ let g:WhichKeyDesc_leader_c = "<leader>c +code"
 let g:WhichKeyDesc_structure_popup = "<leader>cs File Structure Popup"
 nmap <leader>cs <Action>(FileStructurePopup)
 
-
 let g:WhichKeyDesc_structure_tool = "<leader>cS Toggle Structure Panel"
 nmap <leader>cS <Action>(ActivateStructureToolWindow)
 
@@ -166,8 +161,9 @@ nmap <leader>chm <Action>(MethodHierarchy)
 let g:WhichKeyDesc_hierarchy_type = "<leader>cht Type Hierarchy"
 nmap <leader>cht <Action>(TypeHierarchy)
 
-let g:WhichKeyDesc_hierarchy_panel = "<leader>cht Hierarchy Panel"
-nmap <leader>cht <Action>(ActivateHierarchyToolWindow)
+let g:WhichKeyDesc_hierarchy_panel = "<leader>chH Hierarchy Panel"
+nmap <leader>chH <Action>(ActivateHierarchyToolWindow)
+
 
 " ========================================
 " Buffers <leader>b
@@ -191,17 +187,6 @@ nmap <leader>bh <Action>(CloseAllToTheLeft)
 
 let g:WhichKeyDesc_buffer_right_delete = "<leader>bl Delete Buffers to the Right"
 nmap <leader>bl <Action>(CloseAllToTheRight)
-
-" let g:WhichKeyDesc_buffer_move_left = "<leader>b[ Move Buffer Left"
-" nmap <leader>b[ <Action>(MoveTabLeft)
-"
-" let g:WhichKeyDesc_buffer_move_right = "<leader>b] Move Buffer Right"
-" nmap <leader>b] <Action>(MoveTabRight)
-
-" ========================================
-" Debug <leader>d TODO
-" ========================================
-"TODO
 
 
 " ========================================
@@ -301,7 +286,7 @@ nmap gr <Action>(FindUsages)
 let g:WhichKeyDesc_goto_implementation = "gi Goto Implementation"
 nmap gi <Action>(GotoImplementation)
 
-let g:WhichKeyDesc_goto_implementation = "gu Goto Upstream"
+let g:WhichKeyDesc_goto_upstream = "gu Goto Upstream"
 nmap gu <Action>(GotoSuperMethod)
 
 let g:WhichKeyDesc_goto_type = "gy Goto Type Definition"
@@ -451,7 +436,7 @@ nmap gm5 <Action>(GotoBookmark5)
 
 
 
-"SHOW
+" SHOW
 let g:WhichKeyDesc_bookmarks_show = "<leader>ms Show Bookmarks Popup"
 nmap <leader>ms <Action>(ShowBookmarks)
 
@@ -514,13 +499,9 @@ nmap <leader>ss <Action>(GotoSymbol)
 let g:WhichKeyDesc_search_todo = "<leader>st Search Todo"
 nmap <leader>st <Action>(ActivateTODOToolWindow)
 
-let g:WhichKeyDesc_search_word = "<leader>sw Visual selection or word (Root Dir)"
+let g:WhichKeyDesc_search_word = "<leader>sw Visual selection or word"
 nmap <leader>sw mzviw<Action>(FindInPath)<esc>`z
 vmap <leader>sw <Action>(FindInPath)
-
-let g:WhichKeyDesc_search_word_cwd = "<leader>sW Visual selection or word (cwd)"
-nmap <leader>sW mzviw<Action>(FindInPath)<esc>`z
-vmap <leader>sW <Action>(FindInPath)
 
 " ========================================
 " Test Keymaps (<leader>t)
@@ -529,7 +510,6 @@ let g:WhichKeyDesc_leader_t = "<leader>t +tests"
 
 let g:WhichKeyDesc_test_last = "<leader>tl Run Last Test"
 nmap <leader>tl <Action>(Run)
-
 
 let g:WhichKeyDesc_test_nearest = "<leader>tn Run Nearest Class"
 nmap <leader>tn <Action>(RunClass)
@@ -542,8 +522,6 @@ nmap <leader>ts <Action>(Stop)
 
 let g:WhichKeyDesc_test_context = "<leader>tc Run Current Context"
 nmap <leader>tc <Action>(ContextRun)
-
-
 
 " ========================================
 " RunConfig Keymaps (<leader>r)
@@ -583,15 +561,19 @@ nmap <leader>dv <Action>(ViewBreakpoints)
 
 let g:WhichKeyDesc_debug_edit_breakpoints = "<leader>de Edit Breakpoint"
 nmap <leader>de <Action>(EditBreakpoint)
+
 let g:WhichKeyDesc_debug_mute_breakpoints = "<leader>dm Mute Breakpoints"
 nmap <leader>dm <Action>(XDebugger.MuteBreakpoints)
+
 let g:WhichKeyDesc_debug_toggle_line_breakpoint = "<leader>db Toggle Breakpoint"
 nmap <leader>db <Action>(ToggleLineBreakpoint)
 
 let g:WhichKeyDesc_debug_step_into = "<leader>di Step Into"
 nmap <leader>di <Action>(StepInto)
+
 let g:WhichKeyDesc_debug_step_over = "<leader>do Step Over"
 nmap <leader>do <Action>(StepOver)
+
 let g:WhichKeyDesc_debug_resume = "<leader>dr Resume Debugging"
 nmap <leader>dr <Action>(Resume)
 

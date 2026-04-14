@@ -46,11 +46,6 @@ layout {
       tab_truncate_start_format "#[fg=bright_black]  +{count} "
       tab_truncate_end_format   "#[fg=bright_black] +{count}  "
 
-      // ── Git branch ──────────────────────────────────
-      // command_git_branch_command    "git rev-parse --abbrev-ref HEAD"
-      // command_git_branch_format     "#[fg=blue] {stdout} "
-      // command_git_branch_interval   "10"
-      // command_git_branch_rendermode "static"
 
       // ── Battery (tiered icons) ───────────────────────
       command_battery_command    "bash -c 'cap=$(cat /sys/class/power_supply/BAT0/capacity); status=$(cat /sys/class/power_supply/BAT0/status); if [ \"$status\" = \"Charging\" ]; then icon=󱐋; elif [ $cap -ge 90 ]; then icon=󰁹; elif [ $cap -ge 60 ]; then icon=󰂀; elif [ $cap -ge 40 ]; then icon=󰁾; elif [ $cap -ge 20 ]; then icon=󰁼; else icon=󰁺; fi; printf \"%s %s%%\" \"$icon\" \"$cap\"'"
@@ -59,7 +54,8 @@ layout {
       command_battery_rendermode "static"
 
       // ── Wifi ────────────────────────────────────────
-      command_wifi_command    "bash -c \"nmcli -t -f WIFI g\""
+      // command_wifi_command    "bash -c \"nmcli -t -f WIFI g\""
+      command_wifi_command    "bash -c 'iwctl station wlan0 show | grep \"Connected network\" | awk \"{print \\$3}\"'"
       command_wifi_format     "#[fg=green]󰖩 {stdout} "
       command_wifi_interval   "10"
       command_wifi_rendermode "static"
@@ -79,7 +75,7 @@ tab name="vim" focus=true borderless=false {
     pane size="30%"
   }
 }
-tab name="claude" focus=false borderless=false
+tab name="agent-1" focus=false borderless=false
 tab name="git" focus=false borderless=false {
   pane split_direction="vertical" {
     pane size="70%" command="bash" {

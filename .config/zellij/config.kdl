@@ -287,6 +287,6 @@ simplified_ui false
 // default_layout "compact"
 
 
-copy_command "xsel --input --clipboard"
+copy_command "wl-copy"
 
 copy_on_select true

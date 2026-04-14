@@ -2,7 +2,7 @@
 ######### UI #########
 # theme - font - cursor
 theme = "Moonfly"
-font-family = "JetBrains mono"
+font-family = "JetBrainsMono Nerd Font"
 font-size = 13
 
 # Mouse

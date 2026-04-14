@@ -85,7 +85,7 @@ fi
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 
 # Cargo/rust path/bin
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env" OMARCHY OUT
 
 # Go-related path/bin
 #export PATH="/usr/local/go/bin:$PATH"
@@ -117,15 +117,3 @@ zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'exter
 
 # zoxide smart cd
 eval "$(zoxide init zsh)"
-
-#### Omnimed overrides ####
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-. "$HOME/.local/bin/env"
-. $HOME/.omnimedrc 2> /dev/null
-PATH=$PATH:~/Applications/Scripts
-export HISTTIMEFORMAT="%Y-%m-%d %T "
-eval "$(direnv hook zsh)"
-
-[ -f "$HOME/.bash_aliases_omnimed" ] && . "$HOME/.bash_aliases_omnimed"
-omnikools-lag

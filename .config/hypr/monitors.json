@@ -1,0 +1,46 @@
+{
+  "workspaces": [
+    {
+      "name": "Default",
+      "monitors": {
+        "desc:Lenovo Group Limited L27-4C UM1006R0": {
+          "resolution": "1920x1080",
+          "refresh_rate": 144.0,
+          "scale": 1.0,
+          "rotation": 0,
+          "position_x": 0,
+          "position_y": 0,
+          "is_primary": false
+        },
+        "desc:Dell Inc. DELL S3225QS 119VF94": {
+          "resolution": "2560x1440",
+          "refresh_rate": 120.0,
+          "scale": 1.0,
+          "rotation": 0,
+          "position_x": 0,
+          "position_y": 0,
+          "is_primary": true
+        },
+        "desc:Lenovo Group Limited L27-4C UM1006BB": {
+          "resolution": "1920x1080",
+          "refresh_rate": 144.0,
+          "scale": 1.0,
+          "rotation": 0,
+          "position_x": 1920,
+          "position_y": 0,
+          "is_primary": false
+        },
+        "eDP-1": {
+          "resolution": "2880x1800",
+          "refresh_rate": 120.0,
+          "scale": 2.0,
+          "rotation": 0,
+          "position_x": 3840,
+          "position_y": 0,
+          "is_primary": false
+        }
+      }
+    }
+  ],
+  "active_workspace": 0
+}

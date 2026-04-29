@@ -6,7 +6,7 @@ description: >-
   Adapts depth to context — concise for simple questions, thorough for
   complex systems. Read-only by default but can explore codebases and spawn
   subagents for deep dives.
-mode: subagent
+mode: primary
 temperature: 0.3
 permission:
   edit: deny

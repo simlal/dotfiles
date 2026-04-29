@@ -23,6 +23,8 @@ permission:
     "stat *": allow
     "tree *": allow
     "file *": allow
+    "gh pr view *": allow
+    "gh pr diff *": allow
   task: allow
   glob: allow
   grep: allow

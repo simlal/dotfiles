@@ -62,9 +62,6 @@ alias psesh='sesh connect "$(sesh list --icons | fzf-tmux -p 80%,70% \
 # nvim
 alias nvim-alt='NVIM_APPNAME=nvim-alt nvim'
 
-# mysql client use mariadb (for brew)
-alias mysql="mariadb"
-
 # VERBOSE DEFAULT EDITOR
 export EDITOR="nvim"
 

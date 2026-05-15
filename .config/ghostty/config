@@ -1,3 +1,7 @@
+####### INIT COMMAND and SHELL #########
+command = $(which zsh) --login --interactive
+shell-integration-features = no-cursor,ssh-env
+# async-backend = epoll
 
 ######### UI #########
 # theme - font - cursor
@@ -7,117 +11,136 @@ font-size = 13
 
 # Mouse
 mouse-hide-while-typing = true
-focus-follows-mouse = false
+focus-follows-mouse = true
 
 # Cursor
-cursor-invert-fg-bg = true
+# cursor-invert-fg-bg = false
+cursor-style = block
+cursor-style-blink = true
+cursor-color = cell-foreground
+cursor-text = cell-background
+# cursor-color = #80a0ff
+# cursor-text = #80a0ff
+
 
 # splits
 unfocused-split-opacity = 0.5
 unfocused-split-fill = black
-split-divider-color = #ef9f76
+split-divider-color = #80a0ff
 
 # window
 gtk-titlebar = false
 gtk-wide-tabs = true
-window-height = 40
-window-width = 120
-window-padding-x = 2
-window-padding-y = 2
+window-padding-x = 7
+window-padding-y = 7
+gtk-toolbar-style = flat
+gtk-custom-css = ~/.config/ghostty/theme.css
+window-decoration = false
 
 # Clipboard
 clipboard-write = allow
 clipboard-read = allow
+# NOTE: DISABLE WHEN USING TMUX/ZELLIJ
+copy-on-select = clipboard
 
 # Quick Term (only KDE)
 quick-terminal-position = top
-quick-terminal-screen = main
-quick-terminal-animation-duration = 0.2
-quick-terminal-autohide = true
+quick-terminal-animation-duration = 0.1
+quick-terminal-autohide = false
+quick-terminal-size = 45%
 
-# Bell
+# Bell & notifs
 bell-features = attention, title
-
-######### Globals #########
 app-notifications = true
-#NOTE: TOGGLE BACK ON IF NOT USING TMUX
-# copy-on-select = clipboard
 
-# scrollback-limit in bytes ~100mb per terminal
-scrollback-limit = 100000000
+# Scrollback (100 MB)
+scrollback-limit = 100000000 
 
-# adw-toolbar-style = flat
-
-# Hardcode locale
-env=LC_ALL=en_US.UTF-8
-env=LC_CTYPE=en_US.UTF-8
-env=LC_COLLATE=en_US.UTF-8
-
-#NOTE: TOGGLE BACK ON IF NOT USING TMUX
+# NOTE: DISABLE WHEN USING TMUX/ZELLIJ
 ######### keybindings #########
 
-# # Command palette
-# keybind = ctrl+space>p=toggle_command_palette
-#
-# # New tab/windows
-# keybind = ctrl+space>t=new_tab 
-# keybind = ctrl+space>n=new_window
-# keybind = ctrl+space>r=prompt_surface_title
-#
-# # config
-# keybind = ctrl+,=reload_config
-#
-# # tab navigation
-# keybind = ctrl+space>o=toggle_tab_overview
-#
-# keybind = ctrl+space>1=goto_tab:1
-# keybind = ctrl+space>2=goto_tab:2
-# keybind = ctrl+space>3=goto_tab:3
-# keybind = ctrl+space>4=goto_tab:4
-# keybind = ctrl+space>5=goto_tab:5
-# keybind = ctrl+space>6=goto_tab:6
-# keybind = ctrl+space>7=goto_tab:7
-# keybind = ctrl+space>8=goto_tab:8
-# keybind = ctrl+space>9=goto_tab:9
-# keybind = ctrl+space>[=previous_tab
-# keybind = ctrl+space>]=next_tab
-# keybind = ctrl+page_down=unbind
-# keybind = ctrl+page_up=unbind
-#
-# keybind = ctrl+space>w=close_tab
-#
-# keybind = ctrl+space>.=move_tab:1
-# keybind = ctrl+space>,=move_tab:-1
-#
-# # splits
-# # create/close
-# keybind = ctrl+space>x=close_surface
-# keybind = ctrl+space>\=new_split:right
-# keybind = ctrl+space>-=new_split:down
-# keybind = ctrl+space>z=toggle_split_zoom
-#
-# # nav
-# keybind = ctrl+space>h=goto_split:left
-# keybind = ctrl+space>j=goto_split:bottom
-# keybind = ctrl+space>k=goto_split:top
-# keybind = ctrl+space>l=goto_split:right
-#
-# # resize
-# keybind = ctrl+alt+right=unbind
-# keybind = ctrl+alt+left=unbind
-# keybind = ctrl+alt+h=resize_split:left,50
-# keybind = ctrl+alt+l=resize_split:right,50
-# keybind = ctrl+alt+k=resize_split:up,50
-# keybind = ctrl+alt+j=resize_split:down,50
-# keybind = ctrl+alt+equal=equalize_splits 
-#
-# # lines navigation
-# keybind = shift+up=scroll_page_lines:-1 
-# keybind = shift+down=scroll_page_lines:1 
-#
-# # Open scrollback in text editor
-# keybind = ctrl+space>s=write_screen_file:open
+# Command palette
+keybind = ctrl+space>p=toggle_command_palette
 
-####### INIT COMMAND #########
-# default shell and integration
-command = $(which zsh) --login --interactive
+# New tab/windows
+keybind = ctrl+space>t=new_tab 
+keybind = ctrl+space>n=new_window
+keybind = ctrl+space>r=prompt_tab_title
+
+# config
+keybind = ctrl+space>,=reload_config
+
+# Quick term
+keybind = ctrl+space>f=toggle_quick_terminal
+
+# tab navigation
+keybind = ctrl+space>o=toggle_tab_overview
+
+keybind = ctrl+space>1=goto_tab:1
+keybind = ctrl+space>2=goto_tab:2
+keybind = ctrl+space>3=goto_tab:3
+keybind = ctrl+space>4=goto_tab:4
+keybind = ctrl+space>5=goto_tab:5
+keybind = ctrl+space>6=goto_tab:6
+keybind = ctrl+space>7=goto_tab:7
+keybind = ctrl+space>8=goto_tab:8
+keybind = ctrl+space>9=goto_tab:9
+keybind = ctrl+space>[=previous_tab
+keybind = ctrl+space>]=next_tab
+keybind = ctrl+page_down=unbind
+keybind = ctrl+page_up=unbind
+
+keybind = ctrl+space>w=close_tab
+
+keybind = ctrl+space>shift+]=move_tab:1
+keybind = ctrl+space>shift+[=move_tab:-1
+
+# splits
+# create/close
+keybind = ctrl+space>x=close_surface
+keybind = ctrl+space>\=new_split:right
+keybind = ctrl+space>-=new_split:down
+keybind = ctrl+space>z=toggle_split_zoom
+
+# nav
+keybind = ctrl+space>h=goto_split:left
+keybind = ctrl+space>j=goto_split:bottom
+keybind = ctrl+space>k=goto_split:top
+keybind = ctrl+space>l=goto_split:right
+
+# resize
+keybind = ctrl+alt+right=unbind
+keybind = ctrl+alt+left=unbind
+keybind = ctrl+alt+left=resize_split:left,100
+keybind = ctrl+alt+right=resize_split:right,100
+keybind = ctrl+alt+up=resize_split:up,100
+keybind = ctrl+alt+down=resize_split:down,100
+keybind = ctrl+alt+equal=equalize_splits 
+
+# ALTERNATIVE
+# keybind = ctrl+space>shift+h=resize_split:left,100
+# keybind = ctrl+space>shift+l=resize_split:right,100
+# keybind = ctrl+space>shift+j=resize_split:up,100
+# keybind = ctrl+space>shift+k=resize_split:down,100
+# keybind = ctrl+space>equal=equalize_splits 
+
+# lines navigation
+keybind = shift+up=scroll_page_lines:-1 
+keybind = shift+down=scroll_page_lines:1 
+
+# Scrollback in editor
+# BUG: DOES NOT WORK IN OMARCHY?!
+# keybind = ctrl+space>e=write_scrollback_file:open
+
+keybind = ctrl+space>e=text:nvim\u{0020}
+keybind = chain=write_screen_file:paste,plain
+keybind = chain=text:\n
+
+keybind = ctrl+space>shift+e=text:nvim\u{0020}
+keybind = chain=write_scrollback_file:paste,plain
+keybind = chain=text:\n
+
+
+# Search
+keybind = ctrl+space>slash=start_search
+

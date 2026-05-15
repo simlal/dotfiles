@@ -1,0 +1,59 @@
+headerbar {
+  min-height: 24px;
+  padding: 0;
+  margin: 0;
+  background-color: #080808;
+}
+
+tabbar tabbox {
+  margin: 0;
+  padding: 0;
+  min-height: 10px;
+  background-color: #080808;
+  font-family: monospace;
+  border-radius: 0;
+}
+
+tabbar tabbox tab {
+  margin: 0;
+  padding: 0 10px;
+  background-color: #080808;
+  color: #949494;
+  border-radius: 0;
+  outline-width: 0;
+}
+
+tabbar tabbox tab:selected {
+  background-color: #1c1c1c;
+  color: #80a0ff;
+  border-radius: 0;
+  outline-width: 0;
+}
+
+tabbar tabbox tab:hover:not(:selected) {
+  background-color: #161616;
+  color: #eeeeee;
+}
+
+tabbar tabbox tab label {
+  font-size: 14px;
+}
+
+/* The 'x' Button - Restored and Red on hover */
+tabbar tabbox tab button {
+  min-width: 16px;
+  min-height: 16px;
+  padding: 0;
+  margin-left: 6px;
+  /* Keep it visible but subtle until hovered */
+  opacity: 0.6;
+  color: #949494;
+  background-color: transparent;
+}
+
+/* Make it bright red when you specifically hover the button */
+tabbar tabbox tab button:hover {
+  opacity: 1;
+  color: #fb007a; /* Moonfly Crimson */
+  background-color: #303030;
+}

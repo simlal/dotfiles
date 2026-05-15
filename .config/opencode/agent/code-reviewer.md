@@ -6,6 +6,7 @@ description: >-
   always citing file:line and quoting problematic code. Can spawn subagents
   for deeper exploration of large or unfamiliar codebases.
 mode: primary
+model: opencode-go/deepseek-v4-pro
 temperature: 0.1
 permission:
   edit: deny

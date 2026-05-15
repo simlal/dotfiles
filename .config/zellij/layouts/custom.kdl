@@ -69,21 +69,21 @@ layout {
   children
 }
 
-tab name="vim" focus=true borderless=false {
+tab name="vim" focus=false borderless=false {
   pane split_direction="vertical" {
     pane size="70%" command="nvim"
     pane size="30%"
   }
 }
-tab name="agent-1" focus=false borderless=false
-tab name="git" focus=false borderless=false {
-  pane split_direction="vertical" {
-    pane size="70%" command="bash" {
-      args "-c" "git rev-parse --git-dir > /dev/null 2>&1 && lazygit || exec $SHELL"
-    }
-    pane size="30%" command="gh" {
-      args "dash"
-    }
-  }
-}
+tab name="agent" focus=true borderless=false
+// tab name="git" focus=false borderless=false {
+//   pane split_direction="vertical" {
+//     pane size="70%" command="bash" {
+//       args "-c" "git rev-parse --git-dir > /dev/null 2>&1 && lazygit || exec $SHELL"
+//     }
+//     pane size="30%" command="gh" {
+//       args "dash"
+//     }
+//   }
+// }
 }

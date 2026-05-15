@@ -7,6 +7,7 @@ description: >-
   complex systems. Read-only by default but can explore codebases and spawn
   subagents for deep dives.
 mode: primary
+model: opencode-go/deepseek-v4-flash
 temperature: 0.3
 permission:
   edit: deny

@@ -71,9 +71,10 @@
     "on-click-right": "alacritty"
   },
   "clock": {
-    "format": "{:L%A %H:%M}",
-    "format-alt": "{:L%d %B W%V %Y}",
-    "tooltip": false,
+    "format": "{:%H:%M  %d/%m}",
+    "tooltip": true,
+    "tooltip-format": "{:%A, %d %B %Y\nWeek %V}",
+    "on-click": "bash -c 'D=$(zenity --calendar --date-format=\"%d/%m/%Y\") && echo -n \"$D\" | wl-copy && notify-send \"Copied\" \"$D\"'",
     "on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select"
   },
   "network": {

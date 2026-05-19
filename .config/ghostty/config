@@ -44,7 +44,7 @@ clipboard-read = allow
 copy-on-select = clipboard
 
 # Quick Term (only KDE)
-quick-terminal-position = top
+quick-terminal-position = right
 quick-terminal-animation-duration = 0.1
 quick-terminal-autohide = false
 quick-terminal-size = 45%
@@ -87,6 +87,7 @@ keybind = ctrl+space>8=goto_tab:8
 keybind = ctrl+space>9=goto_tab:9
 keybind = ctrl+space>[=previous_tab
 keybind = ctrl+space>]=next_tab
+# keybind = ctrl+space>grave_accent=last_tab
 keybind = ctrl+page_down=unbind
 keybind = ctrl+page_up=unbind
 

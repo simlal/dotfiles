@@ -16,7 +16,7 @@ focus-follows-mouse = true
 # Cursor
 # cursor-invert-fg-bg = false
 cursor-style = block
-cursor-style-blink = true
+cursor-style-blink = false
 cursor-color = cell-foreground
 cursor-text = cell-background
 # cursor-color = #80a0ff

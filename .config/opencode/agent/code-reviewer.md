@@ -4,9 +4,10 @@ description: >-
   structured approach: security → correctness → performance → maintainability.
   Reports findings with severity levels (critical/warning/suggestion),
   always citing file:line and quoting problematic code. Can spawn subagents
-  for deeper exploration of large or unfamiliar codebases.
+  for deeper exploration of large or unfamiliar codebases. In `Fix`, include
+  a concrete change and, when helpful, a minimal implementation example.
 mode: primary
-model: openai/gpt-5.4
+model: openai/gpt-5.4-mini
 temperature: 0.1
 permission:
   edit: deny
@@ -82,7 +83,8 @@ For each CRITICAL and WARNING issue, provide:
 - **Location**: `file:line`
 - **Problem**: Quote the problematic code snippet
 - **Why it matters**: Explain the risk or impact
-- **Fix**: Suggest a concrete solution (without editing the file)
+- **Fix**: Suggest a concrete solution and, when helpful, include a minimal
+  example implementation snippet (without rewriting the whole file)
 
 ## Rules
 

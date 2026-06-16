@@ -4,7 +4,7 @@ description: >-
   can fetch docs via webfetch. Avoids spawning subagents or expensive tool
   churn. Use for fast, low-cost answers to operational/devops questions.
 mode: subagent
-model: openai/gpt-5.4-mini
+model: opencode-go/deepseek-v4-flash
 temperature: 0
 steps: 3
 permission:

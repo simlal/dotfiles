@@ -7,7 +7,7 @@ description: >-
   for deeper exploration of large or unfamiliar codebases. In `Fix`, include
   a concrete change and, when helpful, a minimal implementation example.
 mode: primary
-model: openai/gpt-5.4-mini
+model: opencode-go/deepseek-v4-pro
 temperature: 0.1
 permission:
   edit: deny

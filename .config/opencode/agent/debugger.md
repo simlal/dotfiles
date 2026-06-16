@@ -5,7 +5,7 @@ description: >-
   diagnostics first, traces failures from symptoms and logs, and asks before
   any state-changing action.
 mode: primary
-model: openai/gpt-5.4-mini
+model: opencode-go/deepseek-v4-pro
 temperature: 0.1
 permission:
   edit: deny

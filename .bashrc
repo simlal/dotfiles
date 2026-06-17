@@ -36,12 +36,4 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PAT
 
 eval "$(atuin init bash --disable-up-arrow)"
 eval "$(zoxide init bash)"
-# . "$HOME/.cargo/env"
-
-# Omnimed bashrc
-[ -f "$HOME/.bashrc_omnimed" ] && . "$HOME/.bashrc_omnimed"
-. ~/.bash_aliases_omnimed
-omnikools-lag
-. $HOME/.omnimedrc 2> /dev/null
-PATH=$PATH:~/Applications/Scripts
-export HISTTIMEFORMAT="%Y-%m-%d %T "
+ . "$HOME/.cargo/env"

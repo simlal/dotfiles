@@ -131,15 +131,15 @@ keybind = shift+down=scroll_page_lines:1
 
 # Scrollback in editor
 # BUG: DOES NOT WORK IN OMARCHY?!
-# keybind = ctrl+space>e=write_scrollback_file:open
+keybind = ctrl+space>e=write_screen_file:open,plain
 
-keybind = ctrl+space>e=text:nvim\u{0020}
-keybind = chain=write_screen_file:paste,plain
-keybind = chain=text:\n
-
-keybind = ctrl+space>shift+e=text:nvim\u{0020}
-keybind = chain=write_scrollback_file:paste,plain
-keybind = chain=text:\n
+# keybind = ctrl+space>e=text:nvim\u{0020}
+# keybind = chain=write_screen_file:paste,plain
+# keybind = chain=text:\n
+#
+# keybind = ctrl+space>shift+e=text:nvim\u{0020}
+# keybind = chain=write_scrollback_file:paste,plain
+# keybind = chain=text:\n
 
 
 # Search

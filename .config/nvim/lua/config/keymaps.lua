@@ -7,3 +7,6 @@ LazyVim.safe_keymap_set("n", "<C-Up>", "<cmd>resize +5<cr>", { desc = "Increase 
 LazyVim.safe_keymap_set("n", "<C-Down>", "<cmd>resize -5<cr>", { desc = "Decrease Window Height" })
 LazyVim.safe_keymap_set("n", "<C-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decrease Window Width" })
 LazyVim.safe_keymap_set("n", "<C-Right>", "<cmd>vertical resize +3<cr>", { desc = "Increase Window Width" })
+
+vim.keymap.del("n", "<leader>wm")
+Snacks.toggle.zoom():map("<leader>wz")

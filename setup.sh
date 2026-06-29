@@ -58,6 +58,7 @@ setup_dev_env() {
     "mise"
     "neovim"
     "opencode"
+    "opentofu"
     "ripgrep"
     "sesh"
     "uv"
@@ -65,6 +66,23 @@ setup_dev_env() {
     "yazi"
     "zoxide"
   )
+
+  brew_taps=(
+    "hashicorp/tap"
+  )
+
+  failed_taps=()
+
+  for tap in "${brew_taps[@]}"; do
+    echo "Adding brew tap: $tap..."
+    if ! brew tap "$tap"; then
+      echo "Warning: Failed to add tap $tap"
+      failed_taps+=("$tap")
+    fi
+  done
+  if [ ${#failed_taps[@]} -gt 0 ]; then
+    echo "Failed to add the following taps: ${failed_taps[*]}"
+  fi
 
   failed_packages=()
   for package in "${brew_packages[@]}"; do

@@ -12,6 +12,7 @@ return {
         sql = true,
         sh = true,
         hcl = true,
+        lua = true,
         ["*"] = false,
       },
       keymap = {

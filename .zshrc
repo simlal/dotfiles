@@ -113,3 +113,6 @@ zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'exter
 
 # zoxide smart cd
 eval "$(zoxide init zsh)"
+
+# mise
+eval "$(mise activate zsh)"

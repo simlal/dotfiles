@@ -1,0 +1,124 @@
+onboarding = false
+
+# --- TERM ---
+[terminal]
+default_shell = "/usr/bin/zsh"
+shell_mode = "login"
+
+# --- UI ---
+[ui]
+agent_panel_sort = "spaces"
+sidebar_width = 32
+sidebar_min_width = 18
+sidebar_max_width = 36
+mobile_width_threshold = 64
+mouse_capture = true
+right_click_passthrough_modifier = ""
+redraw_on_focus_gained = true
+mouse_scroll_lines = 3
+confirm_close = true
+prompt_new_tab_name = true
+pane_borders = true
+pane_gaps = true
+show_agent_labels_on_pane_borders = false
+accent = "cyan"
+
+[ui.toast]
+delivery = "herdr"
+[ui.toast.herdr]
+position = "top-right"
+
+[theme]
+name = "vesper"
+auto_switch = false
+
+# --- EXPERIMENTAL ---
+[experimental]
+pane_history = false
+
+# --- KEYBINDINGS ---
+[keys]
+prefix = "ctrl+space"
+
+# ── session ──────────────────
+help          = "prefix+?"
+settings      = "prefix+."
+detach        = "prefix+q"
+reload_config = "prefix+comma"
+
+# ── workspaces ──────────────
+workspace_picker    = "prefix+o"
+goto                = "prefix+g"
+new_workspace       = "prefix+'"
+rename_workspace    = "prefix+shift+r"
+close_workspace     = "prefix+shift+d"
+previous_workspace  = "prefix+up"
+next_workspace      = "prefix+down"
+switch_workspace    = "prefix+shift+1..9"
+
+# ── tabs ────────────────────
+new_tab       = "prefix+t"
+rename_tab    = "prefix+r"
+close_tab     = "prefix+w"
+previous_tab  = "prefix+["
+next_tab      = "prefix+]"
+switch_tab    = "prefix+1..9"
+
+# ── panes: create / close ───
+split_vertical    = "prefix+backslash"
+split_horizontal  = "prefix+minus"
+close_pane        = "prefix+x"
+zoom              = "prefix+z"
+
+# ── panes: navigate ─────────
+focus_pane_left     = "prefix+h"
+focus_pane_down     = "prefix+j"
+focus_pane_up       = "prefix+k"
+focus_pane_right    = "prefix+l"
+cycle_pane_next     = "prefix+tab"
+cycle_pane_previous = "prefix+shift+tab"
+last_pane           = "prefix+backtick"
+
+# ── panes: swap ─────────────
+swap_pane_left    = "prefix+shift+h"
+swap_pane_down    = "prefix+shift+j"
+swap_pane_up      = "prefix+shift+k"
+swap_pane_right   = "prefix+shift+l"
+
+# ── panes: resize ───────────
+resize_mode = "prefix+s"
+
+# ── sidebar ─────────────────
+toggle_sidebar = "prefix+b"
+
+# ── scrollback & copy ───────
+edit_scrollback = "prefix+e"
+copy_mode       = "prefix+c"
+
+# ── agents ──────────────────
+focus_agent = "prefix+alt+1..9"
+
+# ── remote & notifs ─────────
+remote_image_paste       = "ctrl+v"
+open_notification_target = "prefix+n"
+
+
+# ── custom ─────────
+[[keys.command]]
+key = "prefix+alt+g"
+type = "pane"
+command = "lazygit"
+description = "run lazygit"
+
+[[keys.command]]
+key = "prefix+alt+d"
+type = "pane"
+command = "lazydocker"
+description = "run lazydocker"
+
+
+[[keys.command]]
+key = "prefix+alt+e"
+type = "pane"
+command = "yazi"
+description = "run yazi"

@@ -97,6 +97,8 @@ copy_mode       = "prefix+c"
 
 # ── agents ──────────────────
 focus_agent = "prefix+alt+1..9"
+previous_agent = "prefix+("
+next_agent = "prefix+)"
 
 # ── remote & notifs ─────────
 remote_image_paste       = "ctrl+v"

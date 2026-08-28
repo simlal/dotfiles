@@ -20,21 +20,29 @@ confirm_close = true
 prompt_new_tab_name = true
 pane_borders = true
 pane_gaps = true
-show_agent_labels_on_pane_borders = false
+show_agent_labels_on_pane_borders = true
 accent = "cyan"
 
 [ui.toast]
 delivery = "herdr"
+
 [ui.toast.herdr]
 position = "top-right"
 
+[ui.toast.clipboard]
+enabled = false
+
 [theme]
-name = "vesper"
+name = "terminal"
 auto_switch = false
 
 # --- EXPERIMENTAL ---
 [experimental]
 pane_history = false
+
+# --- ADVANCED ---
+[advanced]
+scrollback_limit_bytes = 100000000
 
 # --- KEYBINDINGS ---
 [keys]

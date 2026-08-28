@@ -3,16 +3,16 @@ return {
     "zbirenbaum/copilot.lua",
     opts = {
       filetypes = {
-        markdown = true,
-        python = true,
-        javascript = true,
+        markdown = false,
+        python = false,
+        javascript = false,
         typescript = false,
         yaml = false,
         toml = false,
-        sql = true,
-        sh = true,
-        hcl = true,
-        lua = true,
+        sql = false,
+        sh = false,
+        hcl = false,
+        lua = false,
         ["*"] = false,
       },
       keymap = {

@@ -23,6 +23,9 @@ fi
 export GPG_TTY=$(tty)
 
 ######## Personal aliases ########
+# quick nvim
+alias n="nvim"
+
 # alias python="python3"
 alias cat="bat"
 
@@ -69,6 +72,14 @@ export EDITOR="nvim"
 alias lg="lazygit"
 alias ldo="lazydocker"
 
+# yazi alt
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
+}
 
 ######## PATH EXPORTS and bin ########
 #
@@ -81,7 +92,7 @@ fi
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 
 # Cargo/rust path/bin
-# . "$HOME/.cargo/env" OMARCHY OUT
+. "$HOME/.cargo/env"
 
 # Go-related path/bin
 #export PATH="/usr/local/go/bin:$PATH"
@@ -114,5 +125,20 @@ zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'exter
 # zoxide smart cd
 eval "$(zoxide init zsh)"
 
+# AWS login helper
+aws-login() {
+  unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_CREDENTIAL_EXPIRATION
+
+  aws login || return
+
+  local creds
+  creds="$(aws configure export-credentials --format env)" || return
+
+  eval "$creds"
+}
+
 # mise
 eval "$(mise activate zsh)"
+
+# psql cli
+export PATH="/home/linuxbrew/.linuxbrew/opt/libpq/bin:$PATH"

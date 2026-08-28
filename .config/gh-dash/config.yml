@@ -81,26 +81,21 @@ defaults:
 keybindings: {}
 repoPaths: {}
 theme:
-  ui:
-    sectionsShowCount: true
-    table:
-      showSeparator: true
-      compact: true
   colors:
     text:
-      primary: "#b2b2b2"
-      secondary: "#808080"
-      inverted: "#080808"
-      faint: "#585858"
-      warning: "#e3c78a"
-      error: "#ff5454"
-      success: "#8cc85f"
+      primary: "#cdd6f4"
+      secondary: "#fab387"
+      inverted: "#11111b"
+      faint: "#bac2de"
+      warning: "#f9e2af"
+      success: "#a6e3a1"
+      error: "#f38ba8"
     background:
-      selected: "#303030"
+      selected: "#313244"
     border:
-      primary: "#303030"
-      secondary: "#303030"
-      faint: "#303030"
+      primary: "#fab387"
+      secondary: "#45475a"
+      faint: "#313244"
 pager:
   diff: "diffnav"
 confirmQuit: false

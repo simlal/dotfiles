@@ -5,7 +5,7 @@ shell-integration-features = no-cursor,ssh-env
 
 ######### UI #########
 # theme - font - cursor
-theme = "Moonfly"
+theme = "Catppuccin Mocha"
 font-family = "JetBrainsMono Nerd Font"
 font-size = 13
 

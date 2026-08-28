@@ -35,6 +35,15 @@ permission:
     "free *": allow
     "ps *": allow
     "journalctl *": allow
+    "aws --version": allow
+    "aws sts get-caller-identity": allow
+    "aws * describe*": allow
+    "aws * list*": allow
+    "aws * get*": allow
+    "aws * ls*": allow
+    "aws logs tail*": allow
+    "aws logs filter*": allow
+    "aws * wait*": allow
   read: allow
   glob: allow
   grep: allow

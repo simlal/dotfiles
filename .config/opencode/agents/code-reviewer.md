@@ -29,6 +29,7 @@ permission:
     "gh pr view *": allow
     "gh pr diff *": allow
     "gh pr checkout *": allow
+    "gh api repos/MGPScript/*/pulls/*/comments*": allow
     "mkdir *": allow
   task: allow
   glob: allow

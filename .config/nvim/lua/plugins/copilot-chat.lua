@@ -14,10 +14,10 @@ return {
       -- other mappings...
     },
 
-    model = "gemini-3-flash-preview",
+    model = "gpt-5.3-codex",
     providers = {
       github_models = {
-        disabled = true,
+        disabled = false,
       },
     },
   },

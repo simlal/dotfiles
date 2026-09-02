@@ -129,12 +129,9 @@ eval "$(zoxide init zsh)"
 aws-login() {
   unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_CREDENTIAL_EXPIRATION
 
-  aws login || return
+  aws login --profile signin || return
 
-  local creds
-  creds="$(aws configure export-credentials --format env)" || return
-
-  eval "$creds"
+  export AWS_PROFILE=process
 }
 
 # mise

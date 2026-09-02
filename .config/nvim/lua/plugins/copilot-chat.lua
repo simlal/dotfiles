@@ -17,7 +17,7 @@ return {
     model = "gpt-5.3-codex",
     providers = {
       github_models = {
-        disabled = false,
+        disabled = true,
       },
     },
   },

@@ -64,6 +64,52 @@
       "tac *": "allow"
     }
   },
+  "mcp": {
+    "atlassian": {
+      "type": "remote",
+      "url": "https://mcp.atlassian.com/v2/mcp",
+      "enabled": true
+    }
+  },
+  "tools": {
+    "atlassian*": false
+  },
+  "agent": {
+    "build": {
+      "model": "opencode-go/glm-5.3-flash",
+      "tools": {
+        "atlassian*": true
+      },
+      "permission": {
+        "atlassian_get*": "allow",
+        "atlassian_search*": "allow",
+        "atlassian_*": "ask",
+        "atlassian*delete*": "deny"
+      }
+    },
+    "plan": {
+      "model": "opencode-go/glm-5.3-flash",
+      "tools": {
+        "atlassian*": true
+      },
+      "permission": {
+        "atlassian_get*": "allow",
+        "atlassian_search*": "allow",
+        "atlassian_*": "ask",
+        "atlassian*delete*": "deny"
+      }
+    },
+    "general": {
+      "permission": {
+        "atlassian_*": "deny"
+      }
+    },
+    "explore": {
+      "permission": {
+        "atlassian_*": "deny"
+      }
+    }
+  },
   "provider": {
     "llama.cpp": {
       "npm": "@ai-sdk/openai-compatible",

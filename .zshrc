@@ -81,6 +81,9 @@ function y() {
 	command rm -f -- "$tmp"
 }
 
+# Opencode
+alias oc="opencode"
+
 ######## PATH EXPORTS and bin ########
 #
 # Ensure $PATH and environment variables are set up
@@ -128,11 +131,9 @@ eval "$(zoxide init zsh)"
 # AWS login helper
 aws-login() {
   unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_CREDENTIAL_EXPIRATION
-
   aws login --profile signin || return
-
-  export AWS_PROFILE=process
 }
+export AWS_PROFILE=process
 
 # mise
 eval "$(mise activate zsh)"

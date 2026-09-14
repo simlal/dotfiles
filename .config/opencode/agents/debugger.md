@@ -5,10 +5,11 @@ description: >-
   diagnostics first, traces failures from symptoms and logs, and asks before
   any state-changing action.
 mode: primary
-model: opencode-go/deepseek-v4-pro
+model: opencode-go/minimax-m3
 temperature: 0.1
 permission:
   edit: deny
+  atlassian_*: deny
   bash:
     "*": ask
     "pwd": allow

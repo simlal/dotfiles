@@ -7,11 +7,14 @@ description: >-
   for deeper exploration of large or unfamiliar codebases. In `Fix`, include
   a concrete change and, when helpful, a minimal implementation example.
 mode: primary
-model: opencode-go/deepseek-v4-pro
+model: opencode-go/minimax-m3
 temperature: 0.1
 steps: 20
 permission:
   edit: deny
+  atlassian_get*: allow
+  atlassian_search*: allow
+  atlassian_*: deny
   bash:
     "*": deny
     "git *": allow

@@ -81,9 +81,9 @@
         "atlassian*": true
       },
       "permission": {
+        "atlassian_*": "ask",
         "atlassian_get*": "allow",
         "atlassian_search*": "allow",
-        "atlassian_*": "ask",
         "atlassian*delete*": "deny"
       }
     },
@@ -93,9 +93,9 @@
         "atlassian*": true
       },
       "permission": {
+        "atlassian_*": "ask",
         "atlassian_get*": "allow",
         "atlassian_search*": "allow",
-        "atlassian_*": "ask",
         "atlassian*delete*": "deny"
       }
     },

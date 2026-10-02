@@ -12,15 +12,44 @@
     "bash": {
       "*": "ask",
       "git *": "allow",
+      "git status *": "allow",
+      "git status": "allow",
+      "git log *": "allow",
+      "git diff *": "allow",
+      "git show *": "allow",
+      "git branch *": "allow",
+      "git remote *": "allow",
+      "git config --get *": "allow",
+      "git blame *": "allow",
+      "git stash list *": "allow",
       "git commit *": "ask",
       "git push *": "ask",
       "git pull *": "ask",
       "git reset *": "ask",
+      "git revert *": "ask",
       "git clean *": "ask",
       "git checkout *": "ask",
       "git merge *": "ask",
       "git rebase *": "ask",
-      "gh *": "allow",
+      "gh *": "ask",
+      "gh pr view *": "allow",
+      "gh pr view": "allow",
+      "gh pr list *": "allow",
+      "gh pr list": "allow",
+      "gh pr checks *": "allow",
+      "gh pr diff *": "allow",
+      "gh pr status *": "allow",
+      "gh pr status": "allow",
+      "gh issue view *": "allow",
+      "gh issue list *": "allow",
+      "gh issue list": "allow",
+      "gh issue status *": "allow",
+      "gh repo view *": "allow",
+      "gh repo list *": "allow",
+      "gh run list *": "allow",
+      "gh run view *": "allow",
+      "gh search *": "allow",
+      "gh auth status": "allow",
       "rg *": "allow",
       "fd *": "allow",
       "find *": "allow",
@@ -65,10 +94,12 @@
     }
   },
   "mcp": {
-    "atlassian": {
-      "type": "remote",
-      "url": "https://mcp.atlassian.com/v2/mcp",
-      "enabled": true
+    "servers": {
+      "atlassian": {
+        "type": "remote",
+        "url": "https://mcp.atlassian.com/v2/mcp",
+        "disabled": false
+      }
     }
   },
   "tools": {
@@ -76,7 +107,7 @@
   },
   "agent": {
     "build": {
-      "model": "opencode-go/glm-5.3-flash",
+      "model": "opencode-go/deepseek-v4.1-flash",
       "tools": {
         "atlassian*": true
       },
@@ -88,7 +119,7 @@
       }
     },
     "plan": {
-      "model": "opencode-go/glm-5.3-flash",
+      "model": "opencode-go/deepseek-v4-pro",
       "tools": {
         "atlassian*": true
       },
@@ -110,7 +141,9 @@
       }
     }
   },
+  "disabled_providers": ["amazon-bedrock"],
   "provider": {
+    // local model example
     "llama.cpp": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "llama-server (local)",

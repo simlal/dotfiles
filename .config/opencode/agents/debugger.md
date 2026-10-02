@@ -5,7 +5,7 @@ description: >-
   diagnostics first, traces failures from symptoms and logs, and asks before
   any state-changing action.
 mode: primary
-model: opencode-go/minimax-m3
+model: opencode-go/deepseek-v4.1-flash
 temperature: 0.1
 permission:
   edit: deny

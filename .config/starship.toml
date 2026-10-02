@@ -2,6 +2,9 @@ command_timeout = 750
 [aws]
 disabled = true
 
+[gcloud]
+disabled = true
+
 [buf]
 symbol = " "
 

@@ -7,7 +7,7 @@ description: >-
   for deeper exploration of large or unfamiliar codebases. In `Fix`, include
   a concrete change and, when helpful, a minimal implementation example.
 mode: primary
-model: opencode-go/minimax-m3
+model: opencode-go/deepseek-v4.1-flash
 temperature: 0.1
 steps: 20
 permission:
@@ -29,6 +29,8 @@ permission:
     "stat *": allow
     "tree *": allow
     "file *": allow
+    "gh *": ask
+    "gh pr checks *": allow
     "gh pr view *": allow
     "gh pr diff *": allow
     "gh pr checkout *": allow
@@ -60,7 +62,7 @@ incorrect diff against the wrong base branch.
    the correct repository, clone it into a temporary workspace using ssh:
 
    ```
-   git clone http://<owner>/<repo>.git /tmp/opencode/<repo>
+   git clone git@github.com:<owner>/<repo>.git /tmp/opencode/<repo>
    ```
 
    Use `workdir=/tmp/opencode/<repo>` for all subsequent commands.
@@ -134,11 +136,11 @@ One paragraph: what this change does and your overall assessment.
 
 ### Issues
 
-| Severity | File:Line | Issue | Recommendation |
-|----------|-----------|-------|----------------|
-| CRITICAL | foo.ts:42 | SQL injection via string concat | Use parameterized query |
-| WARNING  | bar.ts:17 | Unhandled null in callback | Add null check or early return |
-| SUGGESTION | baz.ts:89 | Variable name `x` is unclear | Rename to describe purpose |
+| Severity   | File:Line | Issue                           | Recommendation                 |
+| ---------- | --------- | ------------------------------- | ------------------------------ |
+| CRITICAL   | foo.ts:42 | SQL injection via string concat | Use parameterized query        |
+| WARNING    | bar.ts:17 | Unhandled null in callback      | Add null check or early return |
+| SUGGESTION | baz.ts:89 | Variable name `x` is unclear    | Rename to describe purpose     |
 
 ### Detailed Findings
 

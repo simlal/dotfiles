@@ -6,8 +6,8 @@ description: >-
   Adapts depth to context — concise for simple questions, thorough for
   complex systems. Read-only by default but can explore codebases and spawn
   subagents for deep dives.
-mode: primary
-model: opencode-go/glm-5.3-flash
+mode: subagent
+model: opencode-go/deepseek-v4.1-flash
 temperature: 0.3
 permission:
   edit: deny

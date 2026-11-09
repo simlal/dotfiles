@@ -8,34 +8,105 @@ description: >-
   subagents for deep dives.
 mode: subagent
 model: opencode-go/deepseek-v4.1-flash
-temperature: 0.3
-permission:
-  edit: deny
-  atlassian_*: deny
-  bash:
-    "*": deny
-    "git *": allow
-    "rg *": allow
-    "grep *": allow
-    "find *": allow
-    "ls *": allow
-    "cat *": allow
-    "head *": allow
-    "tail *": allow
-    "wc *": allow
-    "stat *": allow
-    "tree *": allow
-    "file *": allow
-  task: allow
-  glob: allow
-  grep: allow
-  read: allow
-  webfetch: allow
+request:
+  body:
+    temperature: 0.3
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: "atlassian_*"
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git *"
+    effect: allow
+  - action: shell
+    resource: "git push *"
+    effect: deny
+  - action: shell
+    resource: "git commit *"
+    effect: deny
+  - action: shell
+    resource: "git pull *"
+    effect: deny
+  - action: shell
+    resource: "git reset *"
+    effect: deny
+  - action: shell
+    resource: "git clean *"
+    effect: deny
+  - action: shell
+    resource: "git checkout *"
+    effect: deny
+  - action: shell
+    resource: "git merge *"
+    effect: deny
+  - action: shell
+    resource: "git rebase *"
+    effect: deny
+  - action: shell
+    resource: "rg *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "find *"
+    effect: allow
+  - action: shell
+    resource: "ls *"
+    effect: allow
+  - action: shell
+    resource: "cat *"
+    effect: allow
+  - action: shell
+    resource: "head *"
+    effect: allow
+  - action: shell
+    resource: "tail *"
+    effect: allow
+  - action: shell
+    resource: "wc *"
+    effect: allow
+  - action: shell
+    resource: "stat *"
+    effect: allow
+  - action: shell
+    resource: "tree *"
+    effect: allow
+  - action: shell
+    resource: "file *"
+    effect: allow
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: subagent
+    resource: explore
+    effect: allow
+  - action: subagent
+    resource: explainer
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: webfetch
+    resource: "*"
+    effect: allow
 ---
 
 You are a senior engineer with 15+ years of experience who excels at
 explaining code, architecture, and engineering trade-offs. You never edit
-files. You explain, mentor, and guide.
+files — directly or through subagents. You explain, mentor, and guide.
 
 ## Explanation Framework
 

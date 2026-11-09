@@ -131,7 +131,6 @@ scrollback-limit = 100000000
 # keybind = shift+down=scroll_page_lines:1 
 #
 # # Scrollback in editor
-# # BUG: DOES NOT WORK IN OMARCHY?!
 # keybind = ctrl+space>e=write_screen_file:open,plain
 #
 # # keybind = ctrl+space>e=text:nvim\u{0020}

@@ -8,39 +8,206 @@ description: >-
   a concrete change and, when helpful, a minimal implementation example.
 mode: primary
 model: opencode-go/deepseek-v4.1-flash
-temperature: 0.1
 steps: 20
-permission:
-  edit: deny
-  atlassian_get*: allow
-  atlassian_search*: allow
-  atlassian_*: deny
-  bash:
-    "*": deny
-    "git *": allow
-    "rg *": allow
-    "grep *": allow
-    "find *": allow
-    "ls *": allow
-    "cat *": allow
-    "head *": allow
-    "tail *": allow
-    "wc *": allow
-    "stat *": allow
-    "tree *": allow
-    "file *": allow
-    "gh *": ask
-    "gh pr checks *": allow
-    "gh pr view *": allow
-    "gh pr diff *": allow
-    "gh pr checkout *": allow
-    "gh api repos/MGPScript/*/pulls/*/comments*": allow
-    "mkdir *": allow
-  task: allow
-  glob: allow
-  grep: allow
-  read: allow
-  webfetch: allow
+request:
+  body:
+    temperature: 0.1
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: "atlassian_*"
+    resource: "*"
+    effect: deny
+  - action: "atlassian_get*"
+    resource: "*"
+    effect: allow
+  - action: "atlassian_search*"
+    resource: "*"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git *"
+    effect: allow
+  - action: shell
+    resource: "git push *"
+    effect: deny
+  - action: shell
+    resource: "git commit *"
+    effect: deny
+  - action: shell
+    resource: "git pull *"
+    effect: deny
+  - action: shell
+    resource: "git reset *"
+    effect: deny
+  - action: shell
+    resource: "git clean *"
+    effect: deny
+  - action: shell
+    resource: "git checkout *"
+    effect: deny
+  - action: shell
+    resource: "git merge *"
+    effect: deny
+  - action: shell
+    resource: "git rebase *"
+    effect: deny
+  - action: shell
+    resource: "git apply *"
+    effect: deny
+  - action: shell
+    resource: "git am *"
+    effect: deny
+  - action: shell
+    resource: "git stash *"
+    effect: deny
+  - action: shell
+    resource: "git stash list *"
+    effect: allow
+  - action: shell
+    resource: "git restore *"
+    effect: deny
+  - action: shell
+    resource: "git switch *"
+    effect: deny
+  - action: shell
+    resource: "git tag *"
+    effect: deny
+  - action: shell
+    resource: "rg *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "find *"
+    effect: allow
+  - action: shell
+    resource: "ls *"
+    effect: allow
+  - action: shell
+    resource: "cat *"
+    effect: allow
+  - action: shell
+    resource: "head *"
+    effect: allow
+  - action: shell
+    resource: "tail *"
+    effect: allow
+  - action: shell
+    resource: "wc *"
+    effect: allow
+  - action: shell
+    resource: "stat *"
+    effect: allow
+  - action: shell
+    resource: "tree *"
+    effect: allow
+  - action: shell
+    resource: "file *"
+    effect: allow
+  - action: shell
+    resource: "echo *"
+    effect: allow
+  - action: shell
+    resource: "printf *"
+    effect: allow
+  - action: shell
+    resource: "sort *"
+    effect: allow
+  - action: shell
+    resource: "jq *"
+    effect: allow
+  - action: shell
+    resource: "sed *"
+    effect: allow
+  - action: shell
+    resource: "sed -i*"
+    effect: deny
+  - action: shell
+    resource: "sed --in-place*"
+    effect: deny
+  - action: shell
+    resource: "awk *"
+    effect: allow
+  - action: shell
+    resource: "gh *"
+    effect: deny
+  - action: shell
+    resource: "gh pr checks *"
+    effect: allow
+  - action: shell
+    resource: "gh pr view *"
+    effect: allow
+  - action: shell
+    resource: "gh pr diff *"
+    effect: allow
+  - action: shell
+    resource: "gh pr checkout *"
+    effect: allow
+  - action: shell
+    resource: "gh api repos/MGPScript/*/pulls/*/comments*"
+    effect: allow
+  - action: shell
+    resource: "gh api repos/MGPScript/*/pulls/*/reviews*"
+    effect: allow
+  - action: shell
+    resource: "gh api repos/MGPScript/*/pulls/*/files*"
+    effect: allow
+  - action: shell
+    resource: "gh api repos/MGPScript/*/pulls/*/commits*"
+    effect: allow
+  - action: shell
+    resource: "gh api user*"
+    effect: allow
+  - action: shell
+    resource: "gh auth status"
+    effect: allow
+  - action: shell
+    resource: "gh api * -f*"
+    effect: deny
+  - action: shell
+    resource: "gh api * -F*"
+    effect: deny
+  - action: shell
+    resource: "gh api * --raw-field*"
+    effect: deny
+  - action: shell
+    resource: "gh api * --field*"
+    effect: deny
+  - action: shell
+    resource: "gh api * --method*"
+    effect: deny
+  - action: shell
+    resource: "gh api * --input*"
+    effect: deny
+  - action: shell
+    resource: "mkdir *"
+    effect: allow
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: subagent
+    resource: explore
+    effect: allow
+  - action: subagent
+    resource: explainer
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: webfetch
+    resource: "*"
+    effect: allow
 ---
 
 You are a senior code reviewer with 15+ years of experience across multiple
@@ -158,6 +325,14 @@ For each CRITICAL and WARNING issue, provide:
 - Always quote the problematic code snippet.
 - Prioritize by severity — critical issues first.
 - Do not rewrite the code for the user; explain what to change and why.
+- Never modify files — not directly, and not by delegating edits to
+  subagents. If a change is needed, report it and let the user apply it.
+- Keep GitHub read-only too: use `gh api` read endpoints (comments,
+  reviews, files, commits, user) with the path written **unquoted** —
+  quoting breaks the permission patterns. Never pass `-f`, `--method`, or
+  `--input`; you never post comments, reviews, or submit anything.
+- Slice large output with `head`, `tail`, or `sed -n`. Scratch files under
+  `/tmp/opencode/` are fine; never write into the repository you review.
 - Escalate critical security flaws explicitly — flag them as requiring
   immediate human review.
 - If the codebase is large or unfamiliar, use a subagent to explore

@@ -1,98 +1,309 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "plan",
-  "permission": {
-    "read": "allow",
-    "edit": "ask",
-    "glob": "allow",
-    "grep": "allow",
-    "webfetch": "allow",
-    "task": "ask",
-    "question": "allow",
-    "bash": {
-      "*": "ask",
-      "git *": "allow",
-      "git status *": "allow",
-      "git status": "allow",
-      "git log *": "allow",
-      "git diff *": "allow",
-      "git show *": "allow",
-      "git branch *": "allow",
-      "git remote *": "allow",
-      "git config --get *": "allow",
-      "git blame *": "allow",
-      "git stash list *": "allow",
-      "git commit *": "ask",
-      "git push *": "ask",
-      "git pull *": "ask",
-      "git reset *": "ask",
-      "git revert *": "ask",
-      "git clean *": "ask",
-      "git checkout *": "ask",
-      "git merge *": "ask",
-      "git rebase *": "ask",
-      "gh *": "ask",
-      "gh pr view *": "allow",
-      "gh pr view": "allow",
-      "gh pr list *": "allow",
-      "gh pr list": "allow",
-      "gh pr checks *": "allow",
-      "gh pr diff *": "allow",
-      "gh pr status *": "allow",
-      "gh pr status": "allow",
-      "gh issue view *": "allow",
-      "gh issue list *": "allow",
-      "gh issue list": "allow",
-      "gh issue status *": "allow",
-      "gh repo view *": "allow",
-      "gh repo list *": "allow",
-      "gh run list *": "allow",
-      "gh run view *": "allow",
-      "gh search *": "allow",
-      "gh auth status": "allow",
-      "rg *": "allow",
-      "fd *": "allow",
-      "find *": "allow",
-      "ls *": "allow",
-      "ls": "allow",
-      "cat *": "allow",
-      "head *": "allow",
-      "tail *": "allow",
-      "wc *": "allow",
-      "file *": "allow",
-      "stat *": "allow",
-      "tree *": "allow",
-      "pwd": "allow",
-      "date *": "allow",
-      "uname *": "allow",
-      "whoami": "allow",
-      "which *": "allow",
-      "type *": "allow",
-      "echo *": "allow",
-      "docker ps *": "allow",
-      "docker images *": "allow",
-      "docker inspect *": "allow",
-      "docker logs *": "allow",
-      "docker version": "allow",
-      "docker info": "allow",
-      "npm ls *": "allow",
-      "npm list *": "allow",
-      "npm view *": "allow",
-      "npm info *": "allow",
-      "curl *": "allow",
-      "wget *": "allow",
-      "grep *": "allow",
-      "sort *": "allow",
-      "uniq *": "allow",
-      "cut *": "allow",
-      "tr *": "allow",
-      "jq *": "allow",
-      "column *": "allow",
-      "rev *": "allow",
-      "nl *": "allow",
-      "tac *": "allow"
+  "permissions": [
+    // Atlassian MCP tools are denied by default; build/plan re-enable them below.
+    { "action": "atlassian*", "resource": "*", "effect": "deny" },
+
+    { "action": "edit", "resource": "*", "effect": "ask" },
+    { "action": "subagent", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "*", "effect": "ask" },
+
+    // Read-only shell commands run without prompting; the ask rules below matter in prompt mode.
+    { "action": "shell", "resource": "git *", "effect": "allow" },
+    { "action": "shell", "resource": "git status *", "effect": "allow" },
+    { "action": "shell", "resource": "git status", "effect": "allow" },
+    { "action": "shell", "resource": "git log *", "effect": "allow" },
+    { "action": "shell", "resource": "git diff *", "effect": "allow" },
+    { "action": "shell", "resource": "git show *", "effect": "allow" },
+    { "action": "shell", "resource": "git branch *", "effect": "allow" },
+    { "action": "shell", "resource": "git remote *", "effect": "allow" },
+    { "action": "shell", "resource": "git config --get *", "effect": "allow" },
+    { "action": "shell", "resource": "git blame *", "effect": "allow" },
+    { "action": "shell", "resource": "git stash list *", "effect": "allow" },
+    { "action": "shell", "resource": "git commit *", "effect": "ask" },
+    { "action": "shell", "resource": "git push *", "effect": "ask" },
+    { "action": "shell", "resource": "git pull *", "effect": "ask" },
+    { "action": "shell", "resource": "git reset *", "effect": "ask" },
+    { "action": "shell", "resource": "git revert *", "effect": "ask" },
+    { "action": "shell", "resource": "git clean *", "effect": "ask" },
+    { "action": "shell", "resource": "git checkout *", "effect": "ask" },
+    { "action": "shell", "resource": "git merge *", "effect": "ask" },
+    { "action": "shell", "resource": "git rebase *", "effect": "ask" },
+
+    { "action": "shell", "resource": "gh *", "effect": "ask" },
+    { "action": "shell", "resource": "gh pr view *", "effect": "allow" },
+    { "action": "shell", "resource": "gh pr view", "effect": "allow" },
+    { "action": "shell", "resource": "gh pr list *", "effect": "allow" },
+    { "action": "shell", "resource": "gh pr list", "effect": "allow" },
+    { "action": "shell", "resource": "gh pr checks *", "effect": "allow" },
+    { "action": "shell", "resource": "gh pr diff *", "effect": "allow" },
+    { "action": "shell", "resource": "gh pr status *", "effect": "allow" },
+    { "action": "shell", "resource": "gh pr status", "effect": "allow" },
+    { "action": "shell", "resource": "gh issue view *", "effect": "allow" },
+    { "action": "shell", "resource": "gh issue list *", "effect": "allow" },
+    { "action": "shell", "resource": "gh issue list", "effect": "allow" },
+    { "action": "shell", "resource": "gh issue status *", "effect": "allow" },
+    { "action": "shell", "resource": "gh repo view *", "effect": "allow" },
+    { "action": "shell", "resource": "gh repo list *", "effect": "allow" },
+    { "action": "shell", "resource": "gh run list *", "effect": "allow" },
+    { "action": "shell", "resource": "gh run view *", "effect": "allow" },
+    { "action": "shell", "resource": "gh search *", "effect": "allow" },
+    { "action": "shell", "resource": "gh auth status", "effect": "allow" },
+
+    { "action": "shell", "resource": "rg *", "effect": "allow" },
+    { "action": "shell", "resource": "fd *", "effect": "allow" },
+    { "action": "shell", "resource": "find *", "effect": "allow" },
+    { "action": "shell", "resource": "ls *", "effect": "allow" },
+    { "action": "shell", "resource": "ls", "effect": "allow" },
+    { "action": "shell", "resource": "cat *", "effect": "allow" },
+    { "action": "shell", "resource": "head *", "effect": "allow" },
+    { "action": "shell", "resource": "tail *", "effect": "allow" },
+    { "action": "shell", "resource": "wc *", "effect": "allow" },
+    { "action": "shell", "resource": "file *", "effect": "allow" },
+    { "action": "shell", "resource": "stat *", "effect": "allow" },
+    { "action": "shell", "resource": "tree *", "effect": "allow" },
+    { "action": "shell", "resource": "pwd", "effect": "allow" },
+    { "action": "shell", "resource": "date *", "effect": "allow" },
+    { "action": "shell", "resource": "uname *", "effect": "allow" },
+    { "action": "shell", "resource": "whoami", "effect": "allow" },
+    { "action": "shell", "resource": "which *", "effect": "allow" },
+    { "action": "shell", "resource": "type *", "effect": "allow" },
+    { "action": "shell", "resource": "echo *", "effect": "allow" },
+    { "action": "shell", "resource": "docker ps *", "effect": "allow" },
+    { "action": "shell", "resource": "docker images *", "effect": "allow" },
+    { "action": "shell", "resource": "docker inspect *", "effect": "allow" },
+    { "action": "shell", "resource": "docker logs *", "effect": "allow" },
+    { "action": "shell", "resource": "docker version", "effect": "allow" },
+    { "action": "shell", "resource": "docker info", "effect": "allow" },
+    { "action": "shell", "resource": "npm ls *", "effect": "allow" },
+    { "action": "shell", "resource": "npm list *", "effect": "allow" },
+    { "action": "shell", "resource": "npm view *", "effect": "allow" },
+    { "action": "shell", "resource": "npm info *", "effect": "allow" },
+    { "action": "shell", "resource": "curl *", "effect": "allow" },
+    { "action": "shell", "resource": "wget *", "effect": "allow" },
+    { "action": "shell", "resource": "grep *", "effect": "allow" },
+    { "action": "shell", "resource": "sort *", "effect": "allow" },
+    { "action": "shell", "resource": "uniq *", "effect": "allow" },
+    { "action": "shell", "resource": "cut *", "effect": "allow" },
+    { "action": "shell", "resource": "tr *", "effect": "allow" },
+    { "action": "shell", "resource": "jq *", "effect": "allow" },
+    { "action": "shell", "resource": "column *", "effect": "allow" },
+    { "action": "shell", "resource": "rev *", "effect": "allow" },
+    { "action": "shell", "resource": "nl *", "effect": "allow" },
+    { "action": "shell", "resource": "tac *", "effect": "allow" },
+
+    // Hard stops — also enforced by the top-level policies below, which no rule can override.
+    {
+      "action": "shell",
+      "resource": "aws secretsmanager get-secret-value*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "aws secretsmanager batch-get-secret-value*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "aws ssm get-parameter*",
+      "effect": "deny"
+    },
+    {
+      "action": "atlassian_executeDestructive",
+      "resource": "*",
+      "effect": "deny"
+    },
+
+    // gh api DELETE mutations (e.g. removing branch protection before a merge) are hard stops.
+    { "action": "shell", "resource": "gh api -X DELETE*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api * -X DELETE*", "effect": "deny" },
+    {
+      "action": "shell",
+      "resource": "gh api --method DELETE*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "gh api * --method DELETE*",
+      "effect": "deny"
+    },
+
+    // Ship actions are human-only. Autoaccept does not apply to deny rules; the
+    // agent must stop and ask instead of finding another route (see AGENTS.md).
+    // Keep these last so they win over every broader allow/ask above.
+    { "action": "shell", "resource": "gh pr merge*", "effect": "deny" },
+    { "action": "shell", "resource": "gh release create*", "effect": "deny" },
+    { "action": "shell", "resource": "gh release delete*", "effect": "deny" },
+    { "action": "shell", "resource": "gh release edit*", "effect": "deny" },
+    { "action": "shell", "resource": "gh release upload*", "effect": "deny" },
+    { "action": "shell", "resource": "gh workflow run *", "effect": "deny" },
+
+    // Tag creation/move/push.
+    { "action": "shell", "resource": "git tag -f*", "effect": "deny" },
+    { "action": "shell", "resource": "git tag * -f*", "effect": "deny" },
+    { "action": "shell", "resource": "git tag --force*", "effect": "deny" },
+    { "action": "shell", "resource": "git tag * --force*", "effect": "deny" },
+    { "action": "shell", "resource": "git push --tags*", "effect": "deny" },
+    { "action": "shell", "resource": "git push * --tags*", "effect": "deny" },
+    { "action": "shell", "resource": "git push --follow-tags*", "effect": "deny" },
+    { "action": "shell", "resource": "git push * --follow-tags*", "effect": "deny" },
+    { "action": "shell", "resource": "git push --all*", "effect": "deny" },
+    { "action": "shell", "resource": "git push * --all*", "effect": "deny" },
+    { "action": "shell", "resource": "git push --mirror*", "effect": "deny" },
+    { "action": "shell", "resource": "git push * --mirror*", "effect": "deny" },
+    { "action": "shell", "resource": "git push *refs/tags/*", "effect": "deny" },
+
+    // Remote ref deletion.
+    { "action": "shell", "resource": "git push --delete*", "effect": "deny" },
+    { "action": "shell", "resource": "git push * --delete*", "effect": "deny" },
+    { "action": "shell", "resource": "git push :*", "effect": "deny" },
+    { "action": "shell", "resource": "git push * :*", "effect": "deny" },
+
+    // Shared branches: never push directly.
+    { "action": "shell", "resource": "git push main*", "effect": "deny" },
+    { "action": "shell", "resource": "git push * main*", "effect": "deny" },
+    { "action": "shell", "resource": "git push *:main*", "effect": "deny" },
+    { "action": "shell", "resource": "git push *refs/heads/main*", "effect": "deny" },
+    { "action": "shell", "resource": "git push dev*", "effect": "deny" },
+    { "action": "shell", "resource": "git push * dev*", "effect": "deny" },
+    { "action": "shell", "resource": "git push *:dev*", "effect": "deny" },
+    { "action": "shell", "resource": "git push *refs/heads/dev*", "effect": "deny" },
+    { "action": "shell", "resource": "git push v1*", "effect": "deny" },
+    { "action": "shell", "resource": "git push * v1*", "effect": "deny" },
+    { "action": "shell", "resource": "git push *:v1*", "effect": "deny" },
+
+    // Raw force only. --force-with-lease stays allowed for feature-branch rebases.
+    { "action": "shell", "resource": "git push --force", "effect": "deny" },
+    { "action": "shell", "resource": "git push --force *", "effect": "deny" },
+    { "action": "shell", "resource": "git push * --force", "effect": "deny" },
+    { "action": "shell", "resource": "git push * --force *", "effect": "deny" },
+    { "action": "shell", "resource": "git push -f", "effect": "deny" },
+    { "action": "shell", "resource": "git push -f *", "effect": "deny" },
+    { "action": "shell", "resource": "git push * -f", "effect": "deny" },
+    { "action": "shell", "resource": "git push * -f *", "effect": "deny" },
+
+    // API routes around the gates.
+    { "action": "shell", "resource": "gh api -X PUT *merge*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api --method PUT *merge*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api * -X PUT *merge*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api * --method PUT *merge*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api -X POST *merges*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api * -X POST *merges*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api -X POST *git/refs*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api -X PATCH *git/refs*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api * -X POST *git/refs*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api * -X PATCH *git/refs*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api graphql *mutation*merge*", "effect": "deny" },
+    { "action": "shell", "resource": "gh api *actions/workflows*dispatches*", "effect": "deny" },
+
+    // Hard stop: gh --admin bypasses branch protection (force merge) — also enforced by policies below.
+    // Keep these last so they win over any overlapping gh rule; only a policy can make them stronger.
+    { "action": "shell", "resource": "gh * --admin*", "effect": "deny" },
+    { "action": "shell", "resource": "gh * -admin*", "effect": "deny" }
+  ],
+  // Policies run after all permission rules and saved approvals; they can only deny, never grant.
+  "policies": [
+    { "action": "tool.use", "resource": "shell:sudo *", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push --force", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push --force *", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * --force", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * --force *", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push -f", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push -f *", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * -f", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * -f *", "effect": "deny" },
+    {
+      "action": "tool.use",
+      "resource": "shell:git push --mirror*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "shell:git push * +*",
+      "effect": "deny"
+    },
+    { "action": "tool.use", "resource": "shell:gh pr merge*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh release create*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh release delete*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh release edit*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh release upload*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh workflow run *", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git tag -f*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git tag * -f*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git tag --force*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git tag * --force*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push --tags*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * --tags*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push --follow-tags*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * --follow-tags*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push --all*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * --all*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push --mirror*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * --mirror*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push *refs/tags/*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push --delete*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * --delete*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push :*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * :*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push main*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * main*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push *:main*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push *refs/heads/main*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push dev*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * dev*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push *:dev*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push *refs/heads/dev*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push v1*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push * v1*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:git push *:v1*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api * -X DELETE*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api * --method DELETE*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api -X PUT *merge*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api --method PUT *merge*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api * -X PUT *merge*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api * --method PUT *merge*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api -X POST *merges*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api * -X POST *merges*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api -X POST *git/refs*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api -X PATCH *git/refs*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api * -X POST *git/refs*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api * -X PATCH *git/refs*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api graphql *mutation*merge*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:gh api *actions/workflows*dispatches*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:rm -rf /*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:rm -fr /*", "effect": "deny" },
+    {
+      "action": "tool.use",
+      "resource": "shell:aws secretsmanager get-secret-value*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "shell:aws secretsmanager batch-get-secret-value*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "shell:aws ssm get-parameter*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "shell:gh * --admin*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "shell:gh * -admin*",
+      "effect": "deny"
+    },
+    {
+      "action": "tool.use",
+      "resource": "atlassian_executeDestructive:*",
+      "effect": "deny"
     }
-  },
+  ],
   "mcp": {
     "servers": {
       "atlassian": {
@@ -102,52 +313,74 @@
       }
     }
   },
-  "tools": {
-    "atlassian*": false
-  },
-  "agent": {
+  "agents": {
     "build": {
       "model": "opencode-go/deepseek-v4.1-flash",
-      "tools": {
-        "atlassian*": true
-      },
-      "permission": {
-        "atlassian_*": "ask",
-        "atlassian_get*": "allow",
-        "atlassian_search*": "allow",
-        "atlassian*delete*": "deny"
-      }
+      "permissions": [
+        { "action": "atlassian*", "resource": "*", "effect": "allow" },
+        { "action": "atlassian_*", "resource": "*", "effect": "ask" },
+        { "action": "atlassian_get*", "resource": "*", "effect": "allow" },
+        { "action": "atlassian_search*", "resource": "*", "effect": "allow" },
+        { "action": "atlassian*delete*", "resource": "*", "effect": "deny" },
+        {
+          "action": "atlassian_executeDestructive",
+          "resource": "*",
+          "effect": "deny"
+        }
+      ]
     },
     "plan": {
-      "model": "opencode-go/deepseek-v4-pro",
-      "tools": {
-        "atlassian*": true
-      },
-      "permission": {
-        "atlassian_*": "ask",
-        "atlassian_get*": "allow",
-        "atlassian_search*": "allow",
-        "atlassian*delete*": "deny"
-      }
+      "model": "opencode-go/deepseek-v4.1-flash",
+      // "model": "opencode-go/glm-5.3",
+      "permissions": [
+        { "action": "atlassian*", "resource": "*", "effect": "allow" },
+        { "action": "atlassian_*", "resource": "*", "effect": "ask" },
+        { "action": "atlassian_get*", "resource": "*", "effect": "allow" },
+        { "action": "atlassian_search*", "resource": "*", "effect": "allow" },
+        { "action": "atlassian*delete*", "resource": "*", "effect": "deny" },
+        {
+          "action": "atlassian_executeDestructive",
+          "resource": "*",
+          "effect": "deny"
+        },
+        { "action": "edit", "resource": "*", "effect": "deny" },
+        {
+          "action": "edit",
+          "resource": "~/.opencode/plan/*",
+          "effect": "allow"
+        },
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "explore", "effect": "allow" },
+        { "action": "subagent", "resource": "explainer", "effect": "allow" }
+      ]
     },
     "general": {
-      "permission": {
-        "atlassian_*": "deny"
-      }
+      "permissions": [
+        { "action": "subagent", "resource": "*", "effect": "deny" }
+      ]
     },
     "explore": {
-      "permission": {
-        "atlassian_*": "deny"
-      }
+      "permissions": [
+        { "action": "*", "resource": "*", "effect": "deny" },
+        { "action": "read", "resource": "*", "effect": "allow" },
+        { "action": "read", "resource": "*.env", "effect": "ask" },
+        { "action": "read", "resource": "*.env.*", "effect": "ask" },
+        { "action": "read", "resource": "*.env.example", "effect": "allow" },
+        { "action": "glob", "resource": "*", "effect": "allow" },
+        { "action": "grep", "resource": "*", "effect": "allow" },
+        { "action": "webfetch", "resource": "*", "effect": "allow" },
+        { "action": "websearch", "resource": "*", "effect": "allow" },
+        { "action": "external_directory", "resource": "*", "effect": "ask" }
+      ]
     }
   },
   "disabled_providers": ["amazon-bedrock"],
-  "provider": {
+  "providers": {
     // local model example
     "llama.cpp": {
-      "npm": "@ai-sdk/openai-compatible",
+      "package": "aisdk:@ai-sdk/openai-compatible",
       "name": "llama-server (local)",
-      "options": {
+      "settings": {
         "baseURL": "http://localhost:8081/v1"
       },
       "models": {

@@ -6,50 +6,139 @@ description: >-
   any state-changing action.
 mode: primary
 model: opencode-go/deepseek-v4.1-flash
-temperature: 0.1
-permission:
-  edit: deny
-  atlassian_*: deny
-  bash:
-    "*": ask
-    "pwd": allow
-    "ls": allow
-    "ls *": allow
-    "which *": allow
-    "type *": allow
-    "env": allow
-    "printenv *": allow
-    "node --version": allow
-    "npm --version": allow
-    "python --version": allow
-    "docker ps *": allow
-    "docker logs *": allow
-    "docker inspect *": allow
-    "docker compose ps *": allow
-    "docker compose logs *": allow
-    "git status *": allow
-    "git diff *": allow
-    "curl *": allow
-    "ss *": allow
-    "lsof *": allow
-    "df *": allow
-    "free *": allow
-    "ps *": allow
-    "journalctl *": allow
-    "aws --version": allow
-    "aws sts get-caller-identity": allow
-    "aws * describe*": allow
-    "aws * list*": allow
-    "aws * get*": allow
-    "aws * ls*": allow
-    "aws logs tail*": allow
-    "aws logs filter*": allow
-    "aws * wait*": allow
-  read: allow
-  glob: allow
-  grep: allow
-  task: allow
-  webfetch: allow
+request:
+  body:
+    temperature: 0.1
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: "atlassian_*"
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "pwd"
+    effect: allow
+  - action: shell
+    resource: "ls"
+    effect: allow
+  - action: shell
+    resource: "ls *"
+    effect: allow
+  - action: shell
+    resource: "which *"
+    effect: allow
+  - action: shell
+    resource: "type *"
+    effect: allow
+  - action: shell
+    resource: "env"
+    effect: allow
+  - action: shell
+    resource: "printenv *"
+    effect: allow
+  - action: shell
+    resource: "node --version"
+    effect: allow
+  - action: shell
+    resource: "npm --version"
+    effect: allow
+  - action: shell
+    resource: "python --version"
+    effect: allow
+  - action: shell
+    resource: "docker ps *"
+    effect: allow
+  - action: shell
+    resource: "docker logs *"
+    effect: allow
+  - action: shell
+    resource: "docker inspect *"
+    effect: allow
+  - action: shell
+    resource: "docker compose ps *"
+    effect: allow
+  - action: shell
+    resource: "docker compose logs *"
+    effect: allow
+  - action: shell
+    resource: "git status *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "curl *"
+    effect: allow
+  - action: shell
+    resource: "ss *"
+    effect: allow
+  - action: shell
+    resource: "lsof *"
+    effect: allow
+  - action: shell
+    resource: "df *"
+    effect: allow
+  - action: shell
+    resource: "free *"
+    effect: allow
+  - action: shell
+    resource: "ps *"
+    effect: allow
+  - action: shell
+    resource: "journalctl *"
+    effect: allow
+  - action: shell
+    resource: "aws --version"
+    effect: allow
+  - action: shell
+    resource: "aws sts get-caller-identity"
+    effect: allow
+  - action: shell
+    resource: "aws * describe*"
+    effect: allow
+  - action: shell
+    resource: "aws * list*"
+    effect: allow
+  - action: shell
+    resource: "aws * ls*"
+    effect: allow
+  - action: shell
+    resource: "aws logs tail*"
+    effect: allow
+  - action: shell
+    resource: "aws logs filter*"
+    effect: allow
+  - action: shell
+    resource: "aws logs get*"
+    effect: allow
+  - action: shell
+    resource: "aws * wait*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: subagent
+    resource: explore
+    effect: allow
+  - action: subagent
+    resource: explainer
+    effect: allow
+  - action: webfetch
+    resource: "*"
+    effect: allow
 ---
 
 You are a senior debugging engineer for local development and terminal issues.
@@ -90,8 +179,10 @@ You debug:
 - Prefer logs, exit codes, and exact output over speculation.
 - Say when you are unsure.
 - Ask before any state-changing command.
+- Never modify files, not directly and not through subagents — report the
+  needed change instead.
 - Cite specific evidence when available.
-- Use `task` only when parallel investigation helps.
+- Use subagents (explore, explainer) only when parallel investigation helps.
 
 ## Response style
 

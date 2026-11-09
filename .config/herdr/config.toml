@@ -7,6 +7,7 @@ shell_mode = "login"
 
 # --- UI ---
 [ui]
+
 agent_panel_sort = "spaces"
 sidebar_width = 32
 sidebar_min_width = 18
@@ -23,6 +24,7 @@ pane_gaps = true
 show_agent_labels_on_pane_borders = true
 accent = "cyan"
 
+status_indicators = "symbols"
 [ui.toast]
 delivery = "herdr"
 
@@ -119,19 +121,40 @@ open_notification_target = "prefix+n"
 # ── custom ─────────
 [[keys.command]]
 key = "prefix+alt+g"
-type = "pane"
+type = "popup"
 command = "lazygit"
 description = "run lazygit"
+width = "90%"
+height = "90%"
 
 [[keys.command]]
 key = "prefix+alt+d"
-type = "pane"
+type = "popup"
 command = "lazydocker"
 description = "run lazydocker"
-
+width = "90%"
+height = "90%"
 
 [[keys.command]]
 key = "prefix+alt+e"
-type = "pane"
+type = "popup"
 command = "yazi"
 description = "run yazi"
+width = "85%"
+height = "70%"
+
+[[keys.command]]
+key = "prefix+f"
+type = "popup"
+command = "exec /usr/bin/zsh -l"
+description = "scratch terminal"
+width = "85%"
+height = "70%"
+
+[[keys.command]]
+key = "prefix+alt+n"
+type = "popup"
+command = "nvim -n -c 'set autowriteall' ~/.local/state/nvim/scratchpad.md"
+description = "nvim scratch buffer"
+width = "95%"
+height = "95%"
